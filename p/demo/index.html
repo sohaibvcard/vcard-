@@ -6,30 +6,33 @@
 <meta name="theme-color" content="#0b0b0c">
 <title>Personal Signature</title>
 <style>
-:root{--bg:#0b0b0c;--ivory:#f1e9d8;--muted:#a9a293;--gold:#c8a85a;--line:rgba(200,168,90,.28)}
+:root{--bg:#0b0b0c;--glow:#1f1b11;--c1:#171716;--c2:#101011;--ivory:#f1e9d8;--muted:#a9a293;--accent:#c8a85a;--g1:#e6cf8e;--g2:#b59443;--on:#17130a;--line:rgba(200,168,90,.28)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{min-height:100vh;background:radial-gradient(120% 60% at 50% 0%,#1f1b11 0%,var(--bg) 62%);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;display:flex;justify-content:center;padding:28px 16px calc(28px + env(safe-area-inset-bottom))}
+body{min-height:100vh;background:radial-gradient(120% 60% at 50% 0%,var(--glow) 0%,var(--bg) 62%);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;display:flex;justify-content:center;padding:28px 16px calc(28px + env(safe-area-inset-bottom))}
 .wrap{width:100%;max-width:440px}
-.card{background:linear-gradient(180deg,#171716,#101011);border:1px solid var(--line);border-radius:24px;padding:36px 24px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55)}
-.avatar{width:128px;height:128px;margin:0 auto 22px;border-radius:50%;padding:4px;background:linear-gradient(135deg,#ecd592,#8f7632)}
-.avatar img,.avatar .ini{width:100%;height:100%;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#1b1a17;border:3px solid #111112}
-.ini{font-family:Georgia,serif;font-size:42px;color:var(--gold)}
+.card{background:linear-gradient(180deg,var(--c1),var(--c2));border:1px solid var(--line);border-radius:24px;padding:36px 24px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.avatar{width:128px;height:128px;margin:0 auto 22px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--g1),var(--g2))}
+.avatar img,.avatar .ini{width:100%;height:100%;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:var(--c1);border:3px solid var(--c2)}
+.avatar.sq{width:160px;height:160px;border-radius:26px}
+.avatar.sq img{border-radius:22px;object-fit:contain;padding:12px}
+.ini{font-family:Georgia,serif;font-size:42px;color:var(--accent)}
 h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:30px;line-height:1.3;letter-spacing:.5px}
-.title{margin-top:10px;color:var(--gold);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.title{margin-top:10px;color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}
 .company{margin-top:6px;color:var(--muted);font-size:14px}
-.rule{width:56px;height:1px;background:var(--gold);margin:22px auto}
+.rule{width:56px;height:1px;background:var(--accent);margin:22px auto}
 .bio{color:var(--muted);font-size:15px;line-height:1.85}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;border-radius:14px;border:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;background:transparent;font-family:inherit;cursor:pointer;width:100%}
 .btn svg,.row svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.btn.gold{grid-column:1/-1;background:linear-gradient(135deg,#e6cf8e,#b59443);color:#17130a;border:0;font-weight:700}
+.btn.full{grid-column:1/-1}
+.btn.gold{grid-column:1/-1;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);border:0;font-weight:700}
 .btn:active{transform:scale(.98)}
 .info{margin-top:22px;text-align:start;border-top:1px solid var(--line)}
 .row{display:flex;gap:14px;align-items:center;padding:15px 4px;border-bottom:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;word-break:break-word}
-.row svg{color:var(--gold)}
+.row svg{color:var(--accent)}
 .social{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
 .chip{display:flex;align-items:center;gap:7px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;color:var(--ivory);text-decoration:none;font-size:14px}
-.chip svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.chip svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ltr{direction:ltr;unicode-bidi:embed}
 </style>
 </head>
@@ -42,16 +45,25 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:30px;li
    اترك أي حقل فارغ "" وسيختفي من الصفحة تلقائياً
    ===================================================== */
 const CARD = {
-  lang: "ar",                    // ar أو fr أو en
-  countryCode: "213",            // رمز الدولة (الجزائر)
+  lang: "ar",             // اللغة: "ar" أو "fr" أو "en"
+  theme: "gold",          // الألوان: "gold" أو "rose" أو "blue" أو "green"
+  countryCode: "213",
+
   firstName: "أحمد",
   lastName: "بن علي",
   title: "مهندس معماري",
   company: "مكتب بن علي للهندسة",
   bio: "أصمّم مساحات تجمع بين الأناقة والوظيفة، بخبرة تفوق عشر سنوات في المشاريع السكنية والتجارية.",
-  photo: "",                     // مثال: "photo.jpg" (ضع الصورة في نفس المجلد)
+
+  image: "",              // صورة أو شعار، مثال: "photo.jpg" (في نفس المجلد)
+  imageShape: "circle",   // "circle" للصورة الشخصية، "square" للشعار
+  showInitials: true,     // false = لا شيء إذا لم توجد صورة
+
+  buttons: ["call", "whatsapp", "save"],   // الأزرار الكبيرة، الخيارات: call whatsapp email website map save
+  info: ["phone", "email", "address", "website"],  // الأسطر السفلية، الخيارات: phone email address website
+
   phone: "0555 00 00 00",
-  whatsapp: "",                  // اتركه فارغاً ليستعمل نفس رقم الهاتف
+  whatsapp: "",           // فارغ = نفس رقم الهاتف
   email: "contact@example.com",
   address: "الرويبة، الجزائر العاصمة",
   mapLink: "https://maps.google.com/?q=Rouiba+Alger",
@@ -59,19 +71,28 @@ const CARD = {
   social: [
     { name: "Instagram", url: "https://instagram.com/" },
     { name: "Facebook",  url: "https://facebook.com/" },
-    { name: "LinkedIn",  url: "https://linkedin.com/" }
+    { name: "TikTok",    url: "https://tiktok.com/" }
   ]
 };
 /* ================= نهاية قسم البيانات ================= */
 
-const T = {
-  ar: { call: "اتصال", wa: "واتساب", save: "حفظ جهة الاتصال" },
-  fr: { call: "Appeler", wa: "WhatsApp", save: "Enregistrer le contact" },
-  en: { call: "Call", wa: "WhatsApp", save: "Save contact" }
-}[CARD.lang] || {};
+const TH = {
+  gold:  { bg:"#0b0b0c", glow:"#1f1b11", c1:"#171716", c2:"#101011", ivory:"#f1e9d8", muted:"#a9a293", accent:"#c8a85a", g1:"#e6cf8e", g2:"#b59443", on:"#17130a" },
+  rose:  { bg:"#151315", glow:"#2b2126", c1:"#262327", c2:"#1d1b1e", ivory:"#f6ecee", muted:"#b3a8ac", accent:"#e08fa6", g1:"#f2b3c4", g2:"#d1708b", on:"#2a0f18" },
+  blue:  { bg:"#0a1118", glow:"#12202e", c1:"#14202b", c2:"#0f1923", ivory:"#e9f1f7", muted:"#9fb2c1", accent:"#5cb3d6", g1:"#8fd3ec", g2:"#3a8fb3", on:"#06202c" },
+  green: { bg:"#0c110e", glow:"#15231a", c1:"#16201a", c2:"#101813", ivory:"#eef3ea", muted:"#a3b2a5", accent:"#7bb88a", g1:"#a6d9b0", g2:"#4f9a62", on:"#08210f" }
+};
+const TX = {
+  ar: { call:"اتصال", wa:"واتساب", email:"البريد", site:"الموقع", map:"الخريطة", save:"حفظ جهة الاتصال" },
+  fr: { call:"Appeler", wa:"WhatsApp", email:"E-mail", site:"Site web", map:"Itinéraire", save:"Enregistrer le contact" },
+  en: { call:"Call", wa:"WhatsApp", email:"Email", site:"Website", map:"Map", save:"Save contact" }
+};
+const T = TX[CARD.lang] || TX.ar;
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const safeUrl = u => /^https?:\/\//i.test(u) ? u : "";
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const isWeb = u => /^https?:\/\//i.test(u);
+const rgba = (h, a) => { const n = parseInt(h.replace("#", ""), 16); return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + "," + a + ")"; };
 const intl = n => {
   let d = String(n || "").replace(/\D/g, "");
   if (d.startsWith("00")) d = d.slice(2);
@@ -87,47 +108,69 @@ const ic = {
   link: '<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
 };
 
-const full = (CARD.firstName + " " + CARD.lastName).trim();
+const full = ((CARD.firstName || "") + " " + (CARD.lastName || "")).trim();
 const num = intl(CARD.phone);
 const waNum = intl(CARD.whatsapp || CARD.phone);
 
-document.documentElement.lang = CARD.lang;
-document.documentElement.dir = CARD.lang === "ar" ? "rtl" : "ltr";
+/* الألوان واللغة */
+const th = TH[CARD.theme] || TH.gold;
+const root = document.documentElement;
+for (const k in th) root.style.setProperty("--" + k, th[k]);
+root.style.setProperty("--line", rgba(th.accent, .28));
+document.querySelector('meta[name="theme-color"]').setAttribute("content", th.bg);
+root.lang = CARD.lang;
+root.dir = CARD.lang === "ar" ? "rtl" : "ltr";
 document.title = full + (CARD.title ? " — " + CARD.title : "");
 
-const initials = ((CARD.firstName[0] || "") + (CARD.lastName[0] || "")).toUpperCase();
-let h = '<div class="avatar">' + (CARD.photo
-  ? '<img src="' + esc(CARD.photo) + '" alt="' + esc(full) + '">'
-  : '<div class="ini">' + esc(initials) + '</div>') + '</div>';
+/* الصورة أو الشعار */
+let h = "";
+const initials = (((CARD.firstName || "")[0] || "") + ((CARD.lastName || "")[0] || "")).toUpperCase();
+if (CARD.image) h += '<div class="avatar' + (CARD.imageShape === "square" ? ' sq' : '') + '"><img src="' + esc(CARD.image) + '" alt="' + esc(full) + '"></div>';
+else if (CARD.showInitials !== false && initials) h += '<div class="avatar"><div class="ini">' + esc(initials) + '</div></div>';
+
 h += '<h1>' + esc(full) + '</h1>';
 if (CARD.title) h += '<div class="title">' + esc(CARD.title) + '</div>';
 if (CARD.company) h += '<div class="company">' + esc(CARD.company) + '</div>';
 if (CARD.bio) h += '<div class="rule"></div><p class="bio">' + esc(CARD.bio) + '</p>';
 
-h += '<div class="actions">';
-if (num) h += '<a class="btn" href="tel:+' + num + '">' + ic.phone + T.call + '</a>';
-if (waNum) h += '<a class="btn" href="https://wa.me/' + waNum + '" target="_blank" rel="noopener">' + ic.wa + T.wa + '</a>';
-h += '<button class="btn gold" id="save" type="button">' + ic.add + T.save + '</button></div>';
+/* الأزرار الكبيرة */
+const B = {
+  call:     () => num && ['tel:+' + num, ic.phone, T.call],
+  whatsapp: () => waNum && ['https://wa.me/' + waNum, ic.wa, T.wa],
+  email:    () => CARD.email && ['mailto:' + CARD.email, ic.mail, T.email],
+  website:  () => safeUrl(CARD.website) && [CARD.website, ic.link, T.site],
+  map:      () => safeUrl(CARD.mapLink) && [CARD.mapLink, ic.pin, T.map]
+};
+const want = CARD.buttons || [];
+const btns = want.filter(k => k !== "save").map(k => B[k] && B[k]()).filter(Boolean);
+let a = btns.map((b, i) => '<a class="btn' + (btns.length % 2 && i === btns.length - 1 ? ' full' : '') + '" href="' + esc(b[0]) + '"' + (isWeb(b[0]) ? ' target="_blank" rel="noopener"' : '') + '>' + b[1] + b[2] + '</a>').join("");
+if (want.includes("save")) a += '<button class="btn gold" id="save" type="button">' + ic.add + T.save + '</button>';
+if (a) h += '<div class="actions">' + a + '</div>';
 
-let rows = "";
-if (CARD.phone) rows += '<a class="row" href="tel:+' + num + '">' + ic.phone + '<span class="ltr">' + esc(CARD.phone) + '</span></a>';
-if (CARD.email) rows += '<a class="row" href="mailto:' + esc(CARD.email) + '">' + ic.mail + '<span class="ltr">' + esc(CARD.email) + '</span></a>';
-if (CARD.address) {
-  const m = safeUrl(CARD.mapLink);
-  rows += (m ? '<a class="row" href="' + esc(m) + '" target="_blank" rel="noopener">' : '<div class="row">') + ic.pin + '<span>' + esc(CARD.address) + '</span>' + (m ? '</a>' : '</div>');
-}
-if (safeUrl(CARD.website)) rows += '<a class="row" href="' + esc(CARD.website) + '" target="_blank" rel="noopener">' + ic.link + '<span class="ltr">' + esc(CARD.website.replace(/^https?:\/\//i, "")) + '</span></a>';
+/* الأسطر السفلية */
+const R = {
+  phone:   () => CARD.phone && ['tel:+' + num, ic.phone, CARD.phone, 1],
+  email:   () => CARD.email && ['mailto:' + CARD.email, ic.mail, CARD.email, 1],
+  address: () => CARD.address && [safeUrl(CARD.mapLink), ic.pin, CARD.address, 0],
+  website: () => safeUrl(CARD.website) && [CARD.website, ic.link, CARD.website.replace(/^https?:\/\//i, ""), 1]
+};
+const rows = (CARD.info || []).map(k => R[k] && R[k]()).filter(Boolean).map(r => {
+  const inner = r[1] + '<span' + (r[3] ? ' class="ltr"' : '') + '>' + esc(r[2]) + '</span>';
+  return r[0] ? '<a class="row" href="' + esc(r[0]) + '"' + (isWeb(r[0]) ? ' target="_blank" rel="noopener"' : '') + '>' + inner + '</a>' : '<div class="row">' + inner + '</div>';
+}).join("");
 if (rows) h += '<div class="info">' + rows + '</div>';
 
+/* حسابات التواصل */
 const soc = (CARD.social || []).filter(s => safeUrl(s.url));
 if (soc.length) h += '<div class="social">' + soc.map(s => '<a class="chip" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + ic.link + esc(s.name) + '</a>').join("") + '</div>';
 
 document.getElementById("card").innerHTML = h;
 
-// ---- حفظ جهة الاتصال (vCard) ----
+/* حفظ جهة الاتصال (vCard) */
 const v = s => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
-document.getElementById("save").addEventListener("click", () => {
-  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(CARD.lastName) + ";" + v(CARD.firstName) + ";;;", "FN:" + v(full)];
+const saveBtn = document.getElementById("save");
+if (saveBtn) saveBtn.addEventListener("click", () => {
+  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(CARD.lastName || "") + ";" + v(CARD.firstName || "") + ";;;", "FN:" + v(full)];
   if (CARD.company) L.push("ORG:" + v(CARD.company));
   if (CARD.title) L.push("TITLE:" + v(CARD.title));
   if (num) L.push("TEL;TYPE=CELL:+" + num);
@@ -136,12 +179,12 @@ document.getElementById("save").addEventListener("click", () => {
   if (safeUrl(CARD.website)) L.push("URL:" + CARD.website);
   L.push("END:VCARD");
   const blob = new Blob([L.join("\r\n")], { type: "text/vcard;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = (full.replace(/\s+/g, "_") || "contact") + ".vcf";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  const el = document.createElement("a");
+  el.href = URL.createObjectURL(blob);
+  el.download = (full.replace(/\s+/g, "_") || "contact") + ".vcf";
+  document.body.appendChild(el);
+  el.click();
+  el.remove();
 });
 </script>
 </body>
