@@ -59,17 +59,18 @@ h1{font-size:30px;font-weight:800;letter-spacing:.3px;line-height:1.2}
 const SHOP = {
   lang: "fr",             // اللغة: "fr" أو "ar" أو "en"
   theme: "fire",          // الألوان: "fire" أو "gold" أو "royal" أو "rose" أو "blue" أو "green"
-  colors: {},             // تخصيص لون من الشعار، مثال: { accent: "#e63946", g1: "#ffb703", g2: "#e63946" }
+  colors: { accent: "#E8962B", g1: "#F6B94D", g2: "#E8962B", on: "#1f1204" },   // ألوان شعار المطعم
   countryCode: "213",
 
   name: "Juicy Food",
   tagline: "Fast Food",
-  about: "",
+  about: "Chawarma, snacks, entrées froides et salades à savourer sur place. Service de livraison disponible.",
 
-  logo: "",               // مثال: "logo.png" (في نفس المجلد)
-  cover: "",              // صورة الغلاف، مثال: "cover.jpg"
-  menu: [],               // صور القائمة بالترتيب، مثال: ["menu1.jpg", "menu2.jpg"]
-  gallery: [],            // صور المحل، مثال: ["photo1.jpg", "photo2.jpg"]
+  logo: "logo.jpg",       // مثال: "logo.png" (في نفس المجلد)
+  logoFit: "cover",       // "contain" لشعار شفاف أو أبيض الخلفية، "cover" لشعار يملأ الدائرة بلون خلفيته
+  cover: "cover.jpg",     // صورة الغلاف، مثال: "cover.jpg"
+  menu: ["menu1.jpg", "menu2.jpg"],     // صور القائمة بالترتيب
+  gallery: ["photo1.jpg", "photo2.jpg"],  // صور المحل
   hours: [],              // مثال: [["Lun - Jeu", "11:00 - 23:00"], ["Ven - Sam", "13:00 - 00:00"]]
 
   buttons: ["menu", "call", "map"],   // الخيارات: menu call whatsapp email website map save
@@ -142,7 +143,7 @@ document.title = SHOP.name + (SHOP.tagline ? " — " + SHOP.tagline : "");
 /* الغلاف والشعار والاسم */
 let h = '<div class="cover"' + (SHOP.cover ? ' style="background-image:url(\'' + esc(SHOP.cover) + '\')"' : '') + '></div>';
 const initials = String(SHOP.name || "").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
-h += '<div class="logo">' + (SHOP.logo ? '<img src="' + esc(SHOP.logo) + '" alt="' + esc(SHOP.name) + '">' : '<div class="ini">' + esc(initials) + '</div>') + '</div>';
+h += '<div class="logo">' + (SHOP.logo ? '<img src="' + esc(SHOP.logo) + '" alt="' + esc(SHOP.name) + '"' + (SHOP.logoFit === "cover" ? ' style="object-fit:cover;padding:0"' : '') + '>' : '<div class="ini">' + esc(initials) + '</div>') + '</div>';
 h += '<div class="head"><h1>' + esc(SHOP.name) + '</h1>';
 if (SHOP.tagline) h += '<div class="tag">' + esc(SHOP.tagline) + '</div>';
 if (SHOP.about) h += '<p class="about">' + esc(SHOP.about) + '</p>';
