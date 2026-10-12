@@ -45,10 +45,36 @@ h1{font-size:30px;font-weight:800;letter-spacing:.3px;line-height:1.2}
 #viewer[hidden]{display:none}
 #vx{position:fixed;top:calc(12px + env(safe-area-inset-top));inset-inline-end:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:20px;z-index:51;cursor:pointer}
 #vbox img{display:block;width:100%;max-width:720px;margin:0 auto 14px;border-radius:12px}
+#mv{position:fixed;inset:0;background:var(--bg);z-index:60;display:flex;flex-direction:column}
+#mv[hidden]{display:none}
+.mvh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 16px 10px}
+#mt{font-size:20px;font-weight:800}
+#mx{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:18px;cursor:pointer;flex:none}
+.mvs{padding:0 16px 10px}
+#mq{width:100%;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:16px;font-family:inherit;outline:none}
+#mq::placeholder{color:var(--muted)}
+.mvtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mvtabs::-webkit-scrollbar{display:none}
+.mvtabs button{flex:none;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:14px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.mvtabs button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);border:0;font-weight:700}
+.mvb{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+.mvb section{margin-bottom:22px}
+.mvb h3{position:sticky;top:0;z-index:1;background:var(--bg);padding:10px 0;font-size:17px;font-weight:800;color:var(--accent);display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
+.mvb h3 span{font-weight:600;color:var(--muted)}
+.it{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}
+.it[hidden],.mvb section[hidden],.empty[hidden]{display:none}
+.in b{display:block;font-size:16px;font-weight:700}
+.in span{display:block;margin-top:3px;color:var(--muted);font-size:14px}
+html[dir=ltr] .in span{text-align:left}
+html[dir=rtl] .in span{text-align:right}
+.ip{flex:none;font-weight:800;color:var(--accent);font-size:16px;direction:ltr;white-space:nowrap}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="wrap" id="app"></div>
+<div id="mv" hidden><div class="mvh"><div id="mt"></div><button id="mx" type="button" aria-label="Close">&#10005;</button></div><div class="mvs"><input id="mq" type="search" autocomplete="off"></div><div class="mvtabs" id="mtabs"></div><div class="mvb" id="mbody"></div></div>
 <div id="viewer" hidden><button id="vx" type="button" aria-label="Close">&#10005;</button><div id="vbox"></div></div>
 
 <script>
@@ -69,7 +95,42 @@ const SHOP = {
   logo: "logo.jpg",       // مثال: "logo.png" (في نفس المجلد)
   logoFit: "cover",       // "contain" لشعار شفاف أو أبيض الخلفية، "cover" لشعار يملأ الدائرة بلون خلفيته
   cover: "cover.jpg",     // صورة الغلاف، مثال: "cover.jpg"
-  menu: ["menu1.jpg", "menu2.jpg"],     // صور القائمة بالترتيب
+  currency: "DA",
+  menuImages: [],         // بديل مؤقت: صور القائمة إن لم تتوفر قائمة مكتوبة، مثال: ["menu1.jpg", "menu2.jpg"]
+  menu: [                 // القائمة المكتوبة: كل صنف = [الاسم, الاسم بالعربية, السعر]
+    { cat: "Sandwich", catAr: "سندويش", items: [
+      ["Chawarma Poulet", "سندويش شاورما دجاج", 300],
+      ["Chawarma Extra", "سندويش شاورما إكسترا", 550],
+      ["Chawarma Juicy Food", "سندويش شاورما جوسي فود", 600],
+      ["Chich Taouk", "شيش طاووق", 450],
+      ["Zanjer", "زنجر", 400],
+      ["Chich Taouk", "شيش طاووق", 450]
+    ]},
+    { cat: "Entrée froide", catAr: "مقبلات باردة", items: [
+      ["Homos avec Tahina", "حمص بالطحينة", 400],
+      ["Mhamra", "محمرة", 400],
+      ["Mtabal", "متبل", 400],
+      ["Homos à la Chawarma", "حمص بالشاورما", 650],
+      ["Homos à la Viande", "حمص باللحمة", 700],
+      ["Yalanji", "يالنجي", 600]
+    ]},
+    { cat: "Snack", catAr: "سناك", items: [
+      ["Crispy", "كرسبي", 1200],
+      ["Zanjer", "زنجر", 1300],
+      ["Chich Taouk", "شيش طاووق", 1300],
+      ["Magnom", "ماغنوم", 1400],
+      ["Mexicaine", "ميكسيكانا", 1300],
+      ["Crunchy", "كرانشي", 1400],
+      ["Chich Taouk", "شيش طاووق", 1300],
+      ["Chicken Roll", "تشيكن رول", 1300],
+      ["Poulet Curry", "دجاج بالكاري", 1500]
+    ]},
+    { cat: "Salades", catAr: "سلطات", items: [
+      ["Fatouch", "فتوش", 500],
+      ["Salade Coleslaw", "سلطة سويسرية", 450],
+      ["César", "سيزار", 750]
+    ]}
+  ],
   gallery: ["photo1.jpg", "photo2.jpg"],  // صور المحل
   hours: [],              // مثال: [["Lun - Jeu", "11:00 - 23:00"], ["Ven - Sam", "13:00 - 00:00"]]
 
@@ -99,9 +160,9 @@ const TH = {
   green: { bg:"#0c110e", glow:"#15231a", c1:"#16201a", c2:"#101813", ivory:"#eef3ea", muted:"#a3b2a5", accent:"#7bb88a", g1:"#a6d9b0", g2:"#4f9a62", on:"#08210f" }
 };
 const TX = {
-  fr: { menu:"Menu électronique", call:"Appeler", wa:"WhatsApp", email:"E-mail", site:"Site web", map:"Itinéraire", save:"Enregistrer le contact", photos:"Photos", hours:"Horaires", contact:"Contact" },
-  ar: { menu:"قائمة الطعام الإلكترونية", call:"اتصال", wa:"واتساب", email:"البريد", site:"الموقع", map:"الموقع على الخريطة", save:"حفظ جهة الاتصال", photos:"صور", hours:"أوقات العمل", contact:"التواصل" },
-  en: { menu:"Digital menu", call:"Call", wa:"WhatsApp", email:"Email", site:"Website", map:"Directions", save:"Save contact", photos:"Photos", hours:"Opening hours", contact:"Contact" }
+  fr: { menu:"Menu électronique", call:"Appeler", wa:"WhatsApp", email:"E-mail", site:"Site web", map:"Itinéraire", save:"Enregistrer le contact", photos:"Photos", hours:"Horaires", contact:"Contact", search:"Rechercher un plat", none:"Aucun résultat" },
+  ar: { menu:"قائمة الطعام الإلكترونية", call:"اتصال", wa:"واتساب", email:"البريد", site:"الموقع", map:"الموقع على الخريطة", save:"حفظ جهة الاتصال", photos:"صور", hours:"أوقات العمل", contact:"التواصل", search:"ابحث عن طبق", none:"لا توجد نتائج" },
+  en: { menu:"Digital menu", call:"Call", wa:"WhatsApp", email:"Email", site:"Website", map:"Directions", save:"Save contact", photos:"Photos", hours:"Opening hours", contact:"Contact", search:"Search a dish", none:"No results" }
 };
 const T = TX[SHOP.lang] || TX.fr;
 
@@ -127,7 +188,8 @@ const ic = {
 
 const num = intl(SHOP.phone);
 const waNum = intl(SHOP.whatsapp);
-const menu = (SHOP.menu || []).filter(Boolean);
+const menu = (SHOP.menu || []).filter(c => c && (c.items || []).length);
+const menuImages = (SHOP.menuImages || []).filter(Boolean);
 const gallery = (SHOP.gallery || []).filter(Boolean);
 
 /* الألوان واللغة */
@@ -151,7 +213,7 @@ h += '</div><div class="sec">';
 
 /* الأزرار */
 const want = SHOP.buttons || [];
-if (want.includes("menu") && menu.length) h += '<button type="button" class="btn cta" id="menu">' + ic.book + esc(T.menu) + '</button>';
+if (want.includes("menu") && (menu.length || menuImages.length)) h += '<button type="button" class="btn cta" id="menu">' + ic.book + esc(T.menu) + '</button>';
 const B = {
   call:     () => num && ['tel:+' + num, ic.phone, T.call],
   whatsapp: () => waNum && ['https://wa.me/' + waNum, ic.wa, T.wa],
@@ -191,7 +253,7 @@ if (soc.length) h += '<div class="social">' + soc.map(s => '<a class="chip" href
 h += '</div>';
 document.getElementById("app").innerHTML = h;
 
-/* عارض الصور (القائمة وصور المحل) */
+/* عارض الصور (صور المحل) */
 const viewer = document.getElementById("viewer"), vbox = document.getElementById("vbox");
 function openViewer(list, start) {
   vbox.innerHTML = list.map(s => '<img loading="lazy" src="' + esc(s) + '" alt="">').join("");
@@ -204,30 +266,22 @@ function openViewer(list, start) {
 }
 function closeViewer() { viewer.hidden = true; document.body.style.overflow = ""; }
 document.getElementById("vx").addEventListener("click", () => { if (history.state && history.state.v) history.back(); else closeViewer(); });
-window.addEventListener("popstate", closeViewer);
-const mb = document.getElementById("menu");
-if (mb) mb.addEventListener("click", () => openViewer(menu, 0));
 document.querySelectorAll(".gal img").forEach((im, i) => im.addEventListener("click", () => openViewer(gallery, i)));
 
-/* حفظ جهة الاتصال (vCard) */
-const v = s => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
-const sb = document.getElementById("save");
-if (sb) sb.addEventListener("click", () => {
-  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(SHOP.name) + ";;;;", "FN:" + v(SHOP.name), "ORG:" + v(SHOP.name)];
-  if (SHOP.tagline) L.push("TITLE:" + v(SHOP.tagline));
-  if (num) L.push("TEL;TYPE=WORK:+" + num);
-  if (SHOP.email) L.push("EMAIL:" + v(SHOP.email));
-  if (SHOP.address) L.push("ADR;TYPE=WORK:;;" + v(SHOP.address) + ";;;;");
-  if (safeUrl(SHOP.website)) L.push("URL:" + SHOP.website);
-  L.push("END:VCARD");
-  const blob = new Blob([L.join("\r\n")], { type: "text/vcard;charset=utf-8" });
-  const el = document.createElement("a");
-  el.href = URL.createObjectURL(blob);
-  el.download = (SHOP.name.replace(/\s+/g, "_") || "contact") + ".vcf";
-  document.body.appendChild(el);
-  el.click();
-  el.remove();
-});
-</script>
-</body>
-</html>
+/* القائمة الإلكترونية */
+const mv = document.getElementById("mv"), mbody = document.getElementById("mbody"), mtabs = document.getElementById("mtabs"), mq = document.getElementById("mq");
+function closeMenu() { mv.hidden = true; document.body.style.overflow = ""; }
+function filterMenu(q) {
+  q = q.trim().toLowerCase();
+  let total = 0;
+  document.querySelectorAll("#mbody section").forEach(sec => {
+    let any = false;
+    sec.querySelectorAll(".it").forEach(it => { const ok = !q || it.getAttribute("data-s").indexOf(q) > -1; it.hidden = !ok; if (ok) any = true; });
+    sec.hidden = !any;
+    if (any) total++;
+  });
+  const em = document.getElementById("mempty");
+  if (em) em.hidden = total > 0;
+}
+if (menu.length) {
+  document.getElementById("mt")
