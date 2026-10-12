@@ -284,4 +284,61 @@ function filterMenu(q) {
   if (em) em.hidden = total > 0;
 }
 if (menu.length) {
-  document.getElementById("mt")
+  document.getElementById("mt").textContent = T.menu;
+  mq.placeholder = T.search;
+  mbody.innerHTML = menu.map((c, i) => '<section id="cat' + i + '"><h3><span style="color:inherit;font-weight:inherit">' + esc(c.cat) + '</span>' + (c.catAr ? '<span dir="auto">' + esc(c.catAr) + '</span>' : '') + '</h3>' +
+    c.items.map(it => '<div class="it" data-s="' + esc((it[0] + " " + (it[1] || "")).toLowerCase()) + '"><div class="in"><b dir="auto">' + esc(it[0]) + '</b>' + (it[1] ? '<span dir="auto">' + esc(it[1]) + '</span>' : '') + '</div>' +
+    (it[2] != null && it[2] !== "" ? '<div class="ip">' + esc(it[2]) + (SHOP.currency ? ' ' + esc(SHOP.currency) : '') + '</div>' : '') + '</div>').join("") + '</section>').join("") +
+    '<div class="empty" id="mempty" hidden>' + esc(T.none) + '</div>';
+  mtabs.innerHTML = menu.map((c, i) => '<button type="button" data-i="' + i + '"' + (i === 0 ? ' class="on"' : '') + '>' + esc(c.cat) + '</button>').join("");
+  mq.addEventListener("input", () => filterMenu(mq.value));
+  mtabs.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    mq.value = ""; filterMenu("");
+    mtabs.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    const s = document.getElementById("cat" + b.getAttribute("data-i"));
+    if (s) s.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  mbody.addEventListener("scroll", () => {
+    const top = mbody.getBoundingClientRect().top;
+    let cur = 0;
+    menu.forEach((c, i) => { const s = document.getElementById("cat" + i); if (s && !s.hidden && s.getBoundingClientRect().top - top <= 60) cur = i; });
+    if (mbody.scrollTop + mbody.clientHeight >= mbody.scrollHeight - 4) cur = menu.length - 1;
+    mtabs.querySelectorAll("button").forEach((b, i) => b.classList.toggle("on", i === cur));
+  });
+}
+function openMenu() {
+  mv.hidden = false;
+  document.body.style.overflow = "hidden";
+  history.pushState({ v: 1 }, "");
+  mq.value = ""; filterMenu("");
+  mbody.scrollTop = 0;
+}
+document.getElementById("mx").addEventListener("click", () => { if (history.state && history.state.v) history.back(); else closeMenu(); });
+window.addEventListener("popstate", () => { closeViewer(); closeMenu(); });
+const mb = document.getElementById("menu");
+if (mb) mb.addEventListener("click", () => { if (menu.length) openMenu(); else openViewer(menuImages, 0); });
+
+/* حفظ جهة الاتصال (vCard) */
+const v = s => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
+const sb = document.getElementById("save");
+if (sb) sb.addEventListener("click", () => {
+  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(SHOP.name) + ";;;;", "FN:" + v(SHOP.name), "ORG:" + v(SHOP.name)];
+  if (SHOP.tagline) L.push("TITLE:" + v(SHOP.tagline));
+  if (num) L.push("TEL;TYPE=WORK:+" + num);
+  if (SHOP.email) L.push("EMAIL:" + v(SHOP.email));
+  if (SHOP.address) L.push("ADR;TYPE=WORK:;;" + v(SHOP.address) + ";;;;");
+  if (safeUrl(SHOP.website)) L.push("URL:" + SHOP.website);
+  L.push("END:VCARD");
+  const blob = new Blob([L.join("\r\n")], { type: "text/vcard;charset=utf-8" });
+  const el = document.createElement("a");
+  el.href = URL.createObjectURL(blob);
+  el.download = (SHOP.name.replace(/\s+/g, "_") || "contact") + ".vcf";
+  document.body.appendChild(el);
+  el.click();
+  el.remove();
+});
+</script>
+</body>
+</html>
