@@ -108,7 +108,6 @@ details p{color:var(--muted);padding:0 0 16px}
 .scr{animation:scr 7s ease-in-out infinite;opacity:0}
 @keyframes scr{0%,42%{opacity:0;transform:translateY(8px)}54%,86%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(8px)}}
 .cust{border:1px solid var(--line);border-radius:24px;padding:22px;background:radial-gradient(90% 80% at 50% 0%,var(--glow),var(--c2));transition:background .4s,border-color .4s}
-.cust svg{width:100%;height:auto;display:block;max-width:380px;margin:0 auto}
 .sw{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
 .sw button{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;color:var(--muted);font-family:inherit;font-size:13px;cursor:pointer}
 .sw i{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);display:block}
@@ -125,6 +124,41 @@ details p{color:var(--muted);padding:0 0 16px}
 .stk.on{transform:translate(-50%,0)}
 @media(min-width:720px){.how{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.pr{animation:none;opacity:0}.cd{animation:none;transform:translateX(66px)}.wv{animation:none;opacity:1}.scr{animation:none;opacity:1}}
+
+.pm{animation:pmove 7s ease-in-out infinite}
+@keyframes pmove{0%,8%{transform:translateX(0)}34%,76%{transform:translateX(60px)}100%{transform:translateX(0)}}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.tabs button{padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-family:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{background:rgba(143,224,255,.14);border-color:var(--ice);color:var(--ice)}
+.try{display:grid;gap:22px;align-items:center}
+.tf label{display:block;font-size:13px;color:var(--muted);margin-bottom:12px}
+.tf input{width:100%;margin-top:5px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-family:inherit;font-size:16px;outline:none}
+.tf input:focus{border-color:var(--ice)}
+.tf .sw{justify-content:flex-start;margin-top:4px}
+.tv{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tv>svg{width:100%;max-width:240px;height:auto;display:block;margin-bottom:-26px;position:relative;z-index:1}
+.ph{width:224px;border-radius:26px;border:2px solid var(--accent);background:var(--c2);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.45);padding-bottom:14px;transition:border-color .4s,background .4s}
+.phc{height:62px;background:linear-gradient(135deg,var(--g2),var(--glow))}
+.pha{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;margin:-28px auto 8px;border:3px solid var(--c2)}
+.phn{text-align:center;font-weight:800;font-size:17px;padding:0 10px}
+.phj{text-align:center;color:var(--accent);font-size:13px;padding:0 10px}
+.ph0{opacity:.45}
+.phb{display:flex;gap:8px;padding:12px 14px 8px}
+.phb span{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:6px 4px;font-size:12px}
+.phs{margin:0 14px 12px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);padding:8px;border-radius:10px;font-weight:700;font-size:12px;text-align:center}
+.phl{height:4px;background:var(--line);border-radius:2px;margin:6px 16px}
+.phl.sh{width:55%}
+.tfoot{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.tfoot .note{color:var(--muted);font-size:13px;text-align:center}
+.demos{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:22px;color:var(--muted);font-size:14px}
+.tg{display:grid;gap:14px}
+.tc{margin:0;background:linear-gradient(160deg,rgba(143,224,255,.07),var(--c1) 45%,var(--c2));border:1px solid var(--line);border-radius:20px;padding:20px}
+.qm{font-size:46px;line-height:.7;color:var(--ice);font-family:Georgia,serif}
+.tc blockquote{margin:8px 0 14px}
+.tc figcaption b{display:block}
+.tc figcaption span{color:var(--muted);font-size:13px}
+@media(min-width:720px){.try{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){.pm{animation:none;transform:translateX(60px)}}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -156,10 +190,11 @@ const SITE = {
 
   stepsTitle: "كيف تعمل؟",
   steps: [
-    ["قرّب", "يقرّب زبونك هاتفه من البطاقة أو يمسح الرمز بالكاميرا."],
+    ["قرّب", "يقرّب زبونك هاتفه من البطاقة أو اللافتة، أو يمسح الرمز بالكاميرا."],
     ["تفتح", "تظهر صفحتك مباشرة، بلا تطبيق وبلا كتابة رابط."],
-    ["يتواصل", "يتصل بك أو يتصفح قائمتك أو يقيّم محلك بنقرة واحدة."]
+    ["يتواصل", "يتصل بك أو يتصفح قائمتك أو يقيّم محلك أو ينضم إلى الواي فاي بنقرة."]
   ],
+  sceneTabs: [["card", "بطاقة"], ["stand", "حامل طاولة"], ["sticker", "ملصق"], ["wifi", "Wi-Fi"]],
 
   productsTitle: "منتجاتنا",
   productsText: "اضغط على أي منتج لتعرف تفاصيله وتطلبه عبر واتساب.",
@@ -169,33 +204,47 @@ const SITE = {
       features: ["بطاقة NFC أنيقة بتصميم يناسبك (أسود أو وردي)", "صفحة باسمك وصورتك ومهنتك", "أزرار اتصال وواتساب وحفظ جهة الاتصال", "رابط ثابت: نعدّل معلوماتك دون تغيير البطاقة", "رمز QR احتياطي للهواتف التي بلا NFC"],
       options: [["اللون", ["أسود", "وردي"]]], price: "" },
     { id: "business-id", art: "page", name: "Business ID", sub: "صفحة لمحلك أو شركتك",
-      text: "واجهة رقمية لنشاطك تجمع شعارك وصورك وموقعك وحساباتك في رابط واحد.",
-      features: ["شعارك وصورة غلاف وصور المحل", "أوقات العمل والموقع على الخريطة", "أزرار اتصال وواتساب وبريد", "حسابات إنستغرام وفيسبوك وتيك توك", "ألوان من هوية شعارك، بالعربية أو الفرنسية أو الإنجليزية"],
+      text: "واجهة رقمية لنشاطك تجمع شعارك وصورك وموقعك وحساباتك وموقعك الإلكتروني في رابط واحد.",
+      features: ["شعارك وصورة غلاف وصور المحل", "أوقات العمل والموقع على الخريطة", "أزرار اتصال وواتساب وبريد وموقعك الإلكتروني", "حسابات إنستغرام وفيسبوك وتيك توك", "قائمة طعام أو أسعار أو خدمات (المنتج التالي)", "ألوان من هوية شعارك، بالعربية أو الفرنسية أو الإنجليزية"],
       options: [["لغة الصفحة", ["العربية", "الفرنسية", "الإنجليزية"]]], price: "" },
-    { id: "e-menu", art: "menu", name: "قائمة طعام إلكترونية", sub: "للمطاعم والمقاهي",
-      text: "قائمة أصناف وأسعار مرتبة بأقسام مع بحث سريع، تُفتح من هاتف الزبون.",
-      features: ["أصناف وأسعار مرتبة بأقسام", "بحث سريع بالعربية والفرنسية", "تعديل الأسعار والأصناف متى شئت", "رمز QR لطاولاتك وواجهة محلك"],
+    { id: "e-menu", art: "menu", name: "قائمة إلكترونية", sub: "طعام أو أسعار أو منتجات",
+      text: "للمطاعم والمقاهي، وللحلاق والورشات وكل نشاط يعرض أسعاره: أصناف أو خدمات بأسعارها، بأقسام وبحث سريع.",
+      features: ["أصناف أو خدمات مرتبة بأقسام مع أسعارها", "بحث سريع بالعربية والفرنسية", "نحدّث الأسعار والأصناف عندما ترسل لنا التعديل", "رمز QR لطاولاتك أو واجهة محلك", "تأتي مع Business ID أو تُطلب وحدها"],
       options: [["لغة القائمة", ["العربية", "الفرنسية", "الإنجليزية"]]], price: "" },
     { id: "google-review", art: "stand", name: "حامل تقييم Google", sub: "لافتة للطاولة أو الكاونتر",
       text: "يأخذ الزبون مباشرة إلى صفحة تقييم محلك على خرائط Google.",
-      features: ["حامل أنيق للطاولة أو الكاونتر", "يفتح صفحة التقييم بلمسة أو مسح رمز QR", "يُعرض على جميع زبائنك دون شروط", "يمكن طباعة شعارك عليه"],
-      options: [["شعارك على الحامل", ["بدون", "مع طباعة شعاري"]]], price: "" },
+      features: ["حامل أنيق للطاولة أو الكاونتر", "يفتح صفحة التقييم بلمسة أو مسح رمز QR", "يُعرض على جميع زبائنك دون شروط", "تصميم خاص بالتقييم: نجوم ورمز QR"],
+      options: [["الشكل", ["بشعار نشاطك", "بدون شعار"]]], price: "" },
+    { id: "wifi", art: "wifi", name: "Wi-Fi بنقرة", sub: "ملصق أو حامل للضيوف",
+      text: "يمسح الضيف الرمز فيتصل بشبكتك بنقرة واحدة، دون أن يكتب كلمة السر.",
+      features: ["رمز QR بصيغة Wi-Fi تفهمه كاميرا الهاتف", "للمقاهي والمطاعم والفنادق والمكاتب", "نوصي بشبكة مخصّصة للضيوف", "إن تغيّرت كلمة السر نعيد طباعة الرمز"],
+      options: [["الشكل", ["ملصق", "حامل طاولة"]]], price: "" },
     { id: "stickers", art: "stickers", name: "ملصقات التواصل", sub: "للزجاج والجدران",
-      text: "ملصقات تفتح حسابك على المنصة التي تختارها، بلمسة أو بمسح.",
-      features: ["ملصقات للزجاج والجدران", "إنستغرام أو فيسبوك أو تيك توك أو واتساب", "تعمل بلمسة (NFC) أو بمسح (QR)", "نطبع شعارك عليها عند الطلب"],
-      options: [["المنصة", ["إنستغرام", "فيسبوك", "تيك توك", "واتساب"]]], price: "" }
+      text: "ملصقات بشعار المنصة تفتح حسابك عليها، بلمسة أو بمسح.",
+      features: ["ملصقات للزجاج والجدران", "لأغلب المنصات: إنستغرام وفيسبوك وتيك توك وسناب وواتساب وغيرها", "تعمل بلمسة (NFC) أو بمسح (QR)", "بشعار المنصة وحده ليجذب النظر"],
+      options: [["المنصة", ["إنستغرام", "فيسبوك", "تيك توك", "سناب", "واتساب", "أخرى"]]], price: "" }
   ],
+
+  tryTitle: "جرّب بنفسك",
+  tryText: "اكتب بياناتك واختر لونًا، وشاهد بطاقتك وصفحتك قبل أن تطلبها.",
+  tryName: "الاسم", tryJob: "المهنة", tryPhone: "الهاتف", tryColor: "اللون",
+  tryOrder: "اطلب هذه البطاقة",
+  tryNote: "بياناتك لا تُحفظ في أي مكان، وتبقى على هاتفك حتى ترسلها أنت.",
+  tryProduct: "Personal ID",
+  swatches: [["gold", "ذهبي"], ["blue", "بلوري"], ["rose", "وردي"], ["green", "أخضر"]],
+  demos: [
+    { title: "بطاقة شخصية حقيقية", url: "p/sohaib/" },
+    { title: "صفحة نشاط: Waslux", url: "p/waslux/" }
+  ],
+  demosText: "جرّب نماذج حيّة من هاتفك:",
 
   segmentsTitle: "لمن نصنع؟",
   segmentsText: "لكل نشاط تعتمد فيه الثقة وسهولة الوصول إلى صاحبه.",
-  segments: ["مطاعم ومقاهٍ", "حلاقون وصالونات", "ورشات وحرفيون", "محلات ملابس", "عيادات ومستشارون", "مهنيون ورجال أعمال"],
+  segments: ["مطاعم ومقاهٍ", "حلاقون وصالونات", "ورشات وحرفيون", "محلات ملابس", "عيادات ومستشارون", "فنادق ومنتجعات", "شركات محلية ودولية", "معارض وفعاليات", "بنوك ومؤسسات", "مهنيون ورجال أعمال"],
 
-  custTitle: "بألوان هويتك",
-  custText: "نصمم البطاقة والصفحة بألوان شعارك. اختر لونًا وشاهد التغيير.",
-  custCap: "ألوان بطاقتك وصفحتك تتبع هوية نشاطك.",
-  swatches: [["gold", "ذهبي"], ["blue", "بلوري"], ["rose", "وردي"], ["green", "أخضر"]],
-
-  demo: { title: "شاهد نموذجًا حيًا", text: "هذه بطاقة شخصية حقيقية بصفحتها، جرّبها من هاتفك.", button: "افتح النموذج", url: "p/sohaib/" },
+  testiTitle: "آراء زبائننا",
+  testiText: "",
+  testimonials: [],       // أضف رأي زبون حقيقي بإذنه: { name: "اسم الزبون", role: "نشاطه", text: "نص رأيه كما قاله" }
 
   faqTitle: "أسئلة شائعة",
   faq: [
@@ -207,7 +256,7 @@ const SITE = {
 
   contactTitle: "تواصل معنا",
   contactText: "راسلنا على واتساب بنوع المنتج الذي يهمك، ونرد عليك.",
-  labels: { order: "اطلب عبر واتساب", more: "شاهد المنتجات", details: "التفاصيل", askPrice: "اطلب السعر", price: "السعر", call: "اتصال", email: "البريد", whatsapp: "واتساب" }
+  labels: { order: "اطلب عبر واتساب", more: "شاهد المنتجات", details: "التفاصيل", askPrice: "اطلب السعر", price: "السعر", call: "اتصال", whatsapp: "واتساب", save: "حفظ جهة الاتصال", yourName: "اسمك", yourJob: "مهنتك" }
 };
 /* ================= نهاية قسم البيانات ================= */
 
@@ -246,6 +295,7 @@ const MARK = '<path d="M0,22 L40,112 L80,40 L120,112 L160,22" fill="none" stroke
 const WORD = '<g fill="none" stroke="url(#gg)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M0,0 L27.5,100 L55,22 L82.5,100 L110,0"/><g transform="translate(136,0)"><path d="M0,100 L40,0 L80,100 M16,68 L64,68"/></g><g transform="translate(242,0)"><path d="M58,14 C48,-2 6,2 6,28 C6,52 58,46 58,72 C58,100 14,100 4,86"/></g><g transform="translate(332,0)"><path d="M4,0 L4,100 L56,100"/></g><g transform="translate(414,0)"><path d="M4,0 L4,66 C4,102 66,102 66,66 L66,0"/></g><g transform="translate(510,0)"><path d="M0,0 L80,100 M80,0 L0,100"/></g></g>';
 const LOGO = '<svg viewBox="0 0 250 38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Waslux"><g transform="translate(0,5) scale(.27)">' + MARK + '</g><g transform="translate(62,6) scale(.3)">' + WORD + '</g></svg>';
 const svg = inner => '<svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + inner + '</svg>';
+const svgW = inner => '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + inner + '</svg>';
 const STAR = "M0,-6 L1.8,-1.9 L6.2,-1.9 L2.7,0.9 L4,5.2 L0,2.6 L-4,5.2 L-2.7,0.9 L-6.2,-1.9 L-1.8,-1.9Z";
 function qr(x, y, c, n, seed) {
   let s = seed, o = "";
@@ -265,22 +315,33 @@ const cardArt = '<g transform="rotate(7 120 88)"><rect x="46" y="44" width="148"
   '<rect x="62" y="118" width="52" height="4" rx="2" class="k-dim"/></g>';
 const phone = '<rect x="78" y="8" width="84" height="154" rx="14" class="k-dark" stroke="url(#gg)" stroke-width="2"/>';
 const pageInner = '<rect x="86" y="16" width="68" height="36" rx="8" class="k-soft"/><circle cx="120" cy="54" r="15" fill="url(#gg)"/><rect x="98" y="76" width="44" height="5" rx="2.5" class="k-iv"/><rect x="105" y="86" width="30" height="3.5" rx="1.7" class="k-dim"/><rect x="88" y="98" width="30" height="13" rx="6.5" class="k-line"/><rect x="122" y="98" width="30" height="13" rx="6.5" class="k-line"/><rect x="88" y="116" width="64" height="15" rx="7.5" fill="url(#gg)"/><rect x="88" y="138" width="64" height="3" rx="1.5" class="k-dim"/><rect x="88" y="146" width="46" height="3" rx="1.5" class="k-dim"/>';
+const wifiScreen = '<g transform="translate(120,62)" fill="none" style="stroke:var(--ice)" stroke-width="5" stroke-linecap="round"><path d="M-26,-8 q26,-24 52,0"/><path d="M-17,3 q17,-16 34,0"/><path d="M-8,14 q8,-7 16,0"/></g><circle cx="120" cy="82" r="3.6" class="k-icf"/><circle cx="120" cy="120" r="16" fill="url(#gg)"/><path d="M112,120 l6,7 l11,-13" fill="none" style="stroke:var(--on)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="96" y="146" width="48" height="4" rx="2" class="k-dim"/>';
+const standInner = () => {
+  let st = ""; for (let i = 0; i < 5; i++) st += '<path transform="translate(' + (96 + i * 12) + ',40)" d="' + STAR + '" class="k-acc"/>';
+  return '<rect x="68" y="136" width="104" height="12" rx="5" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M76,136 L88,24 Q120,14 152,24 L164,136 Z" class="k-dark" stroke="url(#gg)" stroke-width="2" stroke-linejoin="round"/>' + st + '<rect x="94" y="54" width="52" height="52" rx="6" class="k-soft"/>' + qr(99, 59, 6, 7, 11) + '<rect x="100" y="114" width="40" height="4" rx="2" class="k-dim"/><rect x="108" y="122" width="24" height="3" rx="1.5" class="k-dim"/>';
+};
+const wifiPlate = '<rect x="72" y="22" width="96" height="120" rx="14" class="k-dark" stroke="url(#gg)" stroke-width="2"/><g transform="translate(120,46)" fill="none" style="stroke:var(--ice)" stroke-width="3.4" stroke-linecap="round"><path d="M-22,-6 q22,-20 44,0"/><path d="M-14,2 q14,-12 28,0"/><path d="M-6,10 q6,-5 12,0"/></g><circle cx="120" cy="60" r="2.8" class="k-icf"/><rect x="94" y="68" width="52" height="52" rx="6" class="k-soft"/>' + qr(99, 73, 6, 7, 19) + '<rect x="100" y="128" width="40" height="4" rx="2" class="k-dim"/>';
+const smallPhone = inner => '<g class="pm"><g transform="translate(-44.4,33.6) scale(.8)">' + phone + '<g class="scr">' + inner + '</g></g></g>';
+const vf = y => '<path class="wv k-ice" d="M216,' + (y + 10) + ' V' + y + ' H226 M266,' + y + ' H276 V' + (y + 10) + ' M276,' + (y + 50) + ' V' + (y + 60) + ' H266 M226,' + (y + 60) + ' H216 V' + (y + 50) + '"/>';
 const ART = {
   card: () => svg(cardArt),
   hero: () => '<svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" style="stroke:var(--iline)" stroke-width="1.4"><circle cx="120" cy="100" r="46"/><circle cx="120" cy="100" r="68"/><circle cx="120" cy="100" r="90"/></g><circle class="pr" cx="120" cy="100" r="60" fill="none" style="stroke:var(--ice)" stroke-width="1.6"/><circle class="pr" cx="120" cy="100" r="60" fill="none" style="stroke:var(--ice)" stroke-width="1.6"/><circle class="pr" cx="120" cy="100" r="60" fill="none" style="stroke:var(--ice)" stroke-width="1.6"/><g transform="translate(0,12)">' + cardArt + '</g></svg>',
-  scene: () => '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="translate(128,6)">' + phone + '<g class="scr">' + pageInner + '</g></g><g class="cd"><rect x="14" y="76" width="118" height="74" rx="10" class="k-dark" stroke="url(#gg)" stroke-width="2"/><g transform="translate(34,86) scale(.32)">' + MARK + '</g><rect x="30" y="136" width="40" height="4" rx="2" class="k-dim"/></g><path class="wv k-ice" d="M204,100 q-8,12 0,24 M196,92 q-15,20 0,40 M188,84 q-22,28 0,56"/></svg>',
-  cust: () => '<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset="1" style="stop-color:var(--g2)"/></linearGradient></defs>' + ('<g transform="translate(-50,8)">' + phone + pageInner + '</g><g transform="translate(96,16)">' + cardArt + '</g>').replace(/url\(#gg\)/g, 'url(#gc)') + '</svg>',
   page: () => svg(phone + pageInner),
   menu: () => {
     let r = "";
     for (let i = 0; i < 4; i++) { const y = 68 + i * 22; r += '<rect x="90" y="' + y + '" width="34" height="4.5" rx="2.2" class="k-iv"/><rect x="90" y="' + (y + 8) + '" width="24" height="3" rx="1.5" class="k-dim"/><rect x="128" y="' + (y + 1) + '" width="22" height="6" rx="3" class="k-acc"/><rect x="88" y="' + (y + 16) + '" width="64" height="1" class="k-dim"/>'; }
     return svg(phone + '<rect x="90" y="20" width="40" height="6" rx="3" class="k-iv"/><rect x="88" y="32" width="64" height="12" rx="6" class="k-soft"/><rect x="88" y="50" width="22" height="9" rx="4.5" fill="url(#gg)"/><rect x="114" y="50" width="22" height="9" rx="4.5" class="k-line" stroke-width="1.2"/>' + r);
   },
-  stand: () => {
-    let st = ""; for (let i = 0; i < 5; i++) st += '<path transform="translate(' + (96 + i * 12) + ',40)" d="' + STAR + '" class="k-acc"/>';
-    return svg('<rect x="68" y="136" width="104" height="12" rx="5" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M76,136 L88,24 Q120,14 152,24 L164,136 Z" class="k-dark" stroke="url(#gg)" stroke-width="2" stroke-linejoin="round"/>' + st + '<rect x="94" y="54" width="52" height="52" rx="6" class="k-soft"/>' + qr(99, 59, 6, 7, 11) + '<rect x="100" y="114" width="40" height="4" rx="2" class="k-dim"/><rect x="108" y="122" width="24" height="3" rx="1.5" class="k-dim"/>');
-  },
-  stickers: () => svg('<circle cx="88" cy="96" r="52" class="k-dark" stroke="url(#gg)" stroke-width="2"/>' + qr(67, 75, 6, 7, 23) + '<circle cx="172" cy="62" r="34" class="k-soft" stroke="url(#gg)" stroke-width="2"/><g transform="rotate(-35 172 62)"><rect x="152" y="54" width="24" height="15" rx="7.5" class="k-ice"/><rect x="168" y="56" width="24" height="15" rx="7.5" class="k-ice"/></g><circle cx="176" cy="132" r="18" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M168,126 q8,6 0,12 M174,122 q12,10 0,20" class="k-ice" stroke-width="1.8"/>')
+  stand: () => svg(standInner()),
+  wifi: () => svg(wifiPlate),
+  stickers: () => svg('<circle cx="88" cy="96" r="52" class="k-dark" stroke="url(#gg)" stroke-width="2"/>' + qr(67, 75, 6, 7, 23) + '<circle cx="172" cy="62" r="34" class="k-soft" stroke="url(#gg)" stroke-width="2"/><g transform="rotate(-35 172 62)"><rect x="152" y="54" width="24" height="15" rx="7.5" class="k-ice"/><rect x="168" y="56" width="24" height="15" rx="7.5" class="k-ice"/></g><circle cx="176" cy="132" r="18" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M168,126 q8,6 0,12 M174,122 q12,10 0,20" class="k-ice" stroke-width="1.8"/>'),
+  tcard: () => '<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset="1" style="stop-color:var(--g2)"/></linearGradient></defs>' + ('<g transform="translate(0,-18)">' + cardArt + '</g>').replace(/url\(#gg\)/g, 'url(#gc)') + '</svg>'
+};
+const SC = {
+  card: () => svgW('<g transform="translate(128,6)">' + phone + '<g class="scr">' + pageInner + '</g></g><g class="cd"><rect x="14" y="76" width="118" height="74" rx="10" class="k-dark" stroke="url(#gg)" stroke-width="2"/><g transform="translate(34,86) scale(.32)">' + MARK + '</g><rect x="30" y="136" width="40" height="4" rx="2" class="k-dim"/></g><path class="wv k-ice" d="M204,100 q-8,12 0,24 M196,92 q-15,20 0,40 M188,84 q-22,28 0,56"/>'),
+  stand: () => svgW('<g transform="translate(138,22) scale(.9)">' + standInner() + '</g>' + vf(64) + smallPhone(pageInner)),
+  sticker: () => svgW('<rect x="150" y="18" width="150" height="164" rx="8" fill="none" style="stroke:var(--line)" stroke-width="2"/><path d="M225,18 V182" fill="none" style="stroke:var(--line)" stroke-width="1.4"/><circle cx="262" cy="100" r="30" class="k-dark" stroke="url(#gg)" stroke-width="2"/>' + qr(244, 82, 6, 6, 5) + '<path class="wv k-ice" d="M156,90 q10,12 0,24 M164,82 q16,20 0,36 M172,74 q22,28 0,52"/>' + smallPhone(pageInner)),
+  wifi: () => svgW('<g transform="translate(138,22) scale(.9)">' + wifiPlate + '</g>' + vf(77) + smallPhone(wifiScreen))
 };
 
 /* بناء الصفحة */
@@ -288,16 +349,18 @@ const phoneIc = '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 
 const waIc = '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
 const mailIc = '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
 const num = intl(SITE.phone);
-const hd = (eb, t, p) => '<div class="hd rv">' + (eb ? '<div class="eb">' + esc(eb) + '</div>' : '') + '<h2>' + esc(t) + '</h2>' + (p ? '<p>' + esc(p) + '</p>' : '') + '</div>';
+const hd = (t, p) => '<div class="hd rv"><h2>' + esc(t) + '</h2>' + (p ? '<p>' + esc(p) + '</p>' : '') + '</div>';
+const testi = (SITE.testimonials || []).filter(t => t && t.text);
 
 let h = '<header class="top"><div class="w"><a class="brand" href="#top" aria-label="' + esc(SITE.brand) + '">' + LOGO + '</a><a class="btn cta sm" href="' + esc(wa("")) + '" target="_blank" rel="noopener">' + L.whatsapp + '</a></div></header><main id="top">';
 h += '<section class="w hero"><div class="rv"><span class="tag">' + esc(SITE.tagline) + '</span><h1>' + esc(SITE.heroTitle) + '</h1><p>' + esc(SITE.heroText) + '</p><div class="cta-row"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="#products">' + esc(L.more) + '</a></div></div><div class="hero-a rv">' + ART.hero() + '</div></section>';
-h += '<section class="w s">' + hd("", SITE.stepsTitle, "") + '<div class="how"><div class="stl">' + SITE.steps.map((s, i) => '<div class="step rv"><div class="num">' + (i + 1) + '</div><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></div>').join("") + '</div><div class="scene rv">' + ART.scene() + '</div></div></section>';
-h += '<section class="w s" id="products">' + hd("", SITE.productsTitle, SITE.productsText) + '<div class="grid">' + SITE.products.map((p, i) => '<button type="button" class="pc rv" data-i="' + i + '"><div class="art">' + ART[p.art]() + '</div><div class="bd"><div class="sub">' + esc(p.sub) + '</div><h3>' + esc(p.name) + '</h3><p>' + esc(p.text) + '</p><div class="ft"><span class="pr">' + esc(p.price || L.askPrice) + '</span><span>' + esc(L.details) + ' ‹</span></div></div></button>').join("") + '</div></section>';
-h += '<section class="w s">' + hd("", SITE.custTitle, SITE.custText) + '<div class="cust rv" id="cust">' + ART.cust() + '<div class="sw">' + SITE.swatches.map((k, i) => '<button type="button" data-k="' + k[0] + '" class="' + (i ? '' : 'on') + '"><i style="background:linear-gradient(135deg,' + TH[k[0]].g1 + ',' + TH[k[0]].g2 + ')"></i>' + esc(k[1]) + '</button>').join("") + '</div><div class="cap">' + esc(SITE.custCap) + '</div></div></section>';
-h += '<section class="w s">' + hd("", SITE.segmentsTitle, SITE.segmentsText) + '<div class="chips rv">' + SITE.segments.map(s => '<span class="chip">' + esc(s) + '</span>').join("") + '</div></section>';
-if (SITE.demo && SITE.demo.url) h += '<section class="w s"><div class="demo rv"><div><h2>' + esc(SITE.demo.title) + '</h2><p>' + esc(SITE.demo.text) + '</p></div><a class="btn cta" href="' + esc(SITE.demo.url) + '" target="_blank" rel="noopener">' + esc(SITE.demo.button) + '</a></div></section>';
-h += '<section class="w s">' + hd("", SITE.faqTitle, "") + '<div class="rv">' + SITE.faq.map(f => '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>').join("") + '</div></section>';
+h += '<section class="w s">' + hd(SITE.stepsTitle, "") + '<div class="how"><div class="stl">' + SITE.steps.map((s, i) => '<div class="step rv"><div class="num">' + (i + 1) + '</div><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></div>').join("") + '</div><div class="scene rv"><div id="sc"></div><div class="tabs" id="tabs">' + SITE.sceneTabs.map((t, i) => '<button type="button" data-k="' + t[0] + '" class="' + (i ? '' : 'on') + '">' + esc(t[1]) + '</button>').join("") + '</div></div></div></section>';
+h += '<section class="w s" id="products">' + hd(SITE.productsTitle, SITE.productsText) + '<div class="grid">' + SITE.products.map((p, i) => '<button type="button" class="pc rv" data-i="' + i + '"><div class="art">' + ART[p.art]() + '</div><div class="bd"><div class="sub">' + esc(p.sub) + '</div><h3>' + esc(p.name) + '</h3><p>' + esc(p.text) + '</p><div class="ft"><span class="pr">' + esc(p.price || L.askPrice) + '</span><span>' + esc(L.details) + ' ‹</span></div></div></button>').join("") + '</div></section>';
+h += '<section class="w s" id="try">' + hd(SITE.tryTitle, SITE.tryText) + '<div class="cust try rv" id="cust"><div class="tf"><label>' + esc(SITE.tryName) + '<input id="tn" autocomplete="off" maxlength="30"></label><label>' + esc(SITE.tryJob) + '<input id="tj" autocomplete="off" maxlength="34"></label><label>' + esc(SITE.tryPhone) + '<input id="tp" inputmode="tel" autocomplete="off" maxlength="20"></label><div class="ol">' + esc(SITE.tryColor) + '</div><div class="sw">' + SITE.swatches.map((k, i) => '<button type="button" data-k="' + k[0] + '" class="' + (i ? '' : 'on') + '"><i style="background:linear-gradient(135deg,' + TH[k[0]].g1 + ',' + TH[k[0]].g2 + ')"></i>' + esc(k[1]) + '</button>').join("") + '</div></div><div class="tv">' + ART.tcard() + '<div class="ph"><div class="phc"></div><div class="pha" id="pa">؟</div><div class="phn" id="pn">' + esc(L.yourName) + '</div><div class="phj" id="pj">' + esc(L.yourJob) + '</div><div class="phb"><span>' + esc(L.call) + '</span><span>' + esc(L.whatsapp) + '</span></div><div class="phs">' + esc(L.save) + '</div><div class="phl"></div><div class="phl sh"></div></div></div></div><div class="tfoot rv"><a class="btn cta" id="tryorder" href="' + esc(wa(SITE.orderMsg + SITE.tryProduct)) + '" target="_blank" rel="noopener">' + waIc + esc(SITE.tryOrder) + '</a><p class="note">' + esc(SITE.tryNote) + '</p></div>' +
+  (SITE.demos && SITE.demos.length ? '<div class="demos rv"><span>' + esc(SITE.demosText) + '</span>' + SITE.demos.map(d => '<a class="btn" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.title) + '</a>').join("") + '</div>' : '') + '</section>';
+h += '<section class="w s">' + hd(SITE.segmentsTitle, SITE.segmentsText) + '<div class="chips rv">' + SITE.segments.map(s => '<span class="chip">' + esc(s) + '</span>').join("") + '</div></section>';
+if (testi.length) h += '<section class="w s">' + hd(SITE.testiTitle, SITE.testiText) + '<div class="tg">' + testi.map(t => '<figure class="tc rv"><div class="qm">“</div><blockquote>' + esc(t.text) + '</blockquote><figcaption><b>' + esc(t.name || "") + '</b><span>' + esc(t.role || "") + '</span></figcaption></figure>').join("") + '</div></section>';
+h += '<section class="w s">' + hd(SITE.faqTitle, "") + '<div class="rv">' + SITE.faq.map(f => '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>').join("") + '</div></section>';
 h += '<section class="w s" id="contact"><div class="contact rv"><h2>' + esc(SITE.contactTitle) + '</h2><p>' + esc(SITE.contactText) + '</p><div class="crow"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="tel:+' + num + '">' + phoneIc + '<span class="ltr">' + esc(SITE.phone) + '</span></a><a class="btn" href="mailto:' + esc(SITE.email) + '">' + mailIc + '<span class="ltr">' + esc(SITE.email) + '</span></a></div></div></section>';
 h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w">© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + '</div></footer>';
 document.getElementById("site").innerHTML = h;
@@ -309,15 +372,46 @@ if ("IntersectionObserver" in window) {
   rv.forEach(el => io.observe(el));
 } else rv.forEach(el => el.classList.add("in"));
 
-/* ألوان تفاعلية + زر الطلب الثابت */
+/* مشهد "كيف تعمل؟" بتبويبات */
+const sc = document.getElementById("sc"), tabs = document.getElementById("tabs");
+function setScene(k) {
+  sc.innerHTML = SC[k]();
+  tabs.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.getAttribute("data-k") === k));
+}
+tabs.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setScene(b.getAttribute("data-k"))));
+setScene(SITE.sceneTabs[0][0]);
+
+/* جرّب بنفسك */
 const cu = document.getElementById("cust");
+const tn = document.getElementById("tn"), tj = document.getElementById("tj"), tp = document.getElementById("tp");
+let colorName = SITE.swatches[0][1];
+function updTry() {
+  const n = tn.value.trim(), j = tj.value.trim(), p = tp.value.trim();
+  document.getElementById("pn").textContent = n || L.yourName;
+  document.getElementById("pj").textContent = j || L.yourJob;
+  document.getElementById("pa").textContent = n ? n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase() : "؟";
+  document.getElementById("pn").classList.toggle("ph0", !n);
+  document.getElementById("pj").classList.toggle("ph0", !j);
+  const parts = [];
+  if (n) parts.push(SITE.tryName + ": " + n);
+  if (j) parts.push(SITE.tryJob + ": " + j);
+  if (p) parts.push(SITE.tryPhone + ": " + p);
+  parts.push(SITE.tryColor + ": " + colorName);
+  document.getElementById("tryorder").href = wa(SITE.orderMsg + SITE.tryProduct + " — " + parts.join("، "));
+}
+[tn, tj, tp].forEach(i => i.addEventListener("input", updTry));
 cu.querySelectorAll(".sw button").forEach(b => b.addEventListener("click", () => {
   const t = TH[b.getAttribute("data-k")];
   ["accent", "g1", "g2", "ice", "glow", "c1", "c2", "ivory", "muted", "on"].forEach(v => cu.style.setProperty("--" + v, t[v]));
   cu.style.setProperty("--line", rgba(t.accent, .28));
   cu.style.setProperty("--iline", rgba(t.ice, .26));
   cu.querySelectorAll(".sw button").forEach(x => x.classList.toggle("on", x === b));
+  colorName = SITE.swatches.filter(k => k[0] === b.getAttribute("data-k"))[0][1];
+  updTry();
 }));
+updTry();
+
+/* زر الطلب الثابت */
 const stk = document.getElementById("stk");
 const onScroll = () => stk.classList.toggle("on", window.scrollY > 520);
 window.addEventListener("scroll", onScroll, { passive: true });
