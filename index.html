@@ -207,6 +207,10 @@ const SITE = {
       text: "واجهة رقمية لنشاطك تجمع شعارك وصورك وموقعك وحساباتك وموقعك الإلكتروني في رابط واحد.",
       features: ["شعارك وصورة غلاف وصور المحل", "أوقات العمل والموقع على الخريطة", "أزرار اتصال وواتساب وبريد وموقعك الإلكتروني", "حسابات إنستغرام وفيسبوك وتيك توك", "قائمة طعام أو أسعار أو خدمات (المنتج التالي)", "ألوان من هوية شعارك، بالعربية أو الفرنسية أو الإنجليزية"],
       options: [["لغة الصفحة", ["العربية", "الفرنسية", "الإنجليزية"]]], price: "" },
+    { id: "stand-id", art: "sid", name: "Stand ID", sub: "حامل مطبوع + Business ID",
+      text: "حامل أنيق لطاولتك أو الكاونتر يحمل هويتك التجارية: شعارك واسمك المهني ورمز QR وأيقونة NFC، ويفتح صفحة Business ID بلمسة أو مسح.",
+      features: ["تصميم باسمك المهني وشعارك أو صورتك وتعريف خفيف بنشاطك", "رمز QR وأيقونة NFC مع عبارة قرّب هاتفك", "يفتح صفحة Business ID الخاصة بنشاطك", "أو تُقدَّم الهوية نفسها على بطاقة إن فضّلت", "خدمة اختيارية: اتصال الضيوف بالواي فاي بنقرة (نوصي بشبكة للضيوف)", "لغة الصفحة والتصميم بحسب طلبك"],
+      options: [["الشكل", ["حامل", "بطاقة"]]], price: "" },
     { id: "e-menu", art: "menu", name: "قائمة إلكترونية", sub: "طعام أو أسعار أو منتجات",
       text: "للمطاعم والمقاهي، وللحلاق والورشات وكل نشاط يعرض أسعاره: أصناف أو خدمات بأسعارها، بأقسام وبحث سريع.",
       features: ["أصناف أو خدمات مرتبة بأقسام مع أسعارها", "بحث سريع بالعربية والفرنسية", "نحدّث الأسعار والأصناف عندما ترسل لنا التعديل", "رمز QR لطاولاتك أو واجهة محلك", "تأتي مع Business ID أو تُطلب وحدها"],
@@ -215,10 +219,6 @@ const SITE = {
       text: "يأخذ الزبون مباشرة إلى صفحة تقييم محلك على خرائط Google.",
       features: ["حامل أنيق للطاولة أو الكاونتر", "يفتح صفحة التقييم بلمسة أو مسح رمز QR", "يُعرض على جميع زبائنك دون شروط", "تصميم خاص بالتقييم: نجوم ورمز QR"],
       options: [["الشكل", ["بشعار نشاطك", "بدون شعار"]]], price: "" },
-    { id: "wifi", art: "wifi", name: "Wi-Fi بنقرة", sub: "ملصق أو حامل للضيوف",
-      text: "يمسح الضيف الرمز فيتصل بشبكتك بنقرة واحدة، دون أن يكتب كلمة السر.",
-      features: ["رمز QR بصيغة Wi-Fi تفهمه كاميرا الهاتف", "للمقاهي والمطاعم والفنادق والمكاتب", "نوصي بشبكة مخصّصة للضيوف", "إن تغيّرت كلمة السر نعيد طباعة الرمز"],
-      options: [["الشكل", ["ملصق", "حامل طاولة"]]], price: "" },
     { id: "stickers", art: "stickers", name: "ملصقات التواصل", sub: "للزجاج والجدران",
       text: "ملصقات بشعار المنصة تفتح حسابك عليها، بلمسة أو بمسح.",
       features: ["ملصقات للزجاج والجدران", "لأغلب المنصات: إنستغرام وفيسبوك وتيك توك وسناب وواتساب وغيرها", "تعمل بلمسة (NFC) أو بمسح (QR)", "بشعار المنصة وحده ليجذب النظر"],
@@ -316,8 +316,8 @@ const cardArt = '<g transform="rotate(7 120 88)"><rect x="46" y="44" width="148"
 const phone = '<rect x="78" y="8" width="84" height="154" rx="14" class="k-dark" stroke="url(#gg)" stroke-width="2"/>';
 const pageInner = '<rect x="86" y="16" width="68" height="36" rx="8" class="k-soft"/><circle cx="120" cy="54" r="15" fill="url(#gg)"/><rect x="98" y="76" width="44" height="5" rx="2.5" class="k-iv"/><rect x="105" y="86" width="30" height="3.5" rx="1.7" class="k-dim"/><rect x="88" y="98" width="30" height="13" rx="6.5" class="k-line"/><rect x="122" y="98" width="30" height="13" rx="6.5" class="k-line"/><rect x="88" y="116" width="64" height="15" rx="7.5" fill="url(#gg)"/><rect x="88" y="138" width="64" height="3" rx="1.5" class="k-dim"/><rect x="88" y="146" width="46" height="3" rx="1.5" class="k-dim"/>';
 const wifiScreen = '<g transform="translate(120,62)" fill="none" style="stroke:var(--ice)" stroke-width="5" stroke-linecap="round"><path d="M-26,-8 q26,-24 52,0"/><path d="M-17,3 q17,-16 34,0"/><path d="M-8,14 q8,-7 16,0"/></g><circle cx="120" cy="82" r="3.6" class="k-icf"/><circle cx="120" cy="120" r="16" fill="url(#gg)"/><path d="M112,120 l6,7 l11,-13" fill="none" style="stroke:var(--on)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="96" y="146" width="48" height="4" rx="2" class="k-dim"/>';
-const standInner = () => {
-  let st = ""; for (let i = 0; i < 5; i++) st += '<path transform="translate(' + (96 + i * 12) + ',40)" d="' + STAR + '" class="k-acc"/>';
+const standInner = (plain) => {
+  let st = ""; if (plain) st = '<g transform="translate(103,27) scale(.22)">' + MARK + '</g>'; else for (let i = 0; i < 5; i++) st += '<path transform="translate(' + (96 + i * 12) + ',40)" d="' + STAR + '" class="k-acc"/>';
   return '<rect x="68" y="136" width="104" height="12" rx="5" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M76,136 L88,24 Q120,14 152,24 L164,136 Z" class="k-dark" stroke="url(#gg)" stroke-width="2" stroke-linejoin="round"/>' + st + '<rect x="94" y="54" width="52" height="52" rx="6" class="k-soft"/>' + qr(99, 59, 6, 7, 11) + '<rect x="100" y="114" width="40" height="4" rx="2" class="k-dim"/><rect x="108" y="122" width="24" height="3" rx="1.5" class="k-dim"/>';
 };
 const wifiPlate = '<rect x="72" y="22" width="96" height="120" rx="14" class="k-dark" stroke="url(#gg)" stroke-width="2"/><g transform="translate(120,46)" fill="none" style="stroke:var(--ice)" stroke-width="3.4" stroke-linecap="round"><path d="M-22,-6 q22,-20 44,0"/><path d="M-14,2 q14,-12 28,0"/><path d="M-6,10 q6,-5 12,0"/></g><circle cx="120" cy="60" r="2.8" class="k-icf"/><rect x="94" y="68" width="52" height="52" rx="6" class="k-soft"/>' + qr(99, 73, 6, 7, 19) + '<rect x="100" y="128" width="40" height="4" rx="2" class="k-dim"/>';
@@ -333,7 +333,7 @@ const ART = {
     return svg(phone + '<rect x="90" y="20" width="40" height="6" rx="3" class="k-iv"/><rect x="88" y="32" width="64" height="12" rx="6" class="k-soft"/><rect x="88" y="50" width="22" height="9" rx="4.5" fill="url(#gg)"/><rect x="114" y="50" width="22" height="9" rx="4.5" class="k-line" stroke-width="1.2"/>' + r);
   },
   stand: () => svg(standInner()),
-  wifi: () => svg(wifiPlate),
+  sid: () => svg('<g transform="translate(-30,4) scale(.92)">' + standInner(true) + '</g><g transform="translate(87.6,13.6) scale(.8)">' + phone + pageInner + '</g>'),
   stickers: () => svg('<circle cx="88" cy="96" r="52" class="k-dark" stroke="url(#gg)" stroke-width="2"/>' + qr(67, 75, 6, 7, 23) + '<circle cx="172" cy="62" r="34" class="k-soft" stroke="url(#gg)" stroke-width="2"/><g transform="rotate(-35 172 62)"><rect x="152" y="54" width="24" height="15" rx="7.5" class="k-ice"/><rect x="168" y="56" width="24" height="15" rx="7.5" class="k-ice"/></g><circle cx="176" cy="132" r="18" class="k-soft" stroke="url(#gg)" stroke-width="1.6"/><path d="M168,126 q8,6 0,12 M174,122 q12,10 0,20" class="k-ice" stroke-width="1.8"/>'),
   tcard: () => '<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset="1" style="stop-color:var(--g2)"/></linearGradient></defs>' + ('<g transform="translate(0,-18)">' + cardArt + '</g>').replace(/url\(#gg\)/g, 'url(#gc)') + '</svg>'
 };
