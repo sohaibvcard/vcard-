@@ -87,7 +87,7 @@ html[dir=rtl] .in span{text-align:right}
 const SHOP = {
   lang: "ar",             // اللغة: "fr" أو "ar" أو "en"
   theme: "gold",          // الألوان: "fire" أو "gold" أو "royal" أو "rose" أو "blue" أو "green"
-  labels: { menu: "خدماتنا ومنتجاتنا", search: "ابحث عن خدمة" },   // تغيير نصوص الأزرار، مثال: { menu: "خدماتنا", search: "ابحث عن خدمة" }
+  labels: { menu: "خدماتنا ومنتجاتنا", search: "ابحث عن خدمة", site: "تصفح موقعنا الإلكتروني" },   // تغيير نصوص الأزرار، مثال: { menu: "خدماتنا", search: "ابحث عن خدمة" }
   colors: {},             // تخصيص لون من الشعار، مثال: { accent: "#e63946", g1: "#ffb703", g2: "#e63946" }
   countryCode: "213",
 
@@ -118,7 +118,7 @@ const SHOP = {
   gallery: [],            // صور المحل
   hours: [],              // مثال: [["Lun - Jeu", "11:00 - 23:00"], ["Ven - Sam", "13:00 - 00:00"]]
 
-  buttons: ["menu", "whatsapp", "call", "save"],   // الخيارات: menu call whatsapp email website map save
+  buttons: ["menu", "whatsapp", "call", "save", "websiteLast"],   // الخيارات: menu call whatsapp email website map save
   info: ["phone", "email", "address", "website"],   // الأسطر السفلية
 
   phone: "0784 68 87 51",
@@ -126,7 +126,7 @@ const SHOP = {
   email: "sohaibwaslux@gmail.com",
   address: "",
   mapLink: "",
-  website: "",
+  website: "https://waslux.com/",
   social: []
 };
 /* ================= نهاية قسم البيانات ================= */
@@ -204,6 +204,7 @@ const B = {
 const small = want.filter(k => B[k]).map(k => B[k]()).filter(Boolean);
 let g = small.map((b, i) => '<a class="btn' + (small.length % 2 && i === small.length - 1 ? ' full' : '') + '" href="' + esc(b[0]) + '"' + (isWeb(b[0]) ? ' target="_blank" rel="noopener"' : '') + '>' + b[1] + esc(b[2]) + '</a>').join("");
 if (want.includes("save")) g += '<button type="button" class="btn full" id="save">' + ic.add + esc(T.save) + '</button>';
+if (want.includes("websiteLast") && safeUrl(SHOP.website)) g += '<a class="btn full" href="' + esc(SHOP.website) + '" target="_blank" rel="noopener">' + ic.link + esc(T.site) + '</a>';
 if (g) h += '<div class="grid">' + g + '</div>';
 
 /* صور المحل */
