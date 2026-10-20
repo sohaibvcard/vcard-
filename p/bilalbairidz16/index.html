@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<!-- WASLUX TEMPLATE: Business Profile v5 | تعديل قسم SHOP فقط | لا تغيّر بقية الكود -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#120e0c">
+<title>Business Profile</title>
+<style>
+:root{--bg:#120e0c;--glow:#2a1a10;--c1:#1c1613;--c2:#15100e;--ivory:#fff3e6;--muted:#c4ad9b;--accent:#ff6b1a;--g1:#ffb703;--g2:#ff6b1a;--on:#1a0d04;--line:rgba(255,107,26,.3)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;background:var(--bg);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;display:flex;justify-content:center}
+.wrap{width:100%;max-width:480px;padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+.cover{height:200px;background:linear-gradient(135deg,var(--g2),var(--glow));background-size:cover;background-position:center;border-radius:0 0 28px 28px;position:relative}
+.cover::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.45))}
+.logo{width:112px;height:112px;margin:-56px auto 0;border-radius:50%;border:4px solid var(--bg);background:var(--c1);position:relative;z-index:2;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.logo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.ini{font-family:Georgia,serif;font-size:36px;font-weight:700;color:var(--accent)}
+.head{text-align:center;padding:14px 20px 0}
+h1{font-size:30px;font-weight:800;letter-spacing:.3px;line-height:1.2}
+.tag{margin-top:10px;display:inline-block;padding:5px 14px;border-radius:999px;background:var(--c1);border:1px solid var(--line);color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.about{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.8}
+.sec{padding:0 18px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;border-radius:14px;border:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;background:var(--c1);font-family:inherit;cursor:pointer;width:100%}
+.btn svg,.row svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn.cta{margin-top:22px;padding:18px 12px;font-size:17px;font-weight:800;border:0;border-radius:18px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.btn.cta svg{width:22px;height:22px}
+.btn:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn.full{grid-column:1/-1}
+.st{margin:30px 0 12px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;text-align:start}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block;cursor:pointer;background:var(--c1)}
+.gal img:last-child:nth-child(odd){grid-column:1/-1;aspect-ratio:16/9}
+.card{background:var(--c1);border:1px solid var(--line);border-radius:16px;padding:4px 16px;text-align:start}
+.hr{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hr:last-child,.row:last-child{border-bottom:0}
+.hr span:last-child{color:var(--muted);direction:ltr}
+.row{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;word-break:break-word}
+.row svg{color:var(--accent)}
+.social{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.chip{display:flex;align-items:center;gap:7px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--c1);color:var(--ivory);text-decoration:none;font-size:14px}
+.chip svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ltr{direction:ltr;unicode-bidi:embed}
+html[dir=rtl] .st,html[dir=rtl] .tag{letter-spacing:0}
+html[dir=rtl] .hr span:last-child{direction:rtl}
+.credit{margin-top:26px;text-align:center;font-size:12px;direction:ltr}
+.credit a{color:var(--muted);text-decoration:none;opacity:.8}
+#viewer{position:fixed;inset:0;background:rgba(8,6,5,.97);z-index:50;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:64px 12px calc(24px + env(safe-area-inset-bottom))}
+#viewer[hidden]{display:none}
+#vx{position:fixed;top:calc(12px + env(safe-area-inset-top));inset-inline-end:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:20px;z-index:51;cursor:pointer}
+#vbox img{display:block;width:100%;max-width:720px;margin:0 auto 14px;border-radius:12px}
+#mv{position:fixed;inset:0;background:var(--bg);z-index:60;display:flex;flex-direction:column}
+#mv[hidden]{display:none}
+.mvh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 16px 10px}
+#mt{font-size:20px;font-weight:800}
+#mx{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:18px;cursor:pointer;flex:none}
+.mvs{padding:0 16px 10px}
+#mq{width:100%;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:16px;font-family:inherit;outline:none}
+#mq::placeholder{color:var(--muted)}
+.mvtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mvtabs::-webkit-scrollbar{display:none}
+.mvtabs button{flex:none;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:14px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.mvtabs button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);border:0;font-weight:700}
+.mvb{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+.mvb section{margin-bottom:22px}
+.mvb h3{position:sticky;top:0;z-index:1;background:var(--bg);padding:10px 0;font-size:17px;font-weight:800;color:var(--accent);display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
+.mvb h3 span{font-weight:600;color:var(--muted)}
+.it{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}
+.it[hidden],.mvb section[hidden],.empty[hidden]{display:none}
+.in b{display:block;font-size:16px;font-weight:700}
+.in span{display:block;margin-top:3px;color:var(--muted);font-size:14px}
+html[dir=ltr] .in span{text-align:left}
+html[dir=rtl] .in span{text-align:right}
+.ip{flex:none;font-weight:800;color:var(--accent);font-size:16px;direction:ltr;white-space:nowrap}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<script>window.onerror=function(m,s,l){var d=document.createElement("pre");d.style.cssText="white-space:pre-wrap;color:#fff;background:#b00020;padding:12px;margin:12px;font-size:13px;direction:ltr";d.textContent="Erreur: "+m+" (ligne "+l+")";document.body.appendChild(d);};</script>
+<div class="wrap" id="app"></div>
+<div id="mv" hidden><div class="mvh"><div id="mt"></div><button id="mx" type="button" aria-label="Close">&#10005;</button></div><div class="mvs"><input id="mq" type="search" autocomplete="off"></div><div class="mvtabs" id="mtabs"></div><div class="mvb" id="mbody"></div></div>
+<div id="viewer" hidden><button id="vx" type="button" aria-label="Close">&#10005;</button><div id="vbox"></div></div>
+
+<script>
+/* =====================================================
+   بيانات النشاط — عدّل هذا القسم فقط
+   اترك أي حقل فارغ "" أو [] وسيختفي من الصفحة تلقائياً
+   ===================================================== */
+const SHOP = {
+  lang: "fr",
+  theme: "gold",
+  labels: {},
+  colors: { bg:"#f6efe4", glow:"#e4d2b8", c1:"#fffaf1", c2:"#efe4d2", ivory:"#2a1c13", muted:"#7b6554", accent:"#8a5a3b", g1:"#a8744c", g2:"#6f4328", on:"#fff7ea" },
+  countryCode: "213",
+
+  name: "Bilalbairidz16",
+  tagline: "Accessoires femme",
+  about: "Boutique d'accessoires féminins modernes et élégants : accessoires, chaussures et sacs en tous genres. Réservation par téléphone ou sur Instagram.",
+
+  logo: "logo.jpg",
+  logoFit: "cover",
+  cover: "cover.jpg",
+  currency: "DA",
+  menuImages: [],
+  menu: [],
+  gallery: ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"],
+  hours: [["Samedi – Jeudi", "10:00 – 21:00"], ["Vendredi", "Fermé"]],
+
+  buttons: ["call", "map", "save"],
+  info: ["phone", "address"],
+
+  phone: "0562 95 86 14",
+  phone2: "",
+  whatsapp: "",
+  email: "",
+  address: "Rouiba",
+  mapLink: "https://maps.app.goo.gl/qJCgJ2GXSbuYNziWA",
+  website: "",
+  social: [
+    { name: "Instagram", url: "https://www.instagram.com/bilalbairidz16" },
+    { name: "TikTok", url: "https://vm.tiktok.com/ZS9UbnpYdrA21-rHVYE/" },
+    { name: "TikTok 2", url: "https://vm.tiktok.com/ZS9Ubns4WJaSm-6ri8m/" }
+  ],
+  credit: { text: "Powered by Waslux", url: "https://waslux.com" }
+};
+/* ================= نهاية قسم البيانات ================= */
+
+const TH = {
+  fire:  { bg:"#120e0c", glow:"#2a1a10", c1:"#1c1613", c2:"#15100e", ivory:"#fff3e6", muted:"#c4ad9b", accent:"#ff6b1a", g1:"#ffb703", g2:"#ff6b1a", on:"#1a0d04" },
+  gold:  { bg:"#0b0b0c", glow:"#1f1b11", c1:"#171716", c2:"#101011", ivory:"#f1e9d8", muted:"#a9a293", accent:"#c8a85a", g1:"#e6cf8e", g2:"#b59443", on:"#17130a" },
+  royal: { bg:"#06130d", glow:"#0f2b1d", c1:"#0d2018", c2:"#091810", ivory:"#f2ecda", muted:"#aab8ad", accent:"#cdb36a", g1:"#e6d6a2", g2:"#b99b4c", on:"#14110a" },
+  rose:  { bg:"#151315", glow:"#2b2126", c1:"#262327", c2:"#1d1b1e", ivory:"#f6ecee", muted:"#b3a8ac", accent:"#e08fa6", g1:"#f2b3c4", g2:"#d1708b", on:"#2a0f18" },
+  blue:  { bg:"#0a1118", glow:"#12202e", c1:"#14202b", c2:"#0f1923", ivory:"#e9f1f7", muted:"#9fb2c1", accent:"#5cb3d6", g1:"#8fd3ec", g2:"#3a8fb3", on:"#06202c" },
+  green: { bg:"#0c110e", glow:"#15231a", c1:"#16201a", c2:"#101813", ivory:"#eef3ea", muted:"#a3b2a5", accent:"#7bb88a", g1:"#a6d9b0", g2:"#4f9a62", on:"#08210f" }
+};
+const TX = {
+  fr: { menu:"Menu électronique", call:"Appeler", wa:"WhatsApp", email:"E-mail", site:"Site web", map:"Itinéraire", save:"Enregistrer le contact", photos:"Photos", hours:"Horaires", contact:"Contact", search:"Rechercher un plat", none:"Aucun résultat" },
+  ar: { menu:"قائمة الطعام الإلكترونية", call:"اتصال", wa:"واتساب", email:"البريد", site:"الموقع", map:"الموقع على الخريطة", save:"حفظ جهة الاتصال", photos:"صور", hours:"أوقات العمل", contact:"التواصل", search:"ابحث عن طبق", none:"لا توجد نتائج" },
+  en: { menu:"Digital menu", call:"Call", wa:"WhatsApp", email:"Email", site:"Website", map:"Directions", save:"Save contact", photos:"Photos", hours:"Opening hours", contact:"Contact", search:"Search a dish", none:"No results" }
+};
+const T = Object.assign({}, TX[SHOP.lang] || TX.fr, SHOP.labels || {});
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const isWeb = u => /^https?:\/\//i.test(u);
+const rgba = (h, a) => { const n = parseInt(h.replace("#", ""), 16); return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + "," + a + ")"; };
+const intl = n => {
+  let d = String(n || "").replace(/\D/g, "");
+  if (d.startsWith("00")) d = d.slice(2);
+  else if (d.startsWith("0")) d = SHOP.countryCode + d.slice(1);
+  return d;
+};
+const ic = {
+  phone: '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  wa: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  add: '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
+  link: '<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  book: '<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'
+};
+
+const num = intl(SHOP.phone);
+const waNum = intl(SHOP.whatsapp);
+const menu = (SHOP.menu || []).filter(c => c && (c.items || []).length);
+const menuImages = (SHOP.menuImages || []).filter(Boolean);
+const gallery = (SHOP.gallery || []).filter(Boolean);
+
+/* الألوان واللغة */
+const th = Object.assign({}, TH[SHOP.theme] || TH.fire, SHOP.colors || {});
+const root = document.documentElement;
+for (const k in th) root.style.setProperty("--" + k, th[k]);
+root.style.setProperty("--line", rgba(th.accent, .3));
+document.querySelector('meta[name="theme-color"]').setAttribute("content", th.bg);
+root.lang = SHOP.lang;
+root.dir = SHOP.lang === "ar" ? "rtl" : "ltr";
+document.title = SHOP.name + (SHOP.tagline ? " — " + SHOP.tagline : "");
+
+/* الغلاف والشعار والاسم */
+let h = '<div class="cover"' + (SHOP.cover ? ' style="background-image:url(\'' + esc(SHOP.cover) + '\')"' : '') + '></div>';
+const initials = String(SHOP.name || "").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+h += '<div class="logo">' + (SHOP.logo ? '<img src="' + esc(SHOP.logo) + '" alt="' + esc(SHOP.name) + '"' + (SHOP.logoFit === "cover" ? ' style="object-fit:cover;padding:0"' : '') + '>' : '<div class="ini">' + esc(initials) + '</div>') + '</div>';
+h += '<div class="head"><h1>' + esc(SHOP.name) + '</h1>';
+if (SHOP.tagline) h += '<div class="tag">' + esc(SHOP.tagline) + '</div>';
+if (SHOP.about) h += '<p class="about">' + esc(SHOP.about) + '</p>';
+h += '</div><div class="sec">';
+
+/* الأزرار */
+const want = SHOP.buttons || [];
+if (want.includes("menu") && (menu.length || menuImages.length)) h += '<button type="button" class="btn cta" id="menu">' + ic.book + esc(T.menu) + '</button>';
+const B = {
+  call:     () => num && ['tel:+' + num, ic.phone, T.call],
+  whatsapp: () => waNum && ['https://wa.me/' + waNum, ic.wa, T.wa],
+  email:    () => SHOP.email && ['mailto:' + SHOP.email, ic.mail, T.email],
+  website:  () => safeUrl(SHOP.website) && [SHOP.website, ic.link, T.site],
+  map:      () => safeUrl(SHOP.mapLink) && [SHOP.mapLink, ic.pin, T.map]
+};
+const small = want.filter(k => B[k]).map(k => B[k]()).filter(Boolean);
+let g = small.map((b, i) => '<a class="btn' + (small.length % 2 && i === small.length - 1 ? ' full' : '') + '" href="' + esc(b[0]) + '"' + (isWeb(b[0]) ? ' target="_blank" rel="noopener"' : '') + '>' + b[1] + esc(b[2]) + '</a>').join("");
+if (want.includes("save")) g += '<button type="button" class="btn full" id="save">' + ic.add + esc(T.save) + '</button>';
+if (g) h += '<div class="grid">' + g + '</div>';
+
+/* صور المحل */
+if (gallery.length) h += '<div class="st">' + esc(T.photos) + '</div><div class="gal">' + gallery.map(s => '<img loading="lazy" src="' + esc(s) + '" alt="">').join("") + '</div>';
+
+/* أوقات العمل */
+const hours = (SHOP.hours || []).filter(r => r && r[0]);
+if (hours.length) h += '<div class="st">' + esc(T.hours) + '</div><div class="card">' + hours.map(r => '<div class="hr"><span>' + esc(r[0]) + '</span><span>' + esc(r[1] || "") + '</span></div>').join("") + '</div>';
+
+/* بيانات التواصل */
+const R = {
+  phone:   () => SHOP.phone && ['tel:+' + num, ic.phone, SHOP.phone, 1],
+  phone2:  () => SHOP.phone2 && ['tel:+' + intl(SHOP.phone2), ic.phone, SHOP.phone2, 1],
+  email:   () => SHOP.email && ['mailto:' + SHOP.email, ic.mail, SHOP.email, 1],
+  address: () => SHOP.address && [safeUrl(SHOP.mapLink), ic.pin, SHOP.address, 0],
+  website: () => safeUrl(SHOP.website) && [SHOP.website, ic.link, SHOP.website.replace(/^https?:\/\//i, ""), 1]
+};
+const rows = (SHOP.info || []).map(k => R[k] && R[k]()).filter(Boolean).map(r => {
+  const inner = r[1] + '<span' + (r[3] ? ' class="ltr"' : '') + '>' + esc(r[2]) + '</span>';
+  return r[0] ? '<a class="row" href="' + esc(r[0]) + '"' + (isWeb(r[0]) ? ' target="_blank" rel="noopener"' : '') + '>' + inner + '</a>' : '<div class="row">' + inner + '</div>';
+}).join("");
+if (rows) h += '<div class="st">' + esc(T.contact) + '</div><div class="card">' + rows + '</div>';
+
+/* حسابات التواصل */
+const soc = (SHOP.social || []).filter(s => safeUrl(s.url));
+if (soc.length) h += '<div class="social">' + soc.map(s => '<a class="chip" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + ic.link + esc(s.name) + '</a>').join("") + '</div>';
+
+if (SHOP.credit && SHOP.credit.url) h += '<div class="credit"><a href="' + esc(SHOP.credit.url) + '" target="_blank" rel="noopener">' + esc(SHOP.credit.text) + '</a></div>';
+h += '</div>';
+document.getElementById("app").innerHTML = h;
+
+/* عارض الصور (صور المحل) */
+const viewer = document.getElementById("viewer"), vbox = document.getElementById("vbox");
+function openViewer(list, start) {
+  vbox.innerHTML = list.map(s => '<img loading="lazy" src="' + esc(s) + '" alt="">').join("");
+  viewer.hidden = false;
+  document.body.style.overflow = "hidden";
+  history.pushState({ v: 1 }, "");
+  viewer.scrollTop = 0;
+  const t = vbox.children[start || 0];
+  if (t && start) setTimeout(() => { viewer.scrollTop = t.offsetTop - 64; }, 40);
+}
+function closeViewer() { viewer.hidden = true; document.body.style.overflow = ""; }
+document.getElementById("vx").addEventListener("click", () => { if (history.state && history.state.v) history.back(); else closeViewer(); });
+document.querySelectorAll(".gal img").forEach((im, i) => im.addEventListener("click", () => openViewer(gallery, i)));
+
+/* القائمة الإلكترونية */
+const mv = document.getElementById("mv"), mbody = document.getElementById("mbody"), mtabs = document.getElementById("mtabs"), mq = document.getElementById("mq");
+function closeMenu() { mv.hidden = true; document.body.style.overflow = ""; }
+function filterMenu(q) {
+  q = q.trim().toLowerCase();
+  let total = 0;
+  document.querySelectorAll("#mbody section").forEach(sec => {
+    let any = false;
+    sec.querySelectorAll(".it").forEach(it => { const ok = !q || it.getAttribute("data-s").indexOf(q) > -1; it.hidden = !ok; if (ok) any = true; });
+    sec.hidden = !any;
+    if (any) total++;
+  });
+  const em = document.getElementById("mempty");
+  if (em) em.hidden = total > 0;
+}
+if (menu.length) {
+  document.getElementById("mt").textContent = T.menu;
+  mq.placeholder = T.search;
+  mbody.innerHTML = menu.map((c, i) => '<section id="cat' + i + '"><h3><span style="color:inherit;font-weight:inherit">' + esc(c.cat) + '</span>' + (c.catAr ? '<span dir="auto">' + esc(c.catAr) + '</span>' : '') + '</h3>' +
+    c.items.map(it => '<div class="it" data-s="' + esc((it[0] + " " + (it[1] || "")).toLowerCase()) + '"><div class="in"><b dir="auto">' + esc(it[0]) + '</b>' + (it[1] ? '<span dir="auto">' + esc(it[1]) + '</span>' : '') + '</div>' +
+    (it[2] != null && it[2] !== "" ? '<div class="ip">' + esc(it[2]) + (SHOP.currency ? ' ' + esc(SHOP.currency) : '') + '</div>' : '') + '</div>').join("") + '</section>').join("") +
+    '<div class="empty" id="mempty" hidden>' + esc(T.none) + '</div>';
+  mtabs.innerHTML = menu.map((c, i) => '<button type="button" data-i="' + i + '"' + (i === 0 ? ' class="on"' : '') + '>' + esc(c.cat) + '</button>').join("");
+  mq.addEventListener("input", () => filterMenu(mq.value));
+  mtabs.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    mq.value = ""; filterMenu("");
+    mtabs.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    const s = document.getElementById("cat" + b.getAttribute("data-i"));
+    if (s) s.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  mbody.addEventListener("scroll", () => {
+    const top = mbody.getBoundingClientRect().top;
+    let cur = 0;
+    menu.forEach((c, i) => { const s = document.getElementById("cat" + i); if (s && !s.hidden && s.getBoundingClientRect().top - top <= 60) cur = i; });
+    if (mbody.scrollTop + mbody.clientHeight >= mbody.scrollHeight - 4) cur = menu.length - 1;
+    mtabs.querySelectorAll("button").forEach((b, i) => b.classList.toggle("on", i === cur));
+  });
+}
+function openMenu() {
+  mv.hidden = false;
+  document.body.style.overflow = "hidden";
+  history.pushState({ v: 1 }, "");
+  mq.value = ""; filterMenu("");
+  mbody.scrollTop = 0;
+}
+document.getElementById("mx").addEventListener("click", () => { if (history.state && history.state.v) history.back(); else closeMenu(); });
+window.addEventListener("popstate", () => { closeViewer(); closeMenu(); });
+const mb = document.getElementById("menu");
+if (mb) mb.addEventListener("click", () => { if (menu.length) openMenu(); else openViewer(menuImages, 0); });
+
+/* حفظ جهة الاتصال (vCard) */
+const v = s => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
+const sb = document.getElementById("save");
+if (sb) sb.addEventListener("click", () => {
+  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(SHOP.name) + ";;;;", "FN:" + v(SHOP.name), "ORG:" + v(SHOP.name)];
+  if (SHOP.tagline) L.push("TITLE:" + v(SHOP.tagline));
+  if (num) L.push("TEL;TYPE=WORK:+" + num);
+  if (SHOP.email) L.push("EMAIL:" + v(SHOP.email));
+  if (SHOP.address) L.push("ADR;TYPE=WORK:;;" + v(SHOP.address) + ";;;;");
+  if (safeUrl(SHOP.website)) L.push("URL:" + SHOP.website);
+  L.push("END:VCARD");
+  const blob = new Blob([L.join("\r\n")], { type: "text/vcard;charset=utf-8" });
+  const el = document.createElement("a");
+  el.href = URL.createObjectURL(blob);
+  el.download = (SHOP.name.replace(/\s+/g, "_") || "contact") + ".vcf";
+  document.body.appendChild(el);
+  el.click();
+  el.remove();
+});
+</script>
+</body>
+</html>
