@@ -51,7 +51,7 @@ h1{font-size:clamp(32px,7vw,54px);line-height:1.25;font-weight:800;margin:16px 0
 .pc .sub{color:var(--accent);font-size:13px;font-weight:700}
 .pc p{color:var(--muted);font-size:14.5px;margin-top:6px;flex:1}
 .pc .ft{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px}
-.pc .pr{font-weight:800;color:var(--accent)}
+.pc .pp{font-weight:800;color:var(--accent)}.pc .cv{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 40%;display:block;background:var(--c2)}.hp{background:var(--c1);border:1px solid var(--line);border-radius:22px;padding:22px}.hp .hq{font-weight:800;font-size:19px;margin-bottom:12px}.hp .hs{color:var(--muted);font-size:13px;margin-bottom:10px}.hp ul{list-style:none;margin:10px 0 16px}.hp li{padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}.hp li::before{content:"\2713";color:var(--accent);font-weight:800;flex:none}.hp li:last-child{border-bottom:0}.hp .hb{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.hw{display:grid;gap:14px}.hn{color:var(--accent);font-weight:700;margin-top:16px;text-align:center}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chip{padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:var(--c1)}
 .chip:nth-child(3n+2){border-color:var(--iline)}
@@ -179,11 +179,12 @@ const SITE = {
   theme: "gold",          // "gold" أو "royal" أو "rose" أو "blue" أو "green" أو "fire"
   countryCode: "213",
   brand: "Waslux",
-  tagline: "NFC · QR · DIGITAL ID",
+  tagline: "NFC · QR · SMART PAGE",
   title: "Waslux — بطاقات ولافتات ذكية NFC وQR",
   phone: "0784 68 87 51",
   whatsapp: "0784 68 87 51",
-  email: "sohaibwaslux@gmail.com",
+  email: "Commercial.waslux@gmail.com",
+  instagram: "https://www.instagram.com/waslux.waslux",
   orderMsg: "السلام عليكم، أريد معرفة المزيد عن: ",
 
   heroTitle: "بلمسة واحدة يصل إليك زبونك",
@@ -200,29 +201,20 @@ const SITE = {
   productsTitle: "منتجاتنا",
   productsText: "اضغط على أي منتج لتعرف تفاصيله وتطلبه عبر واتساب.",
   products: [
-    { id: "personal-id", art: "card", name: "Personal ID", sub: "بطاقة NFC + صفحة شخصية",
-      text: "بطاقة أنيقة تفتح صفحتك الشخصية بلمسة هاتف، للمهنيين وأصحاب الأعمال.",
-      features: ["بطاقة NFC أنيقة بتصميم يناسبك (أسود أو وردي)", "صفحة باسمك وصورتك ومهنتك", "أزرار اتصال وواتساب وحفظ جهة الاتصال", "رابط ثابت: نعدّل معلوماتك دون تغيير البطاقة", "رمز QR احتياطي للهواتف التي بلا NFC"],
-      options: [["اللون", ["أسود", "وردي"]]], photos: [{ src: "img/personal-id-1.jpg", tags: ["أسود", "وردي"] }, { src: "img/personal-id-2.jpg", tags: ["أسود"] }], price: "" },
-    { id: "business-id", art: "page", name: "Business ID", sub: "صفحة لمحلك أو شركتك",
-      text: "واجهة رقمية لنشاطك تجمع شعارك وصورك وموقعك وحساباتك وموقعك الإلكتروني في رابط واحد.",
-      features: ["شعارك وصورة غلاف وصور المحل", "أوقات العمل والموقع على الخريطة", "أزرار اتصال وواتساب وبريد وموقعك الإلكتروني", "حسابات إنستغرام وفيسبوك وتيك توك", "قائمة طعام أو أسعار أو خدمات (المنتج التالي)", "ألوان من هوية شعارك، بالعربية أو الفرنسية أو الإنجليزية"],
-      options: [["لغة الصفحة", ["العربية", "الفرنسية", "الإنجليزية"]]], photos: [{ src: "img/business-id-1.jpg", tags: [] }, { src: "img/business-id-2.jpg", tags: [] }], price: "" },
-    { id: "stand-id", art: "sid", name: "Stand ID", sub: "حامل مطبوع + Business ID",
-      text: "حامل أنيق لطاولتك أو الكاونتر يحمل هويتك التجارية: شعارك واسمك المهني ورمز QR وأيقونة NFC، ويفتح صفحة Business ID بلمسة أو مسح.",
-      features: ["تصميم باسمك المهني وشعارك أو صورتك وتعريف خفيف بنشاطك", "رمز QR وأيقونة NFC مع عبارة قرّب هاتفك", "يفتح صفحة Business ID الخاصة بنشاطك", "أو تُقدَّم الهوية نفسها على بطاقة إن فضّلت", "خدمة اختيارية: اتصال الضيوف بالواي فاي بنقرة (نوصي بشبكة للضيوف)", "لغة الصفحة والتصميم بحسب طلبك"],
-      options: [["الشكل", ["حامل", "بطاقة"]]], photos: [{ src: "img/stand-id-1.jpg", tags: ["حامل"] }, { src: "img/stand-id-2.jpg", tags: ["حامل"] }], price: "" },
-    { id: "e-menu", art: "menu", name: "قائمة إلكترونية", sub: "طعام أو أسعار أو منتجات",
-      text: "للمطاعم والمقاهي، وللحلاق والورشات وكل نشاط يعرض أسعاره: أصناف أو خدمات بأسعارها، بأقسام وبحث سريع.",
-      features: ["أصناف أو خدمات مرتبة بأقسام مع أسعارها", "بحث سريع بالعربية والفرنسية", "نحدّث الأسعار والأصناف عندما ترسل لنا التعديل", "رمز QR لطاولاتك أو واجهة محلك", "تأتي مع Business ID أو تُطلب وحدها"],
-      options: [["لغة القائمة", ["العربية", "الفرنسية", "الإنجليزية"]]], price: "" },
+    { id: "smart-page", art: "sid", name: "صفحتك الذكية", sub: "بطاقة أو حامل + صفحة خاصة بك",
+      text: "صفحة رقمية باسمك أو باسم نشاطك، تفتح بلمسة هاتف من بطاقة أو حامل طاولة: صورك وأوقات العمل والخريطة وحساباتك في مكان واحد.",
+      features: ["تختار: صفحة لك شخصيًا، أو لمحلك وشركتك، أو قائمة مطعم", "وتختار أن تظهر على بطاقة NFC أنيقة أو حامل للطاولة والكاونتر", "اسمك أو شعارك وصورك وأوقات العمل والموقع على الخريطة", "أزرار اتصال وواتساب وحفظ جهة الاتصال وحساباتك", "رابط ثابت: نعدّل معلوماتك دون إعادة طباعة", "قائمة أصناف أو أسعار ببحث سريع، للمطاعم والحلاقين والورشات", "خدمة اختيارية مع الحامل: واي فاي للضيوف بلمسة أو مسح"],
+      options: [["الصفحة لمن؟", ["لي شخصيًا", "لمحلي أو شركتي", "قائمة مطعم"]], ["على ماذا تظهر؟", ["بطاقة NFC", "حامل طاولة"]]],
+      cover: "img/business-id-2.jpg",
+      photos: [{ src: "img/business-id-2.jpg", tags: ["لمحلي أو شركتي", "بطاقة NFC"] }, { src: "img/personal-id-1.jpg", tags: ["لي شخصيًا"] }, { src: "img/stand-id-1.jpg", tags: ["حامل طاولة"] }, { src: "img/stand-id-2.jpg", tags: [] }, { src: "img/business-id-1.jpg", tags: [] }, { src: "img/personal-id-2.jpg", tags: [] }], price: "" },
     { id: "google-review", art: "stand", name: "حامل تقييم Google", sub: "لافتة للطاولة أو الكاونتر",
       text: "يأخذ الزبون مباشرة إلى صفحة تقييم محلك على خرائط Google.",
       features: ["حامل أنيق للطاولة أو الكاونتر", "يفتح صفحة التقييم بلمسة أو مسح رمز QR", "يُعرض على جميع زبائنك دون شروط", "تصميم خاص بالتقييم: نجوم ورمز QR", "وجه واحد، بلون أبيض أو أسود"],
-      options: [["اللون", ["أبيض", "أسود"]]], photos: [{ src: "img/google-stand-white.jpg", tags: ["أبيض"] }, { src: "img/google-stand-black.jpg", tags: ["أسود"] }], price: "" },
+      options: [["اللون", ["أبيض", "أسود"]]], cover: "img/google-stand-white.jpg", photos: [{ src: "img/google-stand-white.jpg", tags: ["أبيض"] }, { src: "img/google-stand-black.jpg", tags: ["أسود"] }], price: "" },
     { id: "stickers", art: "stickers", name: "ملصقات التواصل", sub: "للزجاج والجدران",
       text: "ملصقات بشعار المنصة تفتح حسابك عليها، بلمسة أو بمسح.",
       features: ["ملصقات للزجاج والجدران", "لأغلب المنصات: إنستغرام وفيسبوك وتيك توك وسناب وواتساب وغيرها", "تعمل بلمسة (NFC) أو بمسح (QR)", "بشعار المنصة وحده ليجذب النظر"],
+      cover: "img/sticker-instagram-color.jpg",
       options: [["اللون", ["ملوّن", "داكن"]], ["المنصة", ["إنستغرام", "فيسبوك", "تيك توك", "سناب", "واتساب", "تيليغرام", "Google", "أخرى"]]],
       photos: [{ src: "img/sticker-instagram-color.jpg", tags: ["ملوّن", "إنستغرام"] }, { src: "img/sticker-telegram.jpg", tags: ["ملوّن", "تيليغرام"] }, { src: "img/sticker-snapchat.jpg", tags: ["ملوّن", "سناب"] }, { src: "img/sticker-whatsapp.jpg", tags: ["ملوّن", "واتساب"] }, { src: "img/sticker-facebook-dark.jpg", tags: ["داكن", "فيسبوك"] }, { src: "img/sticker-instagram-dark.jpg", tags: ["داكن", "إنستغرام"] }, { src: "img/sticker-gym-dark.jpg", tags: ["داكن", "أخرى"] }, { src: "img/sticker-google-dark.jpg", tags: ["داكن", "Google"] }], price: "" }
   ],
@@ -233,7 +225,7 @@ const SITE = {
   tryName: "الاسم", tryJob: "المهنة", tryPhone: "الهاتف", tryColor: "اللون",
   tryOrder: "اطلب هذه البطاقة",
   tryNote: "بياناتك لا تُحفظ في أي مكان، وتبقى على هاتفك حتى ترسلها أنت.",
-  tryProduct: "Personal ID",
+  tryProduct: "صفحتك الذكية (بطاقة)",
   swatches: [["gold", "ذهبي"], ["blue", "بلوري"], ["rose", "وردي"], ["green", "أخضر"]],
   demos: [
     { title: "بطاقة شخصية حقيقية", url: "p/sohaib/" },
@@ -245,6 +237,23 @@ const SITE = {
   segmentsText: "لكل نشاط تعتمد فيه الثقة وسهولة الوصول إلى صاحبه.",
   segments: ["مطاعم ومقاهٍ", "حلاقون وصالونات", "ورشات وحرفيون", "محلات ملابس", "عيادات ومستشارون", "فنادق ومنتجعات", "شركات محلية ودولية", "معارض وفعاليات", "بنوك ومؤسسات", "مهنيون ورجال أعمال"],
 
+  helpTitle: "لا تعرف ماذا تختار؟",
+  helpText: "أجب عن ثلاثة أسئلة قصيرة ونقترح عليك الأنسب.",
+  help: [
+    { q: "ما نشاطك؟", o: ["فرد أو مهني", "محل أو مطعم", "عيادة أو خدمات"] },
+    { q: "ماذا تريد أكثر؟", o: ["أن يتصل بي الزبائن بسهولة", "تقييمات Google أكثر", "متابعون على التواصل", "قائمة أو أسعار"] },
+    { q: "كم عدد المحلات أو الأفراد؟", o: ["واحد", "عدة"] }
+  ],
+  helpSuggest: "نقترح عليك:", helpOrder: "اطلب هذا الاقتراح عبر واتساب", helpAgain: "ابدأ من جديد",
+  howTitle: "كيف تطلب؟",
+  how: [
+    ["راسلنا", "أرسل لنا رسالة على واتساب، أو استعمل «ساعدني أختار»."],
+    ["نختار معًا", "نحدد المنتج المناسب لك، ونرسل لك الأسعار والباقات."],
+    ["ترسل بياناتك", "اسمك أو اسم نشاطك، وشعارك وصورك، وأوقات العمل وحساباتك."],
+    ["تستلم خلال 2 إلى 4 أيام", "نجهّز صفحتك ومنتجك ونسلّمه لك."]
+  ],
+  howNote: "رابط صفحتك مضمون لمدة سنة كاملة، وبعدها 300 دج فقط في السنة للإبقاء عليه.",
+
   testiTitle: "آراء زبائننا",
   testiText: "",
   testimonials: [],       // أضف رأي زبون حقيقي بإذنه: { name: "اسم الزبون", role: "نشاطه", text: "نص رأيه كما قاله" }
@@ -254,7 +263,8 @@ const SITE = {
     ["هل يحتاج زبوني إلى تطبيق؟", "لا. يكفي أن يقرّب هاتفه من البطاقة أو يمسح الرمز بكاميرا الهاتف."],
     ["هل يعمل مع كل الهواتف؟", "تقنية NFC متوفرة في أغلب الهواتف الحديثة، وللهواتف التي بلا NFC يوجد رمز QR يفتح الصفحة نفسها."],
     ["هل أستطيع تغيير معلوماتي لاحقًا؟", "نعم. الرابط على البطاقة ثابت، فنعدّل صفحتك ويبقى كل شيء كما هو، دون إعادة برمجة البطاقة."],
-    ["كيف أطلب؟", "راسلنا على واتساب بنوع المنتج الذي يهمك، ونحدد معًا التصميم والمعلومات."]
+    ["ماذا لو اختفى رابطي؟", "رابط صفحتك ثابت ومضمون لمدة سنة كاملة. وبعدها تجدّده بـ 300 دج فقط في السنة، ونذكّرك قبل انتهائه."],
+    ["كيف أطلب؟", "راسلنا على واتساب أو استعمل «ساعدني أختار»، ونحدد معًا المنتج والتصميم والمعلومات، وتستلم طلبك خلال 2 إلى 4 أيام."]
   ],
 
   contactTitle: "تواصل معنا",
@@ -350,6 +360,7 @@ const SC = {
 /* بناء الصفحة */
 const phoneIc = '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
 const waIc = '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
+const igIc = '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>';
 const mailIc = '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
 const num = intl(SITE.phone);
 const hd = (t, p) => '<div class="hd rv"><h2>' + esc(t) + '</h2>' + (p ? '<p>' + esc(p) + '</p>' : '') + '</div>';
@@ -358,13 +369,15 @@ const testi = (SITE.testimonials || []).filter(t => t && t.text);
 let h = '<header class="top"><div class="w"><a class="brand" href="#top" aria-label="' + esc(SITE.brand) + '">' + LOGO + '</a><a class="btn cta sm" href="' + esc(wa("")) + '" target="_blank" rel="noopener">' + L.whatsapp + '</a></div></header><main id="top">';
 h += '<section class="w hero"><div class="rv"><span class="tag">' + esc(SITE.tagline) + '</span><h1>' + esc(SITE.heroTitle) + '</h1><p>' + esc(SITE.heroText) + '</p><div class="cta-row"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="#products">' + esc(L.more) + '</a></div></div><div class="hero-a rv">' + ART.hero() + '</div></section>';
 h += '<section class="w s">' + hd(SITE.stepsTitle, "") + '<div class="how"><div class="stl">' + SITE.steps.map((s, i) => '<div class="step rv"><div class="num">' + (i + 1) + '</div><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></div>').join("") + '</div><div class="scene rv"><div id="sc"></div><div class="tabs" id="tabs">' + SITE.sceneTabs.map((t, i) => '<button type="button" data-k="' + t[0] + '" class="' + (i ? '' : 'on') + '">' + esc(t[1]) + '</button>').join("") + '</div></div></div></section>';
-h += '<section class="w s" id="products">' + hd(SITE.productsTitle, SITE.productsText) + '<div class="grid">' + SITE.products.map((p, i) => '<button type="button" class="pc rv" data-i="' + i + '"><div class="art">' + ART[p.art]() + '</div><div class="bd"><div class="sub">' + esc(p.sub) + '</div><h3>' + esc(p.name) + '</h3><p>' + esc(p.text) + '</p><div class="ft"><span class="pr">' + esc(p.price || L.askPrice) + '</span><span>' + esc(L.details) + ' ‹</span></div></div></button>').join("") + '</div></section>';
+h += '<section class="w s" id="help">' + hd(SITE.helpTitle, SITE.helpText) + '<div class="hp rv" id="hp"></div></section>';
+h += '<section class="w s" id="products">' + hd(SITE.productsTitle, SITE.productsText) + '<div class="grid">' + SITE.products.map((p, i) => '<button type="button" class="pc rv" data-i="' + i + '">' + (p.cover ? '<img class="cv" loading="lazy" src="' + esc(p.cover) + '" alt="' + esc(p.name) + '">' : '<div class="art">' + ART[p.art]() + '</div>') + '<div class="bd"><div class="sub">' + esc(p.sub) + '</div><h3>' + esc(p.name) + '</h3><p>' + esc(p.text) + '</p><div class="ft"><span class="pp">' + esc(p.price || L.askPrice) + '</span><span>' + esc(L.details) + ' ‹</span></div></div></button>').join("") + '</div></section>';
 h += '<section class="w s" id="try">' + hd(SITE.tryTitle, SITE.tryText) + '<div class="cust try rv" id="cust"><div class="tf"><label>' + esc(SITE.tryName) + '<input id="tn" autocomplete="off" maxlength="30"></label><label>' + esc(SITE.tryJob) + '<input id="tj" autocomplete="off" maxlength="34"></label><label>' + esc(SITE.tryPhone) + '<input id="tp" inputmode="tel" autocomplete="off" maxlength="20"></label><div class="ol">' + esc(SITE.tryColor) + '</div><div class="sw">' + SITE.swatches.map((k, i) => '<button type="button" data-k="' + k[0] + '" class="' + (i ? '' : 'on') + '"><i style="background:linear-gradient(135deg,' + TH[k[0]].g1 + ',' + TH[k[0]].g2 + ')"></i>' + esc(k[1]) + '</button>').join("") + '</div></div><div class="tv">' + ART.tcard() + '<div class="ph"><div class="phc"></div><div class="pha" id="pa">؟</div><div class="phn" id="pn">' + esc(L.yourName) + '</div><div class="phj" id="pj">' + esc(L.yourJob) + '</div><div class="phb"><span>' + esc(L.call) + '</span><span>' + esc(L.whatsapp) + '</span></div><div class="phs">' + esc(L.save) + '</div><div class="phl"></div><div class="phl sh"></div></div></div></div><div class="tfoot rv"><a class="btn cta" id="tryorder" href="' + esc(wa(SITE.orderMsg + SITE.tryProduct)) + '" target="_blank" rel="noopener">' + waIc + esc(SITE.tryOrder) + '</a><p class="note">' + esc(SITE.tryNote) + '</p></div>' +
   (SITE.demos && SITE.demos.length ? '<div class="demos rv"><span>' + esc(SITE.demosText) + '</span>' + SITE.demos.map(d => '<a class="btn" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.title) + '</a>').join("") + '</div>' : '') + '</section>';
+h += '<section class="w s" id="how">' + hd(SITE.howTitle, "") + '<div class="hw">' + SITE.how.map((x, i) => '<div class="step rv"><div class="num">' + (i + 1) + '</div><h3>' + esc(x[0]) + '</h3><p>' + esc(x[1]) + '</p></div>').join("") + '</div><p class="hn rv">' + esc(SITE.howNote) + '</p></section>';
 h += '<section class="w s">' + hd(SITE.segmentsTitle, SITE.segmentsText) + '<div class="chips rv">' + SITE.segments.map(s => '<span class="chip">' + esc(s) + '</span>').join("") + '</div></section>';
 if (testi.length) h += '<section class="w s">' + hd(SITE.testiTitle, SITE.testiText) + '<div class="tg">' + testi.map(t => '<figure class="tc rv"><div class="qm">“</div><blockquote>' + esc(t.text) + '</blockquote><figcaption><b>' + esc(t.name || "") + '</b><span>' + esc(t.role || "") + '</span></figcaption></figure>').join("") + '</div></section>';
 h += '<section class="w s">' + hd(SITE.faqTitle, "") + '<div class="rv">' + SITE.faq.map(f => '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>').join("") + '</div></section>';
-h += '<section class="w s" id="contact"><div class="contact rv"><h2>' + esc(SITE.contactTitle) + '</h2><p>' + esc(SITE.contactText) + '</p><div class="crow"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="tel:+' + num + '">' + phoneIc + '<span class="ltr">' + esc(SITE.phone) + '</span></a><a class="btn" href="mailto:' + esc(SITE.email) + '">' + mailIc + '<span class="ltr">' + esc(SITE.email) + '</span></a></div></div></section>';
+h += '<section class="w s" id="contact"><div class="contact rv"><h2>' + esc(SITE.contactTitle) + '</h2><p>' + esc(SITE.contactText) + '</p><div class="crow"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="tel:+' + num + '">' + phoneIc + '<span class="ltr">' + esc(SITE.phone) + '</span></a><a class="btn" href="mailto:' + esc(SITE.email) + '">' + mailIc + '<span class="ltr">' + esc(SITE.email) + '</span></a>' + (SITE.instagram ? '<a class="btn" href="' + esc(SITE.instagram) + '" target="_blank" rel="noopener">' + igIc + '<span class="ltr">Instagram</span></a>' : '') + '</div></div></section>';
 h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w">© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + '</div></footer>';
 document.getElementById("site").innerHTML = h;
 
@@ -420,6 +433,36 @@ const onScroll = () => stk.classList.toggle("on", window.scrollY > 520);
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
+/* ساعدني أختار */
+(function () {
+  const box = document.getElementById("hp");
+  if (!box) return;
+  let step = 0, ans = [];
+  const pick = () => {
+    const a = ans, items = [], note = [];
+    const biz = a[0] !== 0, page = a[0] === 0 ? "لي شخصيًا" : (a[1] === 3 ? "قائمة مطعم" : "لمحلي أو شركتي"), hold = a[0] === 0 ? "بطاقة NFC" : "حامل طاولة";
+    items.push(["صفحتك الذكية", page + " — على " + hold]);
+    if (a[1] === 1) items.push(["حامل تقييم Google", "ليقيّمك زبائنك بلمسة أو مسح"]);
+    if (a[1] === 2) items.push(["ملصقات حساباتك", "تفتح حسابك على إنستغرام أو غيره بلمسة"]);
+    if (a[1] === 0 && biz) items.push(["بطاقة NFC", "لك شخصيًا إلى جانب حامل نشاطك"]);
+    if (a[2] === 1) note.push("لديك عدة نقاط: لدينا باقات بتخفيض تناسبك.");
+    return { items, note, page, hold };
+  };
+  const draw = () => {
+    if (step < SITE.help.length) {
+      const q = SITE.help[step];
+      box.innerHTML = '<div class="hs">' + (step + 1) + ' / ' + SITE.help.length + '</div><div class="hq">' + esc(q.q) + '</div><div class="oc">' + q.o.map((t, i) => '<button type="button" class="ob" data-i="' + i + '">' + esc(t) + '</button>').join("") + '</div>';
+      box.querySelectorAll(".ob").forEach(b => b.addEventListener("click", () => { ans[step] = +b.getAttribute("data-i"); step++; draw(); }));
+    } else {
+      const r = pick();
+      const msg = SITE.orderMsg + r.items.map(x => x[0]).join(" + ") + " — نشاطي: " + SITE.help[0].o[ans[0]] + "، أريد: " + SITE.help[1].o[ans[1]] + "، العدد: " + SITE.help[2].o[ans[2]];
+      box.innerHTML = '<div class="hq">' + esc(SITE.helpSuggest) + '</div><ul>' + r.items.map(x => '<li><span><b>' + esc(x[0]) + '</b> — ' + esc(x[1]) + '</span></li>').join("") + '</ul>' + (r.note.length ? '<p class="hs">' + esc(r.note.join(" ")) + '</p>' : '') + '<div class="hb"><a class="btn cta" href="' + esc(wa(msg)) + '" target="_blank" rel="noopener">' + waIc + esc(SITE.helpOrder) + '</a><button type="button" class="btn" id="hagain">' + esc(SITE.helpAgain) + '</button></div>';
+      document.getElementById("hagain").addEventListener("click", () => { step = 0; ans = []; draw(); });
+    }
+  };
+  draw();
+})();
+
 /* نافذة تفاصيل المنتج */
 const sheet = document.getElementById("sheet"), sin = document.getElementById("sin");
 function openSheet(i, push) {
@@ -457,12 +500,14 @@ function closeSheet() {
 function hideSheet() { sheet.hidden = true; document.body.style.overflow = ""; }
 document.querySelectorAll(".pc").forEach(b => b.addEventListener("click", () => openSheet(+b.getAttribute("data-i"), true)));
 sheet.addEventListener("click", e => { if (e.target === sheet) closeSheet(); });
+const OLD = { "personal-id": "smart-page", "business-id": "smart-page", "stand-id": "smart-page", "e-menu": "smart-page" };
+const hid = () => { const h = location.hash.slice(1); return OLD[h] || h; };
 window.addEventListener("popstate", () => {
-  const id = location.hash.slice(1), i = SITE.products.findIndex(p => p.id === id);
+  const id = hid(), i = SITE.products.findIndex(p => p.id === id);
   if (i > -1) openSheet(i, false); else hideSheet();
 });
 (function () {
-  const id = location.hash.slice(1), i = SITE.products.findIndex(p => p.id === id);
+  const id = hid(), i = SITE.products.findIndex(p => p.id === id);
   if (i > -1) openSheet(i, false);
 })();
 </script>
