@@ -74,26 +74,13 @@ html[dir=rtl] .hr span:last-child{direction:rtl}
 html[dir=ltr] .in span{text-align:left}
 html[dir=rtl] .in span{text-align:right}
 .ip{flex:none;font-weight:800;color:var(--accent);font-size:16px;direction:ltr;white-space:nowrap}
-.ord{flex:none;display:flex;align-items:center}
-.add,.qty button{width:36px;height:36px;border-radius:50%;font-size:22px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0}
-.add{border:0;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on)}
-.qty{display:none;align-items:center;gap:8px}
-.qty button{border:1px solid var(--accent);background:transparent;color:var(--accent)}
-.qty b{min-width:18px;text-align:center;font-size:16px}
-.it.in-cart .qty{display:flex}
-.it.in-cart .add{display:none}
-#cbar{flex:none;display:flex;align-items:center;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--c1)}
-#cbar[hidden]{display:none}
-#cbar .ct{flex:1;font-size:13px;color:var(--muted)}
-#cbar .ct b{display:block;color:var(--ivory);font-size:17px}
-#cbar a{flex:none;padding:13px 16px;border-radius:14px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);font-weight:800;text-decoration:none;font-size:15px}
 .empty{padding:40px 0;text-align:center;color:var(--muted)}
 </style>
 </head>
 <body>
 <script>window.onerror=function(m,s,l){var d=document.createElement("pre");d.style.cssText="white-space:pre-wrap;color:#fff;background:#b00020;padding:12px;margin:12px;font-size:13px;direction:ltr";d.textContent="Erreur: "+m+" (ligne "+l+")";document.body.appendChild(d);};</script>
 <div class="wrap" id="app"></div>
-<div id="mv" hidden><div class="mvh"><div id="mt"></div><button id="mx" type="button" aria-label="Close">&#10005;</button></div><div class="mvs"><input id="mq" type="search" autocomplete="off"></div><div class="mvtabs" id="mtabs"></div><div class="mvb" id="mbody"></div><div id="cbar" hidden><div class="ct"></div><a id="cgo" target="_blank" rel="noopener">Commander sur WhatsApp</a></div></div>
+<div id="mv" hidden><div class="mvh"><div id="mt"></div><button id="mx" type="button" aria-label="Close">&#10005;</button></div><div class="mvs"><input id="mq" type="search" autocomplete="off"></div><div class="mvtabs" id="mtabs"></div><div class="mvb" id="mbody"></div></div>
 <div id="viewer" hidden><button id="vx" type="button" aria-label="Close">&#10005;</button><div id="vbox"></div></div>
 
 <script>
@@ -110,7 +97,7 @@ const SHOP = {
 
   name: "Sahtek Food",
   tagline: "Fast food · Exemple",
-  about: "Exemple de page Waslux : chawarma, snacks, entrées froides et salades, avec commande par WhatsApp. Images à titre illustratif uniquement.",
+  about: "Exemple de page Waslux : chawarma, snacks, entrées froides et salades. Images à titre illustratif uniquement.",
 
   logo: "logo-sahtek.jpg",
   logoFit: "cover",
@@ -151,8 +138,6 @@ const SHOP = {
 
   buttons: ["menu", "call", "save"],
   info: ["phone", "address"],
-
-  order: { whatsapp: "213784688751", prefix: "[Démo Waslux]" },
 
   phone: "0550 00 00 00",
   phone2: "",
@@ -300,13 +285,12 @@ function filterMenu(q) {
   const em = document.getElementById("mempty");
   if (em) em.hidden = total > 0;
 }
-const ORD = SHOP.order && SHOP.order.whatsapp ? SHOP.order : null;
 if (menu.length) {
   document.getElementById("mt").textContent = T.menu;
   mq.placeholder = T.search;
   mbody.innerHTML = menu.map((c, i) => '<section id="cat' + i + '"><h3><span style="color:inherit;font-weight:inherit">' + esc(c.cat) + '</span>' + (c.catAr ? '<span dir="auto">' + esc(c.catAr) + '</span>' : '') + '</h3>' +
-    c.items.map((it, j) => '<div class="it" data-k="' + i + '-' + j + '" data-s="' + esc((it[0] + " " + (it[1] || "")).toLowerCase()) + '"><div class="in"><b dir="auto">' + esc(it[0]) + '</b>' + (it[1] ? '<span dir="auto">' + esc(it[1]) + '</span>' : '') + '</div>' +
-    (it[2] != null && it[2] !== "" ? '<div class="ip">' + esc(it[2]) + (SHOP.currency ? ' ' + esc(SHOP.currency) : '') + '</div>' : '') + (ORD && it[2] ? '<div class="ord"><div class="qty"><button type="button" data-a="-" aria-label="Retirer">&minus;</button><b>0</b><button type="button" data-a="+" aria-label="Ajouter">+</button></div><button type="button" class="add" data-a="+" aria-label="Ajouter">+</button></div>' : '') + '</div>').join("") + '</section>').join("") +
+    c.items.map(it => '<div class="it" data-s="' + esc((it[0] + " " + (it[1] || "")).toLowerCase()) + '"><div class="in"><b dir="auto">' + esc(it[0]) + '</b>' + (it[1] ? '<span dir="auto">' + esc(it[1]) + '</span>' : '') + '</div>' +
+    (it[2] != null && it[2] !== "" ? '<div class="ip">' + esc(it[2]) + (SHOP.currency ? ' ' + esc(SHOP.currency) : '') + '</div>' : '') + '</div>').join("") + '</section>').join("") +
     '<div class="empty" id="mempty" hidden>' + esc(T.none) + '</div>';
   mtabs.innerHTML = menu.map((c, i) => '<button type="button" data-i="' + i + '"' + (i === 0 ? ' class="on"' : '') + '>' + esc(c.cat) + '</button>').join("");
   mq.addEventListener("input", () => filterMenu(mq.value));
@@ -326,34 +310,6 @@ if (menu.length) {
     mtabs.querySelectorAll("button").forEach((b, i) => b.classList.toggle("on", i === cur));
   });
 }
-/* طلب عبر واتساب (تعديل خاص بهذه الصفحة) */
-const cart = {};
-const cbar = document.getElementById("cbar"), cgo = document.getElementById("cgo");
-function refreshCart() {
-  const lines = []; let n = 0, tot = 0;
-  Object.keys(cart).forEach(k => {
-    const q = cart[k]; if (!(q > 0)) return;
-    const p = k.split("-"), it = menu[p[0]].items[p[1]], sum = q * Number(it[2]);
-    n += q; tot += sum; lines.push("- " + q + " x " + it[0] + (it[1] ? " (" + it[1] + ")" : "") + " : " + sum + " " + (SHOP.currency || ""));
-  });
-  mbody.querySelectorAll(".it[data-k]").forEach(el => {
-    const q = cart[el.getAttribute("data-k")] || 0;
-    el.classList.toggle("in-cart", q > 0);
-    const b = el.querySelector(".qty b"); if (b) b.textContent = q;
-  });
-  if (!cbar) return;
-  cbar.hidden = n === 0;
-  cbar.querySelector(".ct").innerHTML = "<b>" + tot + " " + esc(SHOP.currency || "") + "</b>" + n + " article" + (n > 1 ? "s" : "");
-  const msg = (ORD && ORD.prefix ? ORD.prefix + "\n" : "") + "Bonjour, je souhaite commander chez " + SHOP.name + " :\n" + lines.join("\n") + "\nTotal : " + tot + " " + (SHOP.currency || "") + "\n(Exemple de commande - page de démonstration Waslux)";
-  if (ORD) cgo.href = "https://wa.me/" + String(ORD.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(msg);
-}
-if (ORD) mbody.addEventListener("click", e => {
-  const b = e.target.closest("button[data-a]"); if (!b) return;
-  const el = b.closest(".it"); if (!el) return;
-  const k = el.getAttribute("data-k");
-  cart[k] = Math.max(0, (cart[k] || 0) + (b.getAttribute("data-a") === "+" ? 1 : -1));
-  refreshCart();
-});
 function openMenu() {
   mv.hidden = false;
   document.body.style.overflow = "hidden";
