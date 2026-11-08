@@ -4,7 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0c">
-<title>Waslux</title>
+<title>Waslux — بطاقات ولافتات ذكية NFC وQR</title>
+<meta name="description" content="بطاقات وحوامل وألواح NFC وQR تفتح صفحة نشاطك بلمسة هاتف، دون تطبيق ودون كتابة رابط.">
+<link rel="canonical" href="https://waslux.com/">
+<meta property="og:title" content="Waslux — بطاقات ولافتات ذكية NFC وQR">
+<meta property="og:description" content="بطاقات وحوامل وألواح NFC وQR تفتح صفحة نشاطك بلمسة هاتف، دون تطبيق ودون كتابة رابط.">
+<meta property="og:url" content="https://waslux.com/">
+<meta property="og:type" content="website">
 <style>
 :root{--bg:#0b0b0c;--glow:#1f1b11;--c1:#171716;--c2:#101011;--ivory:#f1e9d8;--muted:#a9a293;--accent:#c8a85a;--g1:#e6cf8e;--g2:#b59443;--on:#17130a;--ice:#8fe0ff;--ice2:#3aa6d8;--line:rgba(200,168,90,.28);--iline:rgba(143,224,255,.26)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -207,6 +213,7 @@ const SITE_AR = {
   theme: "gold",          // "gold" أو "royal" أو "rose" أو "blue" أو "green" أو "fire"
   countryCode: "213",
   brand: "Waslux",
+  rights: "جميع الحقوق محفوظة",
   tagline: "NFC · QR · SMART PAGE",
   title: "Waslux — بطاقات ولافتات ذكية NFC وQR",
   phone: "0784 68 87 51",
@@ -321,6 +328,7 @@ try { const s = localStorage.getItem("waslux-lang"); UILANG = (s === "fr" || s =
 const FR = {
   lang: "fr",
   title: "Waslux — Cartes et plaques intelligentes NFC et QR",
+  rights: "Tous droits réservés",
   orderMsg: "Bonjour, je voudrais en savoir plus sur : ",
   heroTitle: "Toute votre activité sur une seule page, et votre client l'ouvre d'un geste",
   heroText: "Carte, support ou plaque NFC et QR qui ouvre directement votre page, votre menu ou votre avis Google. Sans application et sans taper de lien.",
@@ -443,6 +451,9 @@ root.style.setProperty("--iline", rgba(th.ice, .26));
 root.lang = SITE.lang;
 root.dir = SITE.lang === "ar" ? "rtl" : "ltr";
 document.title = SITE.title;
+document.querySelector('meta[name="description"]').setAttribute("content", UILANG === "fr" ? "Cartes, supports et plaques NFC et QR qui ouvrent la page de votre activité d'un geste." : "بطاقات وحوامل وألواح NFC وQR تفتح صفحة نشاطك بلمسة هاتف، دون تطبيق ودون كتابة رابط.");
+document.querySelector('meta[property="og:title"]').setAttribute("content", SITE.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", UILANG === "fr" ? "Cartes, supports et plaques NFC et QR qui ouvrent la page de votre activité d'un geste." : "بطاقات وحوامل وألواح NFC وQR تفتح صفحة نشاطك بلمسة هاتف، دون تطبيق ودون كتابة رابط.");
 document.querySelector('meta[name="theme-color"]').setAttribute("content", th.bg);
 const setMode = (m, save) => {
   if (m === "cream") root.setAttribute("data-mode", "cream"); else root.removeAttribute("data-mode");
@@ -530,7 +541,7 @@ h += '<section class="w s">' + hd(SITE.segmentsTitle, SITE.segmentsText) + '<div
 if (testi.length) h += '<section class="w s">' + hd(SITE.testiTitle, SITE.testiText) + '<div class="tg">' + testi.map(t => '<figure class="tc rv"><div class="qm">“</div><blockquote>' + esc(t.text) + '</blockquote><figcaption><b>' + esc(t.name || "") + '</b><span>' + esc(t.role || "") + '</span></figcaption></figure>').join("") + '</div></section>';
 h += '<section class="w s">' + hd(SITE.faqTitle, "") + '<div class="rv">' + SITE.faq.map(f => '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>').join("") + '</div></section>';
 h += '<section class="w s" id="contact"><div class="contact rv"><h2>' + esc(SITE.contactTitle) + '</h2><p>' + esc(SITE.contactText) + '</p><div class="crow"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="tel:+' + num + '">' + phoneIc + '<span class="ltr">' + esc(SITE.phone) + '</span></a><a class="btn" href="mailto:' + esc(SITE.email) + '">' + mailIc + '<span class="ltr">' + esc(SITE.email) + '</span></a>' + (SITE.instagram ? '<a class="btn" href="' + esc(SITE.instagram) + '" target="_blank" rel="noopener">' + igIc + '<span class="ltr">Instagram</span></a>' : '') + '</div></div></section>';
-h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w">© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + '</div></footer>';
+h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w">© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + ' — ' + esc(SITE.rights) + '</div></footer>';
 document.getElementById("site").innerHTML = h;
 document.getElementById("mode").addEventListener("click", () => setMode(root.getAttribute("data-mode") === "cream" ? "dark" : "cream", true));
 const lg = document.getElementById("lg");
