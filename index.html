@@ -195,6 +195,14 @@ html[data-mode="cream"] .stk{box-shadow:0 8px 22px rgba(80,55,15,.28)}
 .wbeat{font-size:24px;font-weight:800;color:var(--accent);margin:10px 0 4px}
 .wp{color:var(--muted);line-height:1.9}
 @media(max-width:420px){.brand svg{height:24px}.hr{gap:6px}.lg{padding:0 9px;font-size:13px}.top .btn.sm{padding:7px 12px;font-size:13px}}
+.about-b{display:grid;gap:18px;align-items:center}
+@media(min-width:720px){.about-b{grid-template-columns:260px 1fr;gap:28px}}
+.fnd{text-align:center}
+.fp{width:150px;height:150px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);display:block;margin:0 auto 12px}
+.fnd h3{font-size:20px;font-weight:800}
+.fr{color:var(--accent);font-weight:700}
+.ab .btn{margin-top:14px}
+.fl{color:var(--accent);text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>
@@ -214,6 +222,16 @@ const SITE_AR = {
   countryCode: "213",
   brand: "Waslux",
   rights: "جميع الحقوق محفوظة",
+  aboutLink: "من نحن",
+  about: {
+    title: "من نحن",
+    paras: ["Waslux مشروع جزائري صاعد، يصنع لنشاطك Smart Page تفتحها بلمسة هاتف على بطاقة أو حامل أو لوح NFC / QR.", "فريقنا يهتم بكل طلب، من أول رسالة إلى ما بعد التسليم."],
+    points: ["تشاهد صفحتك قبل أن تدفع، والدفع نقدًا عند الاستلام.", "رابطك مضمون مدى الحياة.", "خصومات على الباقات والكميات."],
+    founderName: "BRAHIMI SOHAIB",
+    founderTitle: "مؤسس Waslux",
+    founderImg: "founder.jpg",
+    btn: "راسلنا على واتساب"
+  },
   tagline: "NFC · QR · SMART PAGE",
   title: "Waslux — بطاقات ولافتات ذكية NFC وQR",
   phone: "0784 68 87 51",
@@ -329,6 +347,16 @@ const FR = {
   lang: "fr",
   title: "Waslux — Cartes et plaques intelligentes NFC et QR",
   rights: "Tous droits réservés",
+  aboutLink: "Qui sommes-nous",
+  about: {
+    title: "Qui sommes-nous",
+    paras: ["Waslux est un projet algérien en pleine croissance. Nous créons pour votre activité une Smart Page qui s'ouvre d'un geste sur une carte, un support ou une plaque NFC / QR.", "Notre équipe s'occupe de chaque commande, du premier message jusqu'après la livraison."],
+    points: ["Vous voyez votre page avant de payer, paiement en espèces à la livraison.", "Votre lien est garanti à vie.", "Remises sur les packs et les quantités."],
+    founderName: "BRAHIMI SOHAIB",
+    founderTitle: "Fondateur de Waslux",
+    founderImg: "founder.jpg",
+    btn: "Écrivez-nous sur WhatsApp"
+  },
   orderMsg: "Bonjour, je voudrais en savoir plus sur : ",
   heroTitle: "Toute votre activité sur une seule page, et votre client l'ouvre d'un geste",
   heroText: "Carte, support ou plaque NFC et QR qui ouvre directement votre page, votre menu ou votre avis Google. Sans application et sans taper de lien.",
@@ -540,8 +568,12 @@ h += '<section class="w s" id="how">' + hd(SITE.howTitle, "") + '<div class="hw"
 h += '<section class="w s">' + hd(SITE.segmentsTitle, SITE.segmentsText) + '<div class="chips rv">' + SITE.segments.map(s => '<span class="chip">' + esc(s) + '</span>').join("") + '</div></section>';
 if (testi.length) h += '<section class="w s">' + hd(SITE.testiTitle, SITE.testiText) + '<div class="tg">' + testi.map(t => '<figure class="tc rv"><div class="qm">“</div><blockquote>' + esc(t.text) + '</blockquote><figcaption><b>' + esc(t.name || "") + '</b><span>' + esc(t.role || "") + '</span></figcaption></figure>').join("") + '</div></section>';
 h += '<section class="w s">' + hd(SITE.faqTitle, "") + '<div class="rv">' + SITE.faq.map(f => '<details><summary>' + esc(f[0]) + '</summary><p>' + esc(f[1]) + '</p></details>').join("") + '</div></section>';
+if (SITE.about && SITE.about.title) {
+  const A = SITE.about, fOk = !!(A.founderName && A.founderTitle && A.founderImg);
+  h += '<section class="w s" id="about">' + hd(A.title, "") + '<div class="why rv about-b">' + (fOk ? '<div class="fnd"><img class="fp" src="' + esc(A.founderImg) + '" alt="' + esc(A.founderName) + '" loading="lazy"><h3>' + esc(A.founderName) + '</h3><p class="fr">' + esc(A.founderTitle) + '</p></div>' : '') + '<div class="ab">' + A.paras.map(p => '<p class="wp">' + esc(p) + '</p>').join("") + '<ul class="wl">' + A.points.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + esc(A.btn) + '</a></div></div></section>';
+}
 h += '<section class="w s" id="contact"><div class="contact rv"><h2>' + esc(SITE.contactTitle) + '</h2><p>' + esc(SITE.contactText) + '</p><div class="crow"><a class="btn cta" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><a class="btn" href="tel:+' + num + '">' + phoneIc + '<span class="ltr">' + esc(SITE.phone) + '</span></a><a class="btn" href="mailto:' + esc(SITE.email) + '">' + mailIc + '<span class="ltr">' + esc(SITE.email) + '</span></a>' + (SITE.instagram ? '<a class="btn" href="' + esc(SITE.instagram) + '" target="_blank" rel="noopener">' + igIc + '<span class="ltr">Instagram</span></a>' : '') + '</div></div></section>';
-h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w">© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + ' — ' + esc(SITE.rights) + '</div></footer>';
+h += '</main><a class="btn cta stk" id="stk" href="' + esc(wa(SITE.orderMsg)) + '" target="_blank" rel="noopener">' + waIc + L.order + '</a><footer class="foot"><div class="w"><a class="fl" href="#about">' + esc(SITE.aboutLink) + '</a><br>© ' + new Date().getFullYear() + ' ' + esc(SITE.brand) + ' — ' + esc(SITE.rights) + '</div></footer>';
 document.getElementById("site").innerHTML = h;
 document.getElementById("mode").addEventListener("click", () => setMode(root.getAttribute("data-mode") === "cream" ? "dark" : "cream", true));
 const lg = document.getElementById("lg");
