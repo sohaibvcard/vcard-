@@ -178,6 +178,7 @@ const SHOP = {
   address: "Oran",
   mapLink: "https://maps.app.goo.gl/WsHoxvWjgd73FctD8",
   reviewLink: "https://search.google.com/local/writereview?placeid=ChIJx8xiLmJjfg0R4S6CZ4gdq2c",
+  sheetCsv: "",   /* رابط CSV للجدول الذي يعدّل فيه الزبون. فارغ = تُستعمل البيانات المكتوبة هنا */
   website: "",
   social: [
     { name: "Instagram", url: "https://www.instagram.com/ilfornopizza1" },
@@ -222,6 +223,58 @@ const ic = {
   book: '<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'
 };
 
+/* ====== Google Sheet (اختياري): إن وُجد sheetCsv يعدّل الزبون بياناته من الجدول ====== */
+const SHEET_KEY = "waslux-sheet-" + location.pathname;
+function parseCsv(s) {
+  s = String(s || "").replace(/^\uFEFF/, "");
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (q) { if (c === '"') { if (s[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && s[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += c;
+  }
+  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+function applySheet(rows) {
+  const KEYS = {}; ["name", "tagline", "about", "phone", "phone2", "whatsapp", "email", "address", "mapLink", "reviewLink", "website"].forEach(k => { KEYS[k.toLowerCase()] = k; });
+  const SOC = [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"]];
+  const info = {}, hours = [], cats = [], idx = {};
+  let n = 0, hasHours = false, hasMenu = false;
+  rows.forEach(r => {
+    const t = String(r[0] || "").trim().toLowerCase();
+    const b = String(r[1] || "").trim(), c = String(r[2] || "").trim();
+    if (t === "info" && b) { info[b.toLowerCase()] = c; n++; }
+    else if (t === "heure" && b) { hours.push([b, c]); hasHours = true; n++; }
+    else if (t === "plat" && b && c) {
+      hasMenu = true; n++;
+      if (/^(non|no|0|false|لا)$/i.test(String(r[5] || "").trim())) return;
+      if (!(b in idx)) { idx[b] = cats.length; cats.push({ cat: b, items: [] }); }
+      cats[idx[b]].items.push([c, String(r[3] || "").trim(), String(r[4] || "").trim()]);
+    }
+  });
+  if (!n) return false;
+  for (const k in KEYS) if (k in info && !(KEYS[k] === "name" && !info[k])) SHOP[KEYS[k]] = info[k];
+  if (SOC.some(s => s[0] in info)) SHOP.social = SOC.filter(s => info[s[0]]).map(s => ({ name: s[1], url: info[s[0]] }));
+  if (hasHours) SHOP.hours = hours;
+  if (hasMenu) SHOP.menu = cats;
+  return true;
+}
+function loadSheet() {
+  const url = SHOP.sheetCsv;
+  if (!safeUrl(url)) return Promise.resolve();
+  const ctl = window.AbortController ? new AbortController() : null;
+  const to = setTimeout(() => { if (ctl) ctl.abort(); }, 3500);
+  return fetch(url, ctl ? { signal: ctl.signal, cache: "no-store" } : { cache: "no-store" })
+    .then(r => { if (!r.ok) throw 0; return r.text(); })
+    .then(txt => { clearTimeout(to); if (!applySheet(parseCsv(txt))) throw 0; try { localStorage.setItem(SHEET_KEY, txt); } catch (e) {} })
+    .catch(() => { clearTimeout(to); try { const c = localStorage.getItem(SHEET_KEY); if (c) applySheet(parseCsv(c)); } catch (e) {} });
+}
+
+function boot() {
 const num = intl(SHOP.phone);
 const waNum = intl(SHOP.whatsapp);
 const menu = (SHOP.menu || []).filter(c => c && (c.items || []).length);
@@ -384,6 +437,10 @@ if (sb) sb.addEventListener("click", () => {
   document.body.appendChild(el);
   el.click();
   el.remove();
+});
+}
+Promise.resolve().then(loadSheet).catch(function () {}).then(function () {
+  try { boot(); } catch (e) { window.onerror(e.message, "", 0); }
 });
 </script>
 </body>
