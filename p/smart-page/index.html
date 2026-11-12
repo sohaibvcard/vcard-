@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#120e0c">
+<title>Smart Page — Aperçu</title>
+<style>
+
+:root{--bg:#120e0c;--glow:#2a1a10;--c1:#1c1613;--c2:#15100e;--ivory:#fff3e6;--muted:#c4ad9b;--accent:#ff6b1a;--g1:#ffb703;--g2:#ff6b1a;--on:#1a0d04;--line:rgba(255,107,26,.3)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;background:var(--bg);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;display:flex;justify-content:center}
+.wrap{width:100%;max-width:480px;padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+.cover{height:200px;background:linear-gradient(135deg,var(--g2),var(--glow));background-size:cover;background-position:center;border-radius:0 0 28px 28px;position:relative}
+.cover::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.45))}
+.logo{width:112px;height:112px;margin:-56px auto 0;border-radius:50%;border:4px solid var(--bg);background:var(--c1);position:relative;z-index:2;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.logo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.ini{font-family:Georgia,serif;font-size:36px;font-weight:700;color:var(--accent)}
+.head{text-align:center;padding:14px 20px 0}
+h1{font-size:30px;font-weight:800;letter-spacing:.3px;line-height:1.2}
+.tag{margin-top:10px;display:inline-block;padding:5px 14px;border-radius:999px;background:var(--c1);border:1px solid var(--line);color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.about{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.8}
+.sec{padding:0 18px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;border-radius:14px;border:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;background:var(--c1);font-family:inherit;cursor:pointer;width:100%}
+.btn svg,.row svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn.cta{margin-top:22px;padding:18px 12px;font-size:17px;font-weight:800;border:0;border-radius:18px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.btn.cta svg{width:22px;height:22px}
+.btn:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn.full{grid-column:1/-1}
+.st{margin:30px 0 12px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;text-align:start}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block;cursor:pointer;background:var(--c1)}
+.gal img:last-child:nth-child(odd){grid-column:1/-1;aspect-ratio:16/9}
+.card{background:var(--c1);border:1px solid var(--line);border-radius:16px;padding:4px 16px;text-align:start}
+.hr{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hr:last-child,.row:last-child{border-bottom:0}
+.hr span:last-child{color:var(--muted);direction:ltr}
+.row{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ivory);text-decoration:none;font-size:15px;word-break:break-word}
+.row svg{color:var(--accent)}
+.social{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.chip{display:flex;align-items:center;gap:7px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--c1);color:var(--ivory);text-decoration:none;font-size:14px}
+.chip svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ltr{direction:ltr;unicode-bidi:embed}
+html[dir=rtl] .st,html[dir=rtl] .tag{letter-spacing:0}
+html[dir=rtl] .hr span:last-child{direction:rtl}
+.credit{margin-top:26px;text-align:center;font-size:12px;direction:ltr}
+.credit a{color:var(--muted);text-decoration:none;opacity:.8}
+#viewer{position:fixed;inset:0;background:rgba(8,6,5,.97);z-index:50;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:64px 12px calc(24px + env(safe-area-inset-bottom))}
+#viewer[hidden]{display:none}
+#vx{position:fixed;top:calc(12px + env(safe-area-inset-top));inset-inline-end:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:20px;z-index:51;cursor:pointer}
+#vbox img{display:block;width:100%;max-width:720px;margin:0 auto 14px;border-radius:12px}
+#mv{position:fixed;inset:0;background:var(--bg);z-index:60;display:flex;flex-direction:column}
+#mv[hidden]{display:none}
+.mvh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 16px 10px}
+#mt{font-size:20px;font-weight:800}
+#mx{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:18px;cursor:pointer;flex:none}
+.mvs{padding:0 16px 10px}
+#mq{width:100%;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:16px;font-family:inherit;outline:none}
+#mq::placeholder{color:var(--muted)}
+.mvtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mvtabs::-webkit-scrollbar{display:none}
+.mvtabs button{flex:none;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);color:var(--ivory);font-size:14px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.mvtabs button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);border:0;font-weight:700}
+.mvb{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+.mvb section{margin-bottom:22px}
+.mvb h3{position:sticky;top:0;z-index:1;background:var(--bg);padding:10px 0;font-size:17px;font-weight:800;color:var(--accent);display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
+.mvb h3 span{font-weight:600;color:var(--muted)}
+.it{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}
+.it[hidden],.mvb section[hidden],.empty[hidden]{display:none}
+.in b{display:block;font-size:16px;font-weight:700}
+.in span{display:block;margin-top:3px;color:var(--muted);font-size:14px}
+html[dir=ltr] .in span{text-align:left}
+html[dir=rtl] .in span{text-align:right}
+.ip{flex:none;font-weight:800;color:var(--accent);font-size:16px;direction:ltr;white-space:nowrap}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+
+body{overflow-x:hidden}
+#bar{position:sticky;top:0;z-index:30;background:rgba(10,10,12,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(143,224,255,.25);padding:8px 0 10px}
+#bar small{display:flex;justify-content:space-between;align-items:center;padding:0 14px 6px;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:#8fe0ff;font-weight:700}
+#bar .ch{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+#bar .ch::-webkit-scrollbar{display:none}
+#bar button{flex:none;min-height:42px;padding:8px 14px;border-radius:999px;border:1px solid rgba(143,224,255,.3);background:rgba(255,255,255,.05);color:#f3f3f3;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+#bar button.on{background:linear-gradient(135deg,rgba(143,224,255,.3),rgba(143,224,255,.1));border-color:#8fe0ff;font-weight:700;box-shadow:0 0 14px rgba(143,224,255,.3)}
+#bar #lg{min-height:30px;padding:3px 12px;font-size:12px;letter-spacing:1px}
+.note{margin:26px 18px 0;padding:14px 16px;border-radius:16px;border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.7;text-align:center}
+.cover{display:block}
+.logo{box-shadow:0 0 0 3px var(--accent)}
+.social{margin-top:30px}.chip{padding:11px 18px;font-size:15px;font-weight:600}.chip svg{width:19px;height:19px;stroke:var(--accent)}
+.gal img{background:var(--c1)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<div id="bar"><small><span>Smart Page · Aperçu</span><button type="button" id="lg">AR</button></small><div class="ch"></div></div>
+<div id="app"></div>
+</div>
+<div id="mv" hidden><div class="mvh"><div id="mt"></div><button id="mx" type="button" aria-label="Close">&#10005;</button></div><div class="mvs"><input id="mq" type="search" autocomplete="off"></div><div class="mvtabs" id="mtabs"></div><div class="mvb" id="mbody"></div></div>
+<div id="viewer" hidden><button id="vx" type="button" aria-label="Close">&#10005;</button><div id="vbox"></div></div>
+<script>
+/* ===== Smart Page — aperçu complet (démo, non publiée) =====
+   Même moteur que le modèle Business Profile v5 ; seules les données (SHOP) changent. */
+var TH = {
+  fire:  { bg:"#120e0c", glow:"#2a1a10", c1:"#1c1613", c2:"#15100e", ivory:"#fff3e6", muted:"#c4ad9b", accent:"#ff6b1a", g1:"#ffb703", g2:"#ff6b1a", on:"#1a0d04" },
+  gold:  { bg:"#0b0b0c", glow:"#1f1b11", c1:"#171716", c2:"#101011", ivory:"#f1e9d8", muted:"#a9a293", accent:"#c8a85a", g1:"#e6cf8e", g2:"#b59443", on:"#17130a" },
+  royal: { bg:"#06130d", glow:"#0f2b1d", c1:"#0d2018", c2:"#091810", ivory:"#f2ecda", muted:"#aab8ad", accent:"#cdb36a", g1:"#e6d6a2", g2:"#b99b4c", on:"#14110a" },
+  rose:  { bg:"#151315", glow:"#2b2126", c1:"#262327", c2:"#1d1b1e", ivory:"#f6ecee", muted:"#b3a8ac", accent:"#e08fa6", g1:"#f2b3c4", g2:"#d1708b", on:"#2a0f18" },
+  blue:  { bg:"#0a1118", glow:"#12202e", c1:"#14202b", c2:"#0f1923", ivory:"#e9f1f7", muted:"#9fb2c1", accent:"#5cb3d6", g1:"#8fd3ec", g2:"#3a8fb3", on:"#06202c" },
+  green: { bg:"#0c110e", glow:"#15231a", c1:"#16201a", c2:"#101813", ivory:"#eef3ea", muted:"#a3b2a5", accent:"#7bb88a", g1:"#a6d9b0", g2:"#4f9a62", on:"#08210f" }
+};
+var TX = {
+  fr: { call:"Appeler", wa:"WhatsApp", email:"E-mail", map:"Itinéraire", save:"Enregistrer le contact", photos:"Photos", hours:"Horaires", contact:"Contact", search:"Rechercher", none:"Aucun résultat" },
+  ar: { call:"اتصال", wa:"واتساب", email:"البريد", map:"الموقع على الخريطة", save:"حفظ جهة الاتصال", photos:"صور", hours:"أوقات العمل", contact:"التواصل", search:"ابحث", none:"لا توجد نتائج" }
+};
+var L = "https://waslux.com";
+
+function ph(e, a, b) {
+  var s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + a + '"/><stop offset="1" stop-color="' + b + '"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><circle cx="330" cy="50" r="90" fill="#fff" opacity=".08"/><text x="200" y="185" font-size="110" text-anchor="middle">' + e + '</text></svg>';
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(s);
+}
+function gal(a, b, es) { return es.map(function (e, i) { return ph(e, i % 2 ? b : a, i % 2 ? a : b); }); }
+
+/* العناصر: [fr, desc fr, prix, ar, desc ar] */
+var D = [
+{ id:"resto", chip:"🍽️ Restaurant", theme:"fire", e:"🍽️", c:["#ff8a00","#5a2a0a"], cur:"DA", cc:"Alger centre",
+  fr:{ name:"Le Comptoir Gourmand", tag:"Restaurant · Cuisine maison", about:"Une cuisine généreuse, préparée chaque jour. Consultez le menu, appelez-nous ou venez nous voir.", menu:"Menu électronique", hours:[["Dim – Jeu","11:00 – 23:00"],["Ven","14:00 – 23:30"],["Sam","11:00 – 23:30"]], addr:"12 rue Didouche Mourad, Alger" },
+  ar:{ name:"لو كونتوار غورماند", tag:"مطعم · أكل منزلي", about:"أكل كريم يُحضَّر كل يوم. تصفّح القائمة واتصل بنا أو زرنا.", menu:"قائمة الطعام الإلكترونية", hours:[["الأحد – الخميس","11:00 – 23:00"],["الجمعة","14:00 – 23:30"],["السبت","11:00 – 23:30"]], addr:"12 شارع ديدوش مراد، الجزائر" },
+  cats:[
+    { fr:"Plats", ar:"أطباق", it:[["Couscous royal","Agneau, poulet, merguez, légumes",1800,"كسكسي ملكي","لحم، دجاج، مرقاز، خضر"],["Chorba frik","Soupe traditionnelle",450,"شوربة فريك","شوربة تقليدية"],["Tajine zitoune","Poulet, olives, citron confit",1400,"طاجين زيتون","دجاج، زيتون، ليمون مصبّر"]] },
+    { fr:"Grillades", ar:"مشويات", it:[["Brochettes mixtes","Poulet et agneau, frites",1500,"بروشيت مشكل","دجاج ولحم، بطاطا"],["Côtelettes","Agneau grillé, salade",1900,"ضلوع مشوية","لحم مشوي، سلطة"],["Merguez maison","Frites, harissa",1100,"مرقاز بيتي","بطاطا، هريسة"]] },
+    { fr:"Desserts", ar:"حلويات", it:[["Makroud","Dattes, miel",300,"مقروض","تمر، عسل"],["Crème caramel","",350,"كريم كراميل",""],["Thé à la menthe","",200,"شاي بالنعناع",""]] }
+  ], ph:["🍲","🥘","🍢","🍰"], soc:["Instagram","Facebook","TikTok","WhatsApp"] },
+{ id:"cafe", chip:"☕ Café", theme:"royal", e:"☕", c:["#cdb36a","#0f2b1d"], cur:"DA", cc:"Oran",
+  fr:{ name:"Café Aurore", tag:"Café · Pâtisserie", about:"Un coin calme pour votre café du matin, vos réunions ou vos pauses. Wi-Fi gratuit.", menu:"Carte des boissons", hours:[["Tous les jours","07:00 – 22:00"]], addr:"Boulevard de la Soummam, Oran" },
+  ar:{ name:"مقهى أورور", tag:"مقهى · حلويات", about:"ركن هادئ لقهوة الصباح واجتماعاتك واستراحتك. واي فاي مجاني.", menu:"قائمة المشروبات", hours:[["كل الأيام","07:00 – 22:00"]], addr:"شارع الصومام، وهران" },
+  cats:[
+    { fr:"Boissons chaudes", ar:"مشروبات ساخنة", it:[["Espresso","",120,"إسبريسو",""],["Cappuccino","Mousse de lait onctueuse",250,"كابتشينو","رغوة حليب ناعمة"],["Café turc","À la braise",200,"قهوة تركية","على الجمر"]] },
+    { fr:"Boissons fraîches", ar:"مشروبات باردة", it:[["Citronnade","Menthe fraîche",250,"ليموناضة","نعناع طازج"],["Jus d'orange","Pressé minute",300,"عصير برتقال","عصير طازج"],["Café glacé","Crème fouettée",350,"قهوة مثلجة","كريمة مخفوقة"]] },
+    { fr:"Pâtisseries", ar:"حلويات", it:[["Croissant","",100,"كرواسان",""],["Mille-feuille","",250,"ميل فاي",""],["Tarte aux fruits","",300,"تارت الفواكه",""]] }
+  ], ph:["☕","🥐","🍰","🍋"], soc:["Instagram","TikTok","Facebook","WhatsApp"] },
+{ id:"boutique", chip:"👗 Boutique", theme:"rose", e:"👗", c:["#e08fa6","#2b2126"], cur:"DA", cc:"Blida",
+  fr:{ name:"Maison Lina", tag:"Mode femme · Nouveautés", about:"Robes, sacs et accessoires choisis avec soin. Commandez et suivez nos nouveautés sur WhatsApp.", menu:"Catalogue", hours:[["Sam – Jeu","10:00 – 20:00"],["Ven","Fermé"]], addr:"Centre-ville, Blida" },
+  ar:{ name:"ميزون لينا", tag:"أزياء نسائية · جديدنا", about:"فساتين وحقائب وإكسسوارات مختارة بعناية. اطلبي وتابعي جديدنا على واتساب.", menu:"الكتالوج", hours:[["السبت – الخميس","10:00 – 20:00"],["الجمعة","مغلق"]], addr:"وسط المدينة، البليدة" },
+  cats:[
+    { fr:"Robes", ar:"فساتين", it:[["Robe satin","Tailles S à XL",4500,"فستان ساتان","من S إلى XL"],["Robe de soirée","Plusieurs coloris",7800,"فستان سهرة","عدة ألوان"],["Robe d'été","Coton léger",3200,"فستان صيفي","قطن خفيف"]] },
+    { fr:"Sacs", ar:"حقائب", it:[["Sac à main cuir","",5200,"حقيبة يد جلد",""],["Pochette","",2400,"حقيبة صغيرة",""],["Sac bandoulière","",3600,"حقيبة كتف",""]] },
+    { fr:"Accessoires", ar:"إكسسوارات", it:[["Foulard soie","",1800,"وشاح حرير",""],["Ceinture","",1500,"حزام",""],["Bijoux fantaisie","",900,"مجوهرات",""]] }
+  ], ph:["👗","👜","👠","💍"], soc:["Instagram","TikTok","Facebook","WhatsApp"], wa:true },
+{ id:"garage", chip:"🔧 Garage", theme:"blue", e:"🔧", c:["#3a8fb3","#12202e"], cur:"DA", cc:"Alger",
+  fr:{ name:"Auto Service Hydra", tag:"Garage · Mécanique & entretien", about:"Vidange, freins, diagnostic électronique. Devis gratuit, travail garanti.", menu:"Services & tarifs", hours:[["Sam – Jeu","08:00 – 18:00"],["Ven","Fermé"]], addr:"Zone industrielle, Hydra" },
+  ar:{ name:"أوتو سيرفيس حيدرة", tag:"ميكانيك وصيانة السيارات", about:"تغيير الزيت، الفرامل، فحص إلكتروني. تقدير مجاني وعمل مضمون.", menu:"الخدمات والأسعار", hours:[["السبت – الخميس","08:00 – 18:00"],["الجمعة","مغلق"]], addr:"المنطقة الصناعية، حيدرة" },
+  cats:[
+    { fr:"Entretien", ar:"صيانة", it:[["Vidange + filtre","Huile incluse (à partir de)",3500,"تغيير زيت + فلتر","الزيت مشمول (ابتداءً من)"],["Contrôle complet","Moteur, freins, pneus",1500,"فحص شامل","محرك، فرامل، عجلات"],["Climatisation","Recharge gaz",3000,"تكييف","إعادة شحن الغاز"]] },
+    { fr:"Mécanique", ar:"ميكانيك", it:[["Plaquettes de frein","Pose incluse (à partir de)",2800,"أقمشة الفرامل","التركيب مشمول (ابتداءً من)"],["Courroie de distribution","Sur devis",null,"سير التوزيع","حسب التقدير"],["Embrayage","Sur devis",null,"قابض","حسب التقدير"]] },
+    { fr:"Diagnostic", ar:"تشخيص", it:[["Diagnostic électronique","Valise multimarque",1000,"فحص إلكتروني","جهاز متعدد الماركات"],["Géométrie / parallélisme","",1800,"ضبط العجلات",""]] }
+  ], ph:["🔧","🚗","🛠️","🛞"], soc:["Facebook","Instagram","WhatsApp"] },
+{ id:"salon", chip:"💇 Salon", theme:"gold", e:"💇", c:["#e6cf8e","#1f1b11"], cur:"DA", cc:"Constantine",
+  fr:{ name:"Salon Yasmine", tag:"Coiffure & beauté · Femmes", about:"Coiffure, soins et maquillage dans une ambiance chaleureuse. Réservez par WhatsApp.", menu:"Prestations", hours:[["Sam – Jeu","09:00 – 19:00"],["Ven","Fermé"]], addr:"Rue Larbi Ben M'hidi, Constantine" },
+  ar:{ name:"صالون ياسمين", tag:"تصفيف وتجميل · نساء", about:"تصفيف وعناية ومكياج في أجواء دافئة. احجزي عبر واتساب.", menu:"الخدمات", hours:[["السبت – الخميس","09:00 – 19:00"],["الجمعة","مغلق"]], addr:"شارع العربي بن مهيدي، قسنطينة" },
+  cats:[
+    { fr:"Coiffure", ar:"تصفيف", it:[["Brushing","",1000,"سشوار",""],["Coupe + brushing","",2000,"قص + سشوار",""],["Coloration","À partir de",3500,"صبغة","ابتداءً من"]] },
+    { fr:"Soins", ar:"عناية", it:[["Soin kératine","À partir de",6000,"علاج الكيراتين","ابتداءً من"],["Soin du visage","",2500,"عناية بالوجه",""],["Manucure","",1200,"مانيكير",""]] },
+    { fr:"Maquillage", ar:"مكياج", it:[["Maquillage jour","",2000,"مكياج نهاري",""],["Maquillage soirée","",3500,"مكياج سهرة",""],["Forfait mariée","Sur rendez-vous",null,"باقة العروس","بموعد"]] }
+  ], ph:["💇","💅","💄","✨"], soc:["Instagram","TikTok","Facebook","WhatsApp"], wa:true },
+{ id:"clinique", chip:"🦷 Clinique", theme:"green", e:"🦷", c:["#4f9a62","#15231a"], cur:"", cc:"Sétif",
+  fr:{ name:"Clinique Dentaire Horizon", tag:"Chirurgie dentaire · Soins", about:"Une équipe à l'écoute pour toute la famille. Prenez rendez-vous par téléphone ou WhatsApp.", menu:"Nos soins", hours:[["Dim – Jeu","08:30 – 17:00"],["Sam","09:00 – 13:00"],["Ven","Fermé"]], addr:"Cité des Frères Bouchama, Sétif" },
+  ar:{ name:"عيادة هوريزون لطب الأسنان", tag:"جراحة الأسنان · علاجات", about:"فريق يصغي لكل أفراد العائلة. احجز موعدك بالهاتف أو واتساب.", menu:"علاجاتنا", hours:[["الأحد – الخميس","08:30 – 17:00"],["السبت","09:00 – 13:00"],["الجمعة","مغلق"]], addr:"حي الإخوة بوشامة، سطيف" },
+  cats:[
+    { fr:"Soins courants", ar:"علاجات عامة", it:[["Consultation & bilan","Examen complet",null,"استشارة وفحص","فحص شامل"],["Détartrage","",null,"تنظيف الجير",""],["Soin de carie","",null,"علاج التسوس",""]] },
+    { fr:"Esthétique", ar:"تجميل", it:[["Blanchiment","",null,"تبييض الأسنان",""],["Facettes","",null,"قشور تجميلية",""]] },
+    { fr:"Enfants", ar:"الأطفال", it:[["Première visite","",null,"الزيارة الأولى",""],["Scellement de sillons","",null,"سدّ الشقوق",""]] }
+  ], ph:["🦷","🪥","😁","🏥"], soc:["Facebook","Instagram","YouTube","WhatsApp"], email:true }
+,{ id:"gym", chip:"🏋️ Gym", theme:"fire", e:"🏋️", cur:"DA", cc:"Alger",
+  fr:{ name:"Power Gym", tag:"Sport & Fitness", about:"Musculation, cardio et coaching personnalisé. Équipez-vous, dépassez vos limites.", menu:"Abonnements", hours:[["Sam – Jeu","06:00 – 23:00"],["Ven","14:00 – 22:00"]], addr:"Bab Ezzouar, Alger" },
+  ar:{ name:"باور جيم", tag:"رياضة ولياقة", about:"كمال أجسام، كارديو وتدريب شخصي. تجهّز وتجاوز حدودك.", menu:"الاشتراكات", hours:[["السبت – الخميس","06:00 – 23:00"],["الجمعة","14:00 – 22:00"]], addr:"باب الزوار، الجزائر" },
+  cats:[
+    { fr:"Abonnements", ar:"اشتراكات", it:[["Mensuel","Accès illimité",3000,"شهري","دخول غير محدود"],["Trimestriel","3 mois",7500,"ثلاثي","3 أشهر"],["Annuel","12 mois",24000,"سنوي","12 شهراً"]] },
+    { fr:"Coaching", ar:"تدريب", it:[["Séance coaching","1 heure",1500,"حصة تدريب","ساعة واحدة"],["Programme perso","Suivi 1 mois",5000,"برنامج شخصي","متابعة شهر"]] },
+    { fr:"Cours collectifs", ar:"حصص جماعية", it:[["Cross training","",500,"كروس تريننغ",""],["Zumba","",500,"زومبا",""]] }
+  ], ph:["🏋️","💪","🥊","🏃"], soc:["Instagram","TikTok","Facebook","WhatsApp"], wa:true },
+{ id:"boulangerie", chip:"🥖 Boulangerie", theme:"fire", e:"🥖", cur:"DA", cc:"Alger",
+  fr:{ name:"La Fournée d'Or", tag:"Boulangerie & Pâtisserie", about:"Pains artisanaux, viennoiseries et pâtisseries faites maison. Des produits frais chaque jour.", menu:"Nos produits", hours:[["Tous les jours","06:00 – 21:00"]], addr:"Rue Hassiba Ben Bouali, Alger" },
+  ar:{ name:"لا فورنيه دور", tag:"مخبزة وحلويات", about:"خبز حرفي ومعجنات وحلويات منزلية. منتجات طازجة كل يوم.", menu:"منتجاتنا", hours:[["كل الأيام","06:00 – 21:00"]], addr:"شارع حسيبة بن بوعلي، الجزائر" },
+  cats:[
+    { fr:"Pains", ar:"خبز", it:[["Baguette tradition","",30,"باغيت تراديسيون",""],["Pain complet","",50,"خبز كامل",""],["Pain aux céréales","",80,"خبز الحبوب",""]] },
+    { fr:"Viennoiseries", ar:"معجنات", it:[["Croissant beurre","",80,"كرواسان بالزبدة",""],["Pain au chocolat","",90,"بان أو شوكولا",""]] },
+    { fr:"Pâtisseries", ar:"حلويات", it:[["Éclair","",150,"إكلير",""],["Tarte citron","",250,"تارت الليمون",""],["Gâteau sur commande","Selon la taille",null,"كعكة بالطلب","حسب الحجم"]] }
+  ], ph:["🥖","🥐","🧁","🍞"], soc:["Instagram","Facebook","TikTok","WhatsApp"], wa:true },
+{ id:"auto", chip:"🚘 Auto", theme:"blue", e:"🚘", cur:"", cc:"Alger",
+  fr:{ name:"Auto Style", tag:"Vente & Location de véhicules", about:"Véhicules neufs et d'occasion. Reprise, financement et service après-vente.", menu:"Nos véhicules", hours:[["Sam – Jeu","09:00 – 18:00"],["Ven","Fermé"]], addr:"Route nationale, Rouiba" },
+  ar:{ name:"أوتو ستايل", tag:"بيع وكراء السيارات", about:"سيارات جديدة ومستعملة. استرجاع وتمويل وخدمة ما بعد البيع.", menu:"سياراتنا", hours:[["السبت – الخميس","09:00 – 18:00"],["الجمعة","مغلق"]], addr:"الطريق الوطني، رويبة" },
+  cats:[
+    { fr:"Occasion", ar:"مستعملة", it:[["Citadine essence","2020 · 60 000 km",null,"سيارة مدينة بنزين","2020 · 60 000 كم"],["Berline diesel","2019 · 90 000 km",null,"سيدان ديزل","2019 · 90 000 كم"]] },
+    { fr:"Location", ar:"كراء", it:[["Courte durée","Tarif sur demande",null,"مدة قصيرة","السعر عند الطلب"],["Longue durée","Tarif sur demande",null,"مدة طويلة","السعر عند الطلب"]] },
+    { fr:"Services", ar:"خدمات", it:[["Reprise de votre véhicule","",null,"استرجاع سيارتك",""],["Financement","",null,"تمويل",""]] }
+  ], ph:["🚘","🚗","🔑","🛣️"], soc:["Facebook","Instagram","WhatsApp"], wa:true },
+{ id:"immo", chip:"🏠 Immobilier", theme:"blue", e:"🏠", cur:"", cc:"Alger",
+  fr:{ name:"Immo Conseil", tag:"Immobilier", about:"Achat, vente, location. Votre projet immobilier, notre priorité.", menu:"Nos biens", hours:[["Sam – Jeu","09:00 – 17:00"],["Ven","Fermé"]], addr:"Hydra, Alger" },
+  ar:{ name:"إيمو كونساي", tag:"عقارات", about:"شراء وبيع وكراء. مشروعك العقاري أولويتنا.", menu:"عقاراتنا", hours:[["السبت – الخميس","09:00 – 17:00"],["الجمعة","مغلق"]], addr:"حيدرة، الجزائر" },
+  cats:[
+    { fr:"À vendre", ar:"للبيع", it:[["Appartement F3","Hydra · 85 m²",null,"شقة F3","حيدرة · 85 م²"],["Villa avec jardin","Dély Ibrahim",null,"فيلا مع حديقة","دالي إبراهيم"]] },
+    { fr:"À louer", ar:"للكراء", it:[["Studio meublé","Centre-ville",null,"استوديو مفروش","وسط المدينة"],["Local commercial","Bab Ezzouar",null,"محل تجاري","باب الزوار"]] },
+    { fr:"Nos services", ar:"خدماتنا", it:[["Estimation gratuite","",null,"تقدير مجاني",""],["Accompagnement juridique","",null,"مرافقة قانونية",""]] }
+  ], ph:["🏠","🏢","🔑","🌆"], soc:["Facebook","Instagram","WhatsApp"], email:true },
+{ id:"voyage", chip:"✈️ Voyages", theme:"green", e:"✈️", cur:"DA", cc:"Alger",
+  fr:{ name:"Atlas Voyages", tag:"Agence de voyage", about:"Billets d'avion, séjours, circuits et excursions. Explorez le monde en toute sérénité.", menu:"Nos offres", hours:[["Sam – Jeu","09:00 – 17:30"],["Ven","Fermé"]], addr:"Place des Martyrs, Alger" },
+  ar:{ name:"أطلس للسفر", tag:"وكالة سفر", about:"تذاكر طيران، رحلات وجولات سياحية. اكتشف العالم بكل راحة.", menu:"عروضنا", hours:[["السبت – الخميس","09:00 – 17:30"],["الجمعة","مغلق"]], addr:"ساحة الشهداء، الجزائر" },
+  cats:[
+    { fr:"Séjours", ar:"إقامات", it:[["Istanbul 5 jours","Vol + hôtel (à partir de)",95000,"إسطنبول 5 أيام","طيران + فندق (ابتداءً من)"],["Dubaï 6 jours","Vol + hôtel (à partir de)",185000,"دبي 6 أيام","طيران + فندق (ابتداءً من)"]] },
+    { fr:"Omra", ar:"عمرة", it:[["Omra 15 jours","Sur devis",null,"عمرة 15 يوماً","حسب التقدير"]] },
+    { fr:"Services", ar:"خدمات", it:[["Billets d'avion","",null,"تذاكر طيران",""],["Assistance visa","",null,"مساعدة التأشيرة",""]] }
+  ], ph:["✈️","🏝️","🧳","🗺️"], soc:["Facebook","Instagram","TikTok","WhatsApp"], wa:true },
+{ id:"animaux", chip:"🐾 Animalerie", theme:"fire", e:"🐾", cur:"DA", cc:"Alger",
+  fr:{ name:"Pet Shop Happy", tag:"Animaux & Accessoires", about:"Alimentation, accessoires et soins pour vos compagnons. Leur bien-être, notre priorité.", menu:"Nos produits", hours:[["Sam – Jeu","09:30 – 19:00"],["Ven","Fermé"]], addr:"Kouba, Alger" },
+  ar:{ name:"بيت شوب هابي", tag:"حيوانات وإكسسوارات", about:"أغذية وإكسسوارات وعناية لحيواناتك الأليفة. راحتها أولويتنا.", menu:"منتجاتنا", hours:[["السبت – الخميس","09:30 – 19:00"],["الجمعة","مغلق"]], addr:"القبة، الجزائر" },
+  cats:[
+    { fr:"Alimentation", ar:"أغذية", it:[["Croquettes chien","Sac 3 kg",2200,"حبيبات الكلاب","كيس 3 كغ"],["Croquettes chat","Sac 2 kg",1800,"حبيبات القطط","كيس 2 كغ"]] },
+    { fr:"Accessoires", ar:"إكسسوارات", it:[["Laisse + collier","",1200,"رباط + طوق",""],["Panier","",2800,"سلة نوم",""],["Jouets","",400,"ألعاب",""]] },
+    { fr:"Soins", ar:"عناية", it:[["Toilettage","Sur rendez-vous",null,"استحمام وتجميل","بموعد"]] }
+  ], ph:["🐾","🐶","🐱","🦴"], soc:["Instagram","Facebook","TikTok","WhatsApp"], wa:true }
+];
+
+var PAL = {
+  resto:{ bg:"#071d26", glow:"#0c3a47", c1:"#0d2c37", c2:"#0a2430", ivory:"#eefafc", muted:"#9fc4cc", accent:"#19b5c7", g1:"#3cc9d9", g2:"#0e9aae", on:"#031a20" },
+  cafe:{ bg:"#241510", glow:"#4a2a18", c1:"#33201a", c2:"#2a1914", ivory:"#fdf1e3", muted:"#d2b79d", accent:"#d08c3e", g1:"#e0a255", g2:"#a8691f", on:"#1f0f05" },
+  boutique:{ bg:"#fbf0f1", glow:"#f6d6dd", c1:"#ffffff", c2:"#fdf6f7", ivory:"#3a1f28", muted:"#8a6672", accent:"#d9708a", g1:"#f7b2c3", g2:"#ee8ba5", on:"#4a1426" },
+  garage:{ bg:"#0b0d11", glow:"#2a2410", c1:"#161920", c2:"#10131a", ivory:"#f4f1e6", muted:"#a7a89c", accent:"#f5be1b", g1:"#ffd24a", g2:"#f0a912", on:"#1a1200" },
+  salon:{ bg:"#170d13", glow:"#3a1426", c1:"#24141c", c2:"#1d1016", ivory:"#fdeef4", muted:"#c7a5b4", accent:"#e0558f", g1:"#f07aa8", g2:"#c23a76", on:"#fff" },
+  clinique:{ bg:"#07161f", glow:"#0b3342", c1:"#0d2530", c2:"#0a1e28", ivory:"#eafafd", muted:"#98bcc6", accent:"#17aec9", g1:"#2cc3dc", g2:"#0b92b0", on:"#03202b" },
+  gym:{ bg:"#0b0b0f", glow:"#2b0c10", c1:"#17171d", c2:"#111116", ivory:"#f6f2f2", muted:"#aaa3a5", accent:"#ea3b48", g1:"#f5505c", g2:"#d42436", on:"#fff" },
+  boulangerie:{ bg:"#1a1109", glow:"#43290c", c1:"#27190e", c2:"#201409", ivory:"#fff3df", muted:"#d6b98f", accent:"#e39a2b", g1:"#f2b24a", g2:"#c97d12", on:"#241100" },
+  auto:{ bg:"#06121e", glow:"#0c2f52", c1:"#0d2236", c2:"#0a1b2c", ivory:"#eaf3fb", muted:"#9db6cb", accent:"#2a90ea", g1:"#4aa5f2", g2:"#1673cc", on:"#fff" },
+  immo:{ bg:"#f3f1fb", glow:"#d9d2f5", c1:"#ffffff", c2:"#f8f6fe", ivory:"#1f1a38", muted:"#625d7e", accent:"#6a4fc4", g1:"#8a6fe6", g2:"#5a3db3", on:"#fff" },
+  voyage:{ bg:"#061f24", glow:"#0b4a52", c1:"#0c2f35", c2:"#0a272c", ivory:"#e9fafa", muted:"#93c2c4", accent:"#1fbcb4", g1:"#41d0c8", g2:"#0f9d96", on:"#02201f" },
+  animaux:{ bg:"#1a1109", glow:"#4a2a0a", c1:"#291a0e", c2:"#211409", ivory:"#fff2e2", muted:"#d8b790", accent:"#f08a24", g1:"#ffa444", g2:"#d9700f", on:"#2a1200" }
+};
+D.forEach(function (d) { var p = PAL[d.id]; d.c = [p.g2, p.glow]; });
+
+
+var IC = {
+  phone: '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  wa: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  add: '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
+  link: '<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  book: '<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'
+};
+var SI = {
+  Instagram: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg>',
+  TikTok: '<svg viewBox="0 0 24 24"><path d="M15 3v10.2a4.2 4.2 0 1 1-4.2-4.2"/><path d="M15 3c.3 2.5 1.9 4.1 4.5 4.3"/></svg>',
+  Facebook: '<svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg>',
+  YouTube: '<svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/></svg>',
+  WhatsApp: IC.wa
+};
+var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+var rgba = function (h, a) { var n = parseInt(h.replace("#", ""), 16); return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + "," + a + ")"; };
+var $ = function (id) { return document.getElementById(id); };
+
+var cur = 0, lang = "fr", SH = null, gallery = [], menu = [];
+
+function build(d, lg) {
+  var x = d[lg], T = TX[lg], ar = lg === "ar";
+  var menuL = d.cats.map(function (c) {
+    return { cat: ar ? c.ar : c.fr, catAr: ar ? "" : c.ar,
+      items: c.it.map(function (i) { return ar ? [i[3], i[4], i[2]] : [i[0], i[1], i[2]]; }) };
+  });
+  return { x: x, T: T, menu: menuL };
+}
+
+function render() {
+  var d = D[cur], b = build(d, lang), x = b.x, T = b.T, ar = lang === "ar";
+  var th = PAL[d.id], root = document.documentElement;
+  for (var k in th) root.style.setProperty("--" + k, th[k]);
+  root.style.setProperty("--line", rgba(th.accent, .3));
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", th.bg);
+  root.lang = lang; root.dir = ar ? "rtl" : "ltr";
+  document.title = x.name + " — Smart Page";
+  menu = b.menu;
+  gallery = gal(d.c[0], d.c[1], d.ph);
+  var initials = x.name.split(/\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w[0]; }).join("").toUpperCase();
+  var h = '<div class="cover" style="background-image:url(\'' + ph(d.e, d.c[0], d.c[1]) + '\');background-size:cover;background-position:center"></div>';
+  h += '<div class="logo"><div class="ini" style="font-size:44px;font-family:inherit">' + d.e + '</div></div>';
+  h += '<div class="head"><h1>' + esc(x.name) + '</h1><div class="tag">' + esc(x.tag) + '</div><p class="about">' + esc(x.about) + '</p></div><div class="sec">';
+  h += '<button type="button" class="btn cta" id="menu">' + IC.book + esc(x.menu) + '</button>';
+  var sm = [['tel:+213550000000', IC.phone, T.call]];
+  if (d.wa) sm.push([L, IC.wa, T.wa]);
+  if (d.email) sm.push(['mailto:contact@exemple.dz', IC.mail, T.email]);
+  sm.push(['https://maps.google.com', IC.pin, T.map]);
+  h += '<div class="grid">' + sm.map(function (s, i) {
+    return '<a class="btn' + (sm.length % 2 && i === sm.length - 1 ? ' full' : '') + '" href="' + esc(s[0]) + '" target="_blank" rel="noopener">' + s[1] + esc(s[2]) + '</a>';
+  }).join("") + '<button type="button" class="btn full" id="save">' + IC.add + esc(T.save) + '</button></div>';
+  h += '<div class="st">' + esc(T.photos) + '</div><div class="gal">' + gallery.map(function (s) { return '<img src="' + s + '" alt="">'; }).join("") + '</div>';
+  h += '<div class="st">' + esc(T.hours) + '</div><div class="card">' + x.hours.map(function (r) { return '<div class="hr"><span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span></div>'; }).join("") + '</div>';
+  h += '<div class="st">' + esc(T.contact) + '</div><div class="card"><a class="row" href="tel:+213550000000">' + IC.phone + '<span class="ltr">0550 00 00 00</span></a>' +
+    (d.email ? '<a class="row" href="mailto:contact@exemple.dz">' + IC.mail + '<span class="ltr">contact@exemple.dz</span></a>' : '') +
+    '<a class="row" href="https://maps.google.com" target="_blank" rel="noopener">' + IC.pin + '<span>' + esc(x.addr) + '</span></a></div>';
+  h += '<div class="social">' + d.soc.map(function (s) { return '<a class="chip" href="' + L + '" target="_blank" rel="noopener">' + (SI[s] || IC.link) + esc(s) + '</a>'; }).join("") + '</div>';
+  h += '<div class="credit"><a href="' + L + '" target="_blank" rel="noopener">Powered by Waslux</a></div>';
+  h += '<div class="note" dir="' + (ar ? "rtl" : "ltr") + '">' + (ar
+    ? "هذه صفحة واحدة بين يدَي زبونك: تُفتح بلمسة NFC أو بمسح QR، دون تطبيق ودون كتابة رابط. صور وأسماء تجريبية للتوضيح فقط."
+    : "Une seule page, ouverte d'un geste (NFC ou QR), sans application ni lien à taper. Images et noms à titre illustratif.") + '</div></div>';
+  $("app").innerHTML = h;
+  window.scrollTo(0, 0);
+
+  /* عارض الصور */
+  document.querySelectorAll(".gal img").forEach(function (im, i) { im.addEventListener("click", function () { openViewer(i); }); });
+  /* القائمة */
+  $("mt").textContent = x.menu; $("mq").placeholder = T.search;
+  $("mbody").innerHTML = menu.map(function (c, i) {
+    return '<section id="cat' + i + '"><h3><span style="color:inherit;font-weight:inherit">' + esc(c.cat) + '</span>' + (c.catAr ? '<span dir="auto">' + esc(c.catAr) + '</span>' : '') + '</h3>' +
+      c.items.map(function (it) {
+        return '<div class="it" data-s="' + esc((it[0] + " " + (it[1] || "")).toLowerCase()) + '"><div class="in"><b dir="auto">' + esc(it[0]) + '</b>' + (it[1] ? '<span dir="auto">' + esc(it[1]) + '</span>' : '') + '</div>' +
+          (it[2] != null ? '<div class="ip">' + esc(it[2]) + (d.cur ? ' ' + d.cur : '') + '</div>' : '') + '</div>';
+      }).join("") + '</section>';
+  }).join("") + '<div class="empty" id="mempty" hidden>' + esc(T.none) + '</div>';
+  $("mtabs").innerHTML = menu.map(function (c, i) { return '<button type="button" data-i="' + i + '"' + (i === 0 ? ' class="on"' : '') + '>' + esc(c.cat) + '</button>'; }).join("");
+  $("menu").addEventListener("click", openMenu);
+  $("save").addEventListener("click", saveVcf);
+  /* شريط الاختيار */
+  document.querySelectorAll("#bar .ch button").forEach(function (bt, i) { bt.classList.toggle("on", i === cur); });
+  $("lg").textContent = ar ? "FR" : "AR";
+}
+
+function openViewer(start) {
+  $("vbox").innerHTML = gallery.map(function (s) { return '<img src="' + s + '" alt="">'; }).join("");
+  $("viewer").hidden = false; document.body.style.overflow = "hidden"; history.pushState({ v: 1 }, "");
+  $("viewer").scrollTop = 0;
+  var t = $("vbox").children[start || 0];
+  if (t && start) setTimeout(function () { $("viewer").scrollTop = t.offsetTop - 64; }, 40);
+}
+function closeAll() { $("viewer").hidden = true; $("mv").hidden = true; document.body.style.overflow = ""; }
+function filterMenu(q) {
+  q = q.trim().toLowerCase(); var total = 0;
+  document.querySelectorAll("#mbody section").forEach(function (sec) {
+    var any = false;
+    sec.querySelectorAll(".it").forEach(function (it) { var ok = !q || it.getAttribute("data-s").indexOf(q) > -1; it.hidden = !ok; if (ok) any = true; });
+    sec.hidden = !any; if (any) total++;
+  });
+  $("mempty").hidden = total > 0;
+}
+function openMenu() {
+  $("mv").hidden = false; document.body.style.overflow = "hidden"; history.pushState({ v: 1 }, "");
+  $("mq").value = ""; filterMenu(""); $("mbody").scrollTop = 0;
+}
+function saveVcf() {
+  var d = D[cur], x = d[lang];
+  var v = function (s) { return String(s).replace(/([,;\\])/g, "\\$1"); };
+  var t = "BEGIN:VCARD\r\nVERSION:3.0\r\nN:" + v(x.name) + ";;;;\r\nFN:" + v(x.name) + "\r\nORG:" + v(x.name) + "\r\nTITLE:" + v(x.tag) + "\r\nTEL;TYPE=WORK,VOICE:+213550000000\r\nADR;TYPE=WORK:;;" + v(x.addr) + ";;;;\r\nEND:VCARD\r\n";
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([t], { type: "text/vcard" }));
+  a.download = (D[cur].fr.name.replace(/\W+/g, "_").replace(/^_|_$/g, "") || "contact") + ".vcf";
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ربط مرة واحدة */
+$("mx").addEventListener("click", function () { if (history.state && history.state.v) history.back(); else closeAll(); });
+$("vx").addEventListener("click", function () { if (history.state && history.state.v) history.back(); else closeAll(); });
+window.addEventListener("popstate", closeAll);
+$("mq").addEventListener("input", function () { filterMenu($("mq").value); });
+$("mtabs").addEventListener("click", function (e) {
+  var b = e.target.closest("button"); if (!b) return;
+  $("mq").value = ""; filterMenu("");
+  $("mtabs").querySelectorAll("button").forEach(function (y) { y.classList.toggle("on", y === b); });
+  var s = $("cat" + b.getAttribute("data-i")); if (s) s.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+$("mbody").addEventListener("scroll", function () {
+  var mb = $("mbody"), top = mb.getBoundingClientRect().top, c = 0;
+  menu.forEach(function (_, i) { var s = $("cat" + i); if (s && !s.hidden && s.getBoundingClientRect().top - top <= 60) c = i; });
+  if (mb.scrollTop + mb.clientHeight >= mb.scrollHeight - 4) c = menu.length - 1;
+  $("mtabs").querySelectorAll("button").forEach(function (b, i) { b.classList.toggle("on", i === c); });
+});
+$("bar").querySelector(".ch").innerHTML = D.map(function (d, i) { return '<button type="button" data-i="' + i + '">' + d.chip + '</button>'; }).join("");
+$("bar").querySelector(".ch").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cur = +b.getAttribute("data-i"); closeAll(); render(); });
+$("lg").addEventListener("click", function () { lang = lang === "fr" ? "ar" : "fr"; closeAll(); render(); });
+render();
+
+</script>
+</body>
+</html>
