@@ -38,6 +38,7 @@ button.d{background:#fff;color:var(--bad);border:1px solid var(--line)}
 #msg{font-size:14px;min-height:20px;text-align:center;margin:4px 0}
 .ok{color:var(--ok)}.bad{color:var(--bad)}
 .hint{font-size:13px;color:var(--mut);margin:4px 0 0}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -53,7 +54,7 @@ button.d{background:#fff;color:var(--bad);border:1px solid var(--line)}
 </div>
 <div class="bar" id="bar" hidden><button id="save" type="button"></button><button class="g" id="view" type="button"></button></div>
 <script>
-var API = "https://script.google.com/macros/s/AKfycbwAtJKTzuqkcJ6RaJ3IGknOcxp69G40peuWyikTIbaKiIBuGTVUpI_yi4yC5dMq8zg/exec?a=csv&s=test-x";
+var API = "https://script.google.com/macros/s/AKfycbwAtJKTzuqkcJ6RaJ3IGknOcxp69G40peuWyikTIbaKiIBuGTVUpI_yi4yC5dMq8zg/exec";
 var $ = function (i) { return document.getElementById(i); };
 var P = {}; (location.hash.slice(1) + "&" + location.search.slice(1)).split("&").forEach(function (x) { var a = x.split("="); if (a[0] && !(a[0] in P)) P[a[0]] = decodeURIComponent(a[1] || ""); });
 var S = P.s || "", K = P.k || "";
@@ -68,7 +69,7 @@ var M = { info: {}, hours: [], menu: [] }, dirty = false;
 function t(k) { return TX[L][k]; }
 function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 function say(txt, cls) { $("msg").textContent = txt || ""; $("msg").className = cls || ""; }
-function fail(k) { $("err").hidden = false; $("err").textContent = t(k); $("app").hidden = true; $("bar").hidden = true; }
+function fail(k, d) { $("err").hidden = false; $("err").textContent = t(k) + (d ? " [" + d + "]" : ""); $("app").hidden = true; $("bar").hidden = true; }
 
 function applyLang() {
   document.documentElement.lang = L; document.documentElement.dir = L === "ar" ? "rtl" : "ltr";
@@ -149,9 +150,13 @@ function init() {
   say(t("loading"));
   $("app").hidden = false;
   fetch(API + (API.indexOf("?") > -1 ? "&" : "?") + "a=load&s=" + encodeURIComponent(S) + "&k=" + encodeURIComponent(K))
-    .then(function (r) { return r.json(); })
-    .then(function (j) { if (!j.ok) return fail("e_key"); fromRows(j.rows); $("bar").hidden = false; say(""); render(); })
-    .catch(function () { fail("e_net"); });
+    .then(function (r) { return r.text(); })
+    .then(function (txt) {
+      var j; try { j = JSON.parse(txt); } catch (x) { return fail("e_net", "reponse: " + txt.replace(/\s+/g, " ").slice(0, 80)); }
+      if (!j.ok) return fail("e_key", "serveur: " + j.e);
+      fromRows(j.rows); $("bar").hidden = false; say(""); render();
+    })
+    .catch(function (e) { fail("e_net", String(e && e.message || e)); });
 }
 init();
 </script>
