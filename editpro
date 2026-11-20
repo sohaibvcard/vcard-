@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Modifier ma page · Waslux</title>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#1f1b16;--mut:#7a7061;--line:#e3dac8;--ac:#b8893b;--ok:#2f7d4f;--bad:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;line-height:1.5}
+.w{max-width:640px;margin:0 auto;padding:14px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:20px;margin:8px 0 2px}.sub{color:var(--mut);font-size:14px;margin:0 0 6px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.c h2{font-size:16px;margin:0 0 8px;color:var(--ac)}
+label{display:block;font-size:14px;font-weight:600;margin:10px 0 0}
+input,textarea{width:100%;margin-top:5px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+textarea{min-height:80px}
+.ltr{direction:ltr;text-align:left}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:11px 14px;background:var(--ac);color:#fff;cursor:pointer}
+button.g{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.s{padding:8px 11px;font-size:14px}
+button.d{background:#fff;color:var(--bad);border:1px solid var(--line)}
+.item{border:1px solid var(--line);border-radius:12px;padding:10px;margin:10px 0;background:#fff}
+.item.off{opacity:.55}
+.r2{display:grid;grid-template-columns:1fr 110px;gap:8px}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.sw{display:flex;align-items:center;gap:6px;font-weight:600;margin:0}
+.sw input{width:auto;margin:0}
+.cat{display:flex;gap:8px;align-items:center;margin-top:14px}
+.cat input{font-weight:700}
+.hr{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin:8px 0}
+.hr input{margin:0}
+.bar{position:fixed;inset-inline:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:center;z-index:5}
+.bar button{flex:1;max-width:320px}
+#msg{font-size:14px;min-height:20px;text-align:center;margin:4px 0}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+details.c>summary{font-size:16px;font-weight:700;color:var(--ac);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:30px}
+details.c>summary::-webkit-details-marker{display:none}
+details.c>summary::after{content:"▾";font-size:14px}details.c[open]>summary::after{content:"▴"}
+details.c[open]>summary{margin-bottom:8px}
+.th{width:64px;height:64px;border-radius:12px;border:1px dashed var(--line);background:#fff center/cover no-repeat;flex:none;padding:0;color:var(--mut);font-size:12px;font-weight:600}
+.row{display:flex;gap:10px;align-items:flex-start}.row>.f{flex:1;min-width:0}
+.r3{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chk{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.chk label{display:flex;align-items:center;gap:6px;margin:0;font-weight:500}.chk input{width:auto;margin:0}
+.hint{font-size:13px;color:var(--mut);margin:4px 0 0}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="w">
+ <div class="top"><div><h1 id="t_title"></h1><p class="sub" id="t_sub"></p></div><button class="g s" id="lang" type="button">العربية</button></div>
+ <div id="err" class="c bad" hidden></div>
+ <div id="app" hidden>
+  <details class="c"><summary id="t_info"></summary><div id="info"></div></details>
+  <details class="c"><summary id="t_hours"></summary><div id="hours"></div><div class="tools"><button class="g s" id="addh" type="button"></button></div></details>
+  <details class="c"><summary id="t_daily"></summary><p class="hint" id="t_daily_h"></p><div id="daily"></div></details>
+  <details class="c" open><summary id="t_menu"></summary><p class="hint" id="t_menu_h"></p><div id="menu"></div><div class="tools"><button class="g s" id="addc" type="button"></button></div></details>
+  <details class="c"><summary id="t_staff"></summary><p class="hint" id="t_staff_h"></p><div id="staff"></div><div class="tools"><button class="g s" id="adds" type="button"></button></div>
+   <h2 style="margin-top:16px" id="t_halls"></h2><p class="hint" id="t_halls_h"></p><div id="halls"></div><div class="tools"><button class="g s" id="addz" type="button"></button></div></details>
+  <div id="msg" role="status"></div>
+ </div>
+</div>
+<input type="file" id="file" accept="image/*" hidden>
+<div class="bar" id="bar" hidden><button id="save" type="button"></button><button class="g" id="view" type="button"></button></div>
+<script>
+var API = "https://script.google.com/macros/s/AKfycbwAtJKTzuqkcJ6RaJ3IGknOcxp69G40peuWyikTIbaKiIBuGTVUpI_yi4yC5dMq8zg/exec";
+var $ = function (i) { return document.getElementById(i); };
+var P = {}; (location.hash.slice(1) + "&" + location.search.slice(1)).split("&").forEach(function (x) { var a = x.split("="); if (a[0] && !(a[0] in P)) P[a[0]] = decodeURIComponent(a[1] || ""); });
+var S = P.s || "", K = P.k || "";
+var TX = {
+ fr: { title: "Modifier ma page", sub: "Vos changements apparaissent sur votre page après l’enregistrement.", info: "Informations", hours: "Horaires", menu: "Menu", menu_h: "Décochez « Disponible » pour masquer un plat épuisé.", addh: "+ Ajouter une ligne", addc: "+ Ajouter une catégorie", save: "Enregistrer", view: "Voir ma page", name: "Nom", desc: "Description", price: "Prix", avail: "Disponible", up: "↑", down: "↓", additem: "+ Ajouter un plat", cat: "Nom de la catégorie", hday: "Jours", hh: "Heures", saved: "✓ Enregistré. Votre page est à jour.", saving: "Enregistrement…", loading: "Chargement…", e_link: "Lien invalide. Demandez-nous votre lien de modification sur WhatsApp.", e_key: "Lien non valide ou désactivé. Contactez Waslux.", e_net: "Connexion impossible. Réessayez.", e_price: "Le prix doit être un nombre.", confirm: "Supprimer ?",
+  daily: "Plat du jour", daily_h: "Un seul plat mis en avant en haut du menu. Il disparaît seul après la date choisie. Laissez le nom vide pour ne rien afficher.", until: "Dernier jour", photo: "Photo", rmphoto: "Retirer la photo", upl: "Envoi de la photo…", e_img: "Photo non envoyée. Réessayez avec une autre photo.", e_quota: "Limite de photos atteinte. Contactez Waslux.",
+  staff: "Serveurs et salles", staff_h: "Serveurs : nom + numéro WhatsApp. Décochez « Actif » quand quelqu’un ne travaille pas aujourd’hui.", sname: "Nom du serveur", snum: "Numéro WhatsApp (ex. 0550…)", active: "Actif", adds: "+ Ajouter un serveur", halls: "Salles", halls_h: "Pour chaque salle : ses tables et le(s) serveur(s) qui répondent.", hname: "Nom de la salle", htab: "Tables (ex. 1-10 ou 1-5, 8)", addz: "+ Ajouter une salle", e_num: "Numéro de serveur invalide.",
+  k: { phone: "Téléphone", whatsapp: "WhatsApp", address: "Adresse", tagline: "Phrase courte", about: "Présentation", mapLink: "Lien Google Maps", reviewLink: "Lien avis Google", phone2: "Deuxième téléphone", email: "E-mail", website: "Site web" } },
+ ar: { title: "تعديل صفحتي", sub: "تظهر تغييراتك على صفحتك بعد الحفظ.", info: "المعلومات", hours: "أوقات العمل", menu: "القائمة", menu_h: "ألغِ «متوفر» لإخفاء صنف نفد.", addh: "+ إضافة سطر", addc: "+ إضافة قسم", save: "حفظ", view: "عرض صفحتي", name: "الاسم", desc: "الوصف", price: "السعر", avail: "متوفر", up: "↑", down: "↓", additem: "+ إضافة صنف", cat: "اسم القسم", hday: "الأيام", hh: "الساعات", saved: "✓ تم الحفظ. صفحتك محدّثة.", saving: "جارٍ الحفظ…", loading: "جارٍ التحميل…", e_link: "الرابط غير صالح. اطلب منا رابط التعديل على واتساب.", e_key: "الرابط غير صالح أو معطّل. تواصل مع Waslux.", e_net: "تعذر الاتصال. حاول مرة أخرى.", e_price: "السعر يجب أن يكون رقماً.", confirm: "حذف؟",
+  daily: "طبق اليوم", daily_h: "طبق واحد يظهر مميّزاً أعلى القائمة، ويختفي تلقائياً بعد التاريخ المحدد. اترك الاسم فارغاً لإخفائه.", until: "آخر يوم", photo: "صورة", rmphoto: "إزالة الصورة", upl: "جارٍ رفع الصورة…", e_img: "تعذر رفع الصورة. جرّب صورة أخرى.", e_quota: "بلغت حد الصور. تواصل مع Waslux.",
+  staff: "النُّدُل والقاعات", staff_h: "النادل: الاسم + رقم واتساب. ألغِ «نشط» عندما لا يعمل اليوم.", sname: "اسم النادل", snum: "رقم واتساب (مثال 0550…)", active: "نشط", adds: "+ إضافة نادل", halls: "القاعات", halls_h: "لكل قاعة: طاولاتها والنادل (أو النُّدُل) المسؤولون.", hname: "اسم القاعة", htab: "الطاولات (مثال 1-10 أو 1-5، 8)", addz: "+ إضافة قاعة", e_num: "رقم النادل غير صالح.",
+  k: { phone: "الهاتف", whatsapp: "واتساب", address: "العنوان", tagline: "جملة قصيرة", about: "نبذة", mapLink: "رابط الخريطة", reviewLink: "رابط تقييم Google", phone2: "هاتف ثانٍ", email: "البريد", website: "الموقع" } }
+};
+var L = "fr"; try { L = localStorage.getItem("wl-edit-l") || ((navigator.language || "").indexOf("ar") === 0 ? "ar" : "fr"); } catch (e) {}
+var INFO_ORDER = ["phone", "whatsapp", "address", "tagline", "about", "mapLink", "reviewLink", "phone2", "email", "website"];
+var LTR = { phone: 1, whatsapp: 1, mapLink: 1, reviewLink: 1, phone2: 1, email: 1, website: 1 };
+var M = { info: {}, hours: [], daily: { n: "", d: "", p: "", u: "", img: "" }, menu: [], staff: [], halls: [] }, dirty = false, upBusy = false;
+function t(k) { return TX[L][k]; }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function say(txt, cls) { $("msg").textContent = txt || ""; $("msg").className = cls || ""; }
+function fail(k, d) { $("err").hidden = false; $("err").textContent = t(k) + (d ? " [" + d + "]" : ""); $("app").hidden = true; $("bar").hidden = true; }
+var isNum = function (p) { return /^\d+([.,]\d+)?$/.test(String(p || "").trim()); };
+
+function applyLang() {
+  document.documentElement.lang = L; document.documentElement.dir = L === "ar" ? "rtl" : "ltr";
+  $("lang").textContent = L === "ar" ? "Français" : "العربية";
+  var m = { t_title: "title", t_sub: "sub", t_info: "info", t_hours: "hours", t_menu: "menu", t_menu_h: "menu_h", t_daily: "daily", t_daily_h: "daily_h", t_staff: "staff", t_staff_h: "staff_h", t_halls: "halls", t_halls_h: "halls_h", addh: "addh", addc: "addc", adds: "adds", addz: "addz", save: "save", view: "view" };
+  for (var k in m) $(k).textContent = t(m[k]);
+  render();
+}
+function fromRows(rows) {
+  M = { info: {}, hours: [], daily: { n: "", d: "", p: "", u: "", img: "" }, menu: [], staff: [], halls: [] }; var idx = {};
+  rows.forEach(function (r) {
+    var ty = r[0];
+    if (ty === "info") M.info[r[1]] = r[2];
+    else if (ty === "hours") M.hours.push([r[1], r[2]]);
+    else if (ty === "daily") M.daily = { n: r[1], d: r[2], p: r[3], u: r[4], img: r[6] || "" };
+    else if (ty === "staff") M.staff.push({ n: r[1], w: r[2], on: !/^(non|no|0|false)$/i.test(r[3] || "") });
+    else if (ty === "hall") M.halls.push({ n: r[1], t: r[2], s: String(r[3] || "").split(/\s*[+,;]\s*/).filter(Boolean) });
+    else if (ty === "menu") { if (!(r[1] in idx)) { idx[r[1]] = M.menu.length; M.menu.push({ cat: r[1], items: [] }); } M.menu[idx[r[1]]].items.push({ n: r[2], d: r[3], p: r[4], on: !/^(non|no|0|false)$/i.test(r[5] || ""), img: r[6] || "" }); }
+  });
+}
+function toRows() {
+  var rows = [], z = function (s) { return String(s == null ? "" : s).trim(); };
+  INFO_ORDER.forEach(function (k) { if (z(M.info[k])) rows.push(["info", k, z(M.info[k]), "", "", "", ""]); });
+  M.hours.forEach(function (h) { if (z(h[0])) rows.push(["hours", z(h[0]), z(h[1]), "", "", "", ""]); });
+  var d = M.daily; if (z(d.n) && z(d.p)) rows.push(["daily", z(d.n), z(d.d), z(d.p), z(d.u), "", z(d.img)]);
+  M.menu.forEach(function (c) { var cn = z(c.cat) || "Menu"; c.items.forEach(function (i) { if (z(i.n)) rows.push(["menu", cn, z(i.n), z(i.d), z(i.p), i.on ? "oui" : "non", z(i.img)]); }); });
+  M.staff.forEach(function (s) { if (z(s.n) && z(s.w)) rows.push(["staff", z(s.n), z(s.w), s.on ? "oui" : "non", "", "", ""]); });
+  M.halls.forEach(function (h) { if (z(h.n)) rows.push(["hall", z(h.n), z(h.t), h.s.join(" + "), "", "", ""]); });
+  return rows;
+}
+function thumb(img, key) { return '<button type="button" class="th" data-a="photo" data-k="' + key + '"' + (img ? ' style="background-image:url(\'' + esc(img) + '\')"' : "") + '>' + (img ? "" : "+ " + esc(t("photo"))) + '</button>'; }
+function render() {
+  var h = "";
+  INFO_ORDER.forEach(function (k) {
+    if (!(k in M.info) && ["phone2", "email", "website"].indexOf(k) > -1) return;
+    var v = M.info[k] || "", multi = k === "about";
+    h += '<label>' + esc(t("k")[k]) + (multi ? '<textarea data-i="' + k + '">' + esc(v) + '</textarea>' : '<input data-i="' + k + '" class="' + (LTR[k] ? "ltr" : "") + '" value="' + esc(v) + '">') + '</label>';
+  });
+  $("info").innerHTML = h;
+  $("hours").innerHTML = M.hours.map(function (x, i) { return '<div class="hr"><input data-h="' + i + '.0" placeholder="' + esc(t("hday")) + '" value="' + esc(x[0]) + '"><input data-h="' + i + '.1" placeholder="' + esc(t("hh")) + '" value="' + esc(x[1]) + '"><button class="d s" data-a="delh" data-i="' + i + '" type="button">✕</button></div>'; }).join("");
+  var D = M.daily;
+  $("daily").innerHTML = '<div class="row">' + thumb(D.img, "d") + '<div class="f"><input data-dl="n" placeholder="' + esc(t("name")) + '" value="' + esc(D.n) + '"><input data-dl="d" placeholder="' + esc(t("desc")) + '" value="' + esc(D.d) + '"></div></div>' +
+    '<div class="r3"><label>' + esc(t("price")) + '<input data-dl="p" inputmode="decimal" class="ltr" value="' + esc(D.p) + '"></label><label>' + esc(t("until")) + '<input type="date" data-dl="u" class="ltr" value="' + esc(D.u) + '"></label></div>' + (D.img ? '<div class="tools"><button class="g s" data-a="rmimg" data-k="d" type="button">' + esc(t("rmphoto")) + '</button></div>' : "");
+  $("menu").innerHTML = M.menu.map(function (c, ci) {
+    return '<div class="cat"><input data-c="' + ci + '" placeholder="' + esc(t("cat")) + '" value="' + esc(c.cat) + '"><button class="d s" data-a="delc" data-c="' + ci + '" type="button">✕</button></div>' +
+      c.items.map(function (it, ii) {
+        var k = ci + "." + ii;
+        return '<div class="item' + (it.on ? "" : " off") + '"><div class="row">' + thumb(it.img, "m" + k) + '<div class="f"><div class="r2"><input data-m="' + k + '.n" placeholder="' + esc(t("name")) + '" value="' + esc(it.n) + '"><input data-m="' + k + '.p" inputmode="decimal" class="ltr" placeholder="' + esc(t("price")) + '" value="' + esc(it.p) + '"></div>' +
+          '<input data-m="' + k + '.d" placeholder="' + esc(t("desc")) + '" value="' + esc(it.d) + '"></div></div>' +
+          '<div class="tools"><label class="sw"><input type="checkbox" data-m="' + k + '.on"' + (it.on ? " checked" : "") + '> ' + esc(t("avail")) + '</label><span style="flex:1"></span>' + (it.img ? '<button class="g s" data-a="rmimg" data-k="m' + k + '" type="button">' + esc(t("rmphoto")) + '</button>' : "") +
+          '<button class="g s" data-a="up" data-c="' + ci + '" data-i="' + ii + '" type="button">' + t("up") + '</button><button class="g s" data-a="dn" data-c="' + ci + '" data-i="' + ii + '" type="button">' + t("down") + '</button><button class="d s" data-a="deli" data-c="' + ci + '" data-i="' + ii + '" type="button">✕</button></div></div>';
+      }).join("") + '<div class="tools"><button class="g s" data-a="addi" data-c="' + ci + '" type="button">' + esc(t("additem")) + '</button></div>';
+  }).join("");
+  $("staff").innerHTML = M.staff.map(function (s, i) { return '<div class="item"><div class="r2" style="grid-template-columns:1fr 1fr"><input data-s="' + i + '.n" placeholder="' + esc(t("sname")) + '" value="' + esc(s.n) + '"><input data-s="' + i + '.w" class="ltr" inputmode="tel" placeholder="' + esc(t("snum")) + '" value="' + esc(s.w) + '"></div><div class="tools"><label class="sw"><input type="checkbox" data-s="' + i + '.on"' + (s.on ? " checked" : "") + '> ' + esc(t("active")) + '</label><span style="flex:1"></span><button class="d s" data-a="dels" data-i="' + i + '" type="button">✕</button></div></div>'; }).join("");
+  renderHalls();
+}
+function renderHalls() {
+  var names = M.staff.map(function (s) { return String(s.n || "").trim(); }).filter(Boolean);
+  $("halls").innerHTML = M.halls.map(function (h, i) { return '<div class="item"><div class="r2" style="grid-template-columns:1fr 1fr"><input data-z="' + i + '.n" placeholder="' + esc(t("hname")) + '" value="' + esc(h.n) + '"><input data-z="' + i + '.t" class="ltr" placeholder="' + esc(t("htab")) + '" value="' + esc(h.t) + '"></div><div class="chk">' + names.map(function (n) { return '<label><input type="checkbox" data-zs="' + i + '" data-v="' + esc(n) + '"' + (h.s.indexOf(n) > -1 ? " checked" : "") + '> ' + esc(n) + '</label>'; }).join("") + '</div><div class="tools"><span style="flex:1"></span><button class="d s" data-a="delz" data-i="' + i + '" type="button">✕</button></div></div>'; }).join("");
+}
+function imgSet(key, url) { if (key === "d") M.daily.img = url; else { var q = key.slice(1).split("."); M.menu[+q[0]].items[+q[1]].img = url; } }
+document.addEventListener("input", function (e) {
+  var el = e.target; dirty = true; say("");
+  if (el.dataset.i && !el.dataset.a) M.info[el.dataset.i] = el.value;
+  else if (el.dataset.h) { var p = el.dataset.h.split("."); M.hours[+p[0]][+p[1]] = el.value; }
+  else if (el.dataset.dl) M.daily[el.dataset.dl] = el.value;
+  else if (el.dataset.s) { var a = el.dataset.s.split("."); M.staff[+a[0]][a[1]] = a[1] === "on" ? el.checked : el.value; }
+  else if (el.dataset.z) { var b = el.dataset.z.split("."); M.halls[+b[0]][b[1]] = el.value; }
+  else if (el.dataset.zs !== undefined) { var hs = M.halls[+el.dataset.zs].s, v = el.dataset.v, k = hs.indexOf(v); if (el.checked && k < 0) hs.push(v); if (!el.checked && k > -1) hs.splice(k, 1); }
+  else if (el.dataset.c !== undefined && !el.dataset.a) M.menu[+el.dataset.c].cat = el.value;
+  else if (el.dataset.m) { var q = el.dataset.m.split("."), it = M.menu[+q[0]].items[+q[1]]; if (q[2] === "on") { it.on = el.checked; el.closest(".item").classList.toggle("off", !it.on); } else it[q[2]] = el.value; }
+});
+/* staff name change must refresh hall checkboxes: do it on blur */
+document.addEventListener("change", function (e) { if (e.target.dataset.s && /\.n$/.test(e.target.dataset.s)) { var old = e.target.defaultValue; M.halls.forEach(function (h) { var k = h.s.indexOf(old); if (k > -1) h.s[k] = e.target.value.trim(); }); renderHalls(); } });
+var photoKey = "";
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("button"); if (!b) return; var a = b.dataset.a, c = +b.dataset.c, i = +b.dataset.i;
+  if (b.id === "lang") { L = L === "ar" ? "fr" : "ar"; try { localStorage.setItem("wl-edit-l", L); } catch (x) {} return applyLang(); }
+  if (b.id === "addh") { M.hours.push(["", ""]); dirty = true; return render(); }
+  if (b.id === "addc") { M.menu.push({ cat: "", items: [{ n: "", d: "", p: "", on: true, img: "" }] }); dirty = true; return render(); }
+  if (b.id === "adds") { M.staff.push({ n: "", w: "", on: true }); dirty = true; return render(); }
+  if (b.id === "addz") { M.halls.push({ n: "", t: "", s: [] }); dirty = true; return render(); }
+  if (b.id === "save") return save();
+  if (b.id === "view") return window.open(location.origin + "/p/" + S + "/", "_blank");
+  if (!a) return;
+  if (a === "photo") { if (upBusy) return; photoKey = b.dataset.k; $("file").value = ""; return $("file").click(); }
+  if (a === "rmimg") { imgSet(b.dataset.k, ""); dirty = true; return render(); }
+  if (a === "delh") M.hours.splice(i, 1);
+  else if (a === "dels") { var nm = M.staff[i].n; M.staff.splice(i, 1); M.halls.forEach(function (h) { var k = h.s.indexOf(nm); if (k > -1) h.s.splice(k, 1); }); }
+  else if (a === "delz") M.halls.splice(i, 1);
+  else if (a === "delc") { if (!confirm(t("confirm"))) return; M.menu.splice(c, 1); }
+  else if (a === "deli") { if (!confirm(t("confirm"))) return; M.menu[c].items.splice(i, 1); }
+  else if (a === "addi") M.menu[c].items.push({ n: "", d: "", p: "", on: true, img: "" });
+  else if (a === "up" && i > 0) { var x = M.menu[c].items; x.splice(i - 1, 0, x.splice(i, 1)[0]); }
+  else if (a === "dn") { var y = M.menu[c].items; if (i < y.length - 1) y.splice(i + 1, 0, y.splice(i, 1)[0]); }
+  dirty = true; render();
+});
+/* ---- photo: compress in the browser (square 320px JPEG) then send to Google Drive via the API ---- */
+$("file").addEventListener("change", function () {
+  var f = this.files && this.files[0]; if (!f) return; var key = photoKey;
+  var im = new Image(), u = URL.createObjectURL(f); upBusy = true; say(t("upl"));
+  im.onload = function () {
+    URL.revokeObjectURL(u);
+    var s = Math.min(im.width, im.height), cv = document.createElement("canvas"); cv.width = cv.height = 320;
+    cv.getContext("2d").drawImage(im, (im.width - s) / 2, (im.height - s) / 2, s, s, 0, 0, 320, 320);
+    var data = cv.toDataURL("image/jpeg", 0.72).split(",")[1];
+    fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ a: "img", s: S, k: K, data: data }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { upBusy = false; if (j.ok) { imgSet(key, j.url); dirty = true; say(""); render(); } else say(t(j.e === "quota" ? "e_quota" : j.e === "key" ? "e_key" : "e_img"), "bad"); })
+      .catch(function () { upBusy = false; say(t("e_net"), "bad"); });
+  };
+  im.onerror = function () { upBusy = false; say(t("e_img"), "bad"); };
+  im.src = u;
+});
+function save() {
+  if (upBusy) return;
+  var D = M.daily; if (String(D.n || "").trim() && !isNum(D.p)) { say(t("e_price") + " (" + t("daily") + ")", "bad"); return; }
+  for (var ci = 0; ci < M.menu.length; ci++) for (var ii = 0; ii < M.menu[ci].items.length; ii++) { var p = String(M.menu[ci].items[ii].p || "").trim(); if (p && !isNum(p)) { say(t("e_price") + " (" + M.menu[ci].items[ii].n + ")", "bad"); return; } }
+  for (var si = 0; si < M.staff.length; si++) { var s = M.staff[si]; if ((s.n || s.w) && !/^[0-9+ ]{8,18}$/.test(String(s.w || "").trim())) { say(t("e_num") + " (" + (s.n || "?") + ")", "bad"); return; } }
+  $("save").disabled = true; say(t("saving"));
+  fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ a: "save", s: S, k: K, rows: toRows() }) })
+    .then(function (r) { return r.json(); })
+    .then(function (j) { $("save").disabled = false; if (j.ok) { dirty = false; say(t("saved"), "ok"); } else say(t(j.e === "key" ? "e_key" : "e_net"), "bad"); })
+    .catch(function () { $("save").disabled = false; say(t("e_net"), "bad"); });
+}
+window.addEventListener("beforeunload", function (e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+function init() {
+  applyLang();
+  if (!/^[a-z0-9][a-z0-9-]{1,58}$/.test(S) || K.length < 12 || !API || API.indexOf("__API") === 0) return fail("e_link");
+  say(t("loading"));
+  $("app").hidden = false;
+  fetch(API + (API.indexOf("?") > -1 ? "&" : "?") + "a=load&s=" + encodeURIComponent(S) + "&k=" + encodeURIComponent(K))
+    .then(function (r) { return r.text(); })
+    .then(function (txt) {
+      var j; try { j = JSON.parse(txt); } catch (x) { return fail("e_net", "reponse: " + txt.replace(/\s+/g, " ").slice(0, 80)); }
+      if (!j.ok) return fail("e_key", "serveur: " + j.e);
+      fromRows(j.rows); $("bar").hidden = false; say(""); render();
+    })
+    .catch(function (e) { fail("e_net", String(e && e.message || e)); });
+}
+init();
+</script>
+</body>
+</html>
