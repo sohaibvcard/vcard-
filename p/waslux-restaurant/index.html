@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0d0d">
+<!-- WASLUX TEMPLATE: Restaurant Pro r1 | تعديل قسم SHOP فقط | لا تغيّر بقية الكود -->
+<title>Menu</title>
+<style>
+:root{--bg:#0d0d0d;--glow:#2a1214;--c1:#1a1a1a;--c2:#131313;--ivory:#f7f2ea;--muted:#b8b0a6;--accent:#e0262f;--g1:#ff5a52;--g2:#c4121f;--on:#fff;--line:rgba(255,255,255,.12);--ok:#3ec97a;--bad:#e5534b}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,Arial,sans-serif;line-height:1.5;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.w{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* header */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top .w{display:flex;align-items:center;gap:12px;height:56px}
+.lg{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;background:var(--c1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)}
+.nm{min-width:0;flex:1}
+.nm b{display:block;font-size:17px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.st i{width:8px;height:8px;border-radius:50%;background:var(--bad);display:block}
+.st.on i{background:var(--ok)}
+.lb{flex:none;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--c1);font-size:13px;font-weight:700}
+/* cover */
+.cv{margin-top:14px;height:130px;border-radius:20px;background:linear-gradient(135deg,var(--glow),var(--c2)) center/cover;position:relative;overflow:hidden;border:1px solid var(--line)}
+.cv::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,.05) 70%)}
+.cv div{position:absolute;inset:auto 16px 12px;z-index:1}
+.cv h1{font-size:22px;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.cv p{font-size:13px;opacity:.9;color:#fff}
+/* search + cats */
+.sr{margin-top:12px;position:relative}
+.sr input{width:100%;height:46px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:var(--c1);outline:none}
+.sr input:focus{border-color:var(--accent)}
+.cats{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin-top:12px}
+.cats .row{display:flex;gap:8px;overflow-x:auto;padding:10px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cats .row::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);font-size:14px;white-space:nowrap}
+.chip.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);border-color:transparent;font-weight:700}
+/* menu */
+.sec{scroll-margin-top:122px;padding-top:18px}
+.sec h2{font-size:20px;margin-bottom:10px}
+.it{display:flex;gap:12px;padding:14px;margin-bottom:10px;background:var(--c1);border:1px solid var(--line);border-radius:18px;align-items:center}
+.it .tx{flex:1;min-width:0}
+.it h3{font-size:16px;line-height:1.3}
+.it .ds{font-size:13px;color:var(--muted);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.it .pr{margin-top:6px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.md{flex:none;position:relative;width:96px;display:flex;flex-direction:column;align-items:center}
+.md.im{padding-bottom:16px}
+.md img{width:96px;height:96px;border-radius:16px;object-fit:cover;display:block;background:var(--c2)}
+.md.im .ctl{position:absolute;bottom:0}
+.ctl{display:flex;align-items:center;justify-content:center}
+.add{width:38px;height:38px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.add svg,.qb svg{width:20px;height:20px}
+.stp{display:flex;align-items:center;gap:2px;background:var(--bg);border:1px solid var(--accent);border-radius:999px;height:36px;box-shadow:0 4px 12px rgba(0,0,0,.35);direction:ltr}
+.qb{width:34px;height:34px;border:0;background:none;display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.stp b{min-width:20px;text-align:center;font-variant-numeric:tabular-nums}
+.dl{margin-top:14px}.dh{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}.it.dly{border-color:var(--accent);background:linear-gradient(135deg,var(--c1),var(--glow))}
+.none{padding:30px 0;text-align:center;color:var(--muted)}
+.cr{padding:26px 0 8px;text-align:center;color:var(--muted);font-size:12px}.cr a{color:inherit}
+/* bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bar .in{max-width:640px;margin:0 auto;display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
+.tab{position:relative;background:none;border:0;padding:9px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:11px;min-height:58px}
+.tab svg{width:24px;height:24px}
+.tab.on{color:var(--accent)}
+.bd{position:absolute;top:4px;inset-inline-start:calc(50% + 4px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--on);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.bd[hidden]{display:none}
+/* sheets */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.62);display:flex;align-items:flex-end;justify-content:center}
+.sh{width:100%;max-width:560px;max-height:90vh;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px));position:relative}
+@media(min-width:720px){.ov{align-items:center}.sh{border-radius:24px}}
+.sh h2{font-size:22px;padding-inline-end:44px;margin-bottom:12px}
+.sx{position:absolute;top:14px;inset-inline-end:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--c1)}
+.sh p.in{color:var(--muted);font-size:14px;margin-bottom:12px}
+.lbl{font-size:13px;color:var(--muted);margin:14px 0 6px}
+.chs{display:flex;gap:8px;flex-wrap:wrap}
+.ch{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--c1);font-size:14px}
+.ch.on{background:rgba(255,255,255,.08);border-color:var(--accent);color:var(--accent);font-weight:700}
+.fld{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--c1);outline:none;font-size:16px}
+.fld:focus{border-color:var(--accent)}
+textarea.fld{min-height:64px;resize:vertical}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;padding:12px 18px;border-radius:14px;border:1px solid var(--line);background:var(--c1);text-decoration:none;color:var(--ivory);font-weight:700;margin-top:10px}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.cta{border:0;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on)}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.ln{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.ln:last-child{border-bottom:0}
+.ln .tx{flex:1;min-width:0}.ln .tx small{display:block;color:var(--muted);font-size:12px}
+.ln .pr{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tt{display:flex;justify-content:space-between;align-items:center;margin:14px 0 4px;font-size:18px;font-weight:800}
+.tt span:last-child{color:var(--accent)}
+.hint{color:var(--bad);font-size:13px;margin-top:8px;min-height:18px}
+.lnk{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:13px;margin-top:12px;display:block;margin-inline:auto}
+.hr{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hr.today{color:var(--accent);font-weight:800}
+.ab{color:var(--muted);font-size:15px;margin-bottom:6px}
+/* contact popover */
+.pop{position:fixed;z-index:50;display:flex;flex-direction:column;gap:8px;align-items:stretch;bottom:calc(70px + env(safe-area-inset-bottom,0px));width:min(260px,calc(100vw - 24px))}
+.pi{display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:999px;background:var(--c1);border:1px solid var(--line);text-decoration:none;color:var(--ivory);font-size:15px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:up .22s ease both;width:100%}
+.pi i{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;background:var(--bg);border:1px solid var(--line);color:var(--accent)}
+.pi i svg{width:20px;height:20px}
+.pi.ig i{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);border:0;color:#fff}
+.pi.fb i{background:#1877f2;border:0;color:#fff}
+.pi.tk i{background:#000;border:1px solid #fff;color:#fff}
+.pi.wa i{background:#25d366;border:0;color:#fff}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.toast{position:fixed;left:50%;bottom:calc(94px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ivory);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;z-index:80;max-width:90vw;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ================= قسم البيانات — عدّل هذا القسم فقط ================= */
+const SHOP = {
+  lang: "fr",
+  langs: ["fr","ar"],
+  msgLang: "fr",
+  theme: "fire",
+  colors: {"bg":"#2f679c","glow":"#4c789f","c1":"#3e72a3","c2":"#356c9f","ivory":"#f7f2ea","muted":"#b8b0a6","accent":"#ffe0b3","g1":"#ffe8c6","g2":"#ccb38f","on":"#1a1a1a"},
+  countryCode: "213",
+
+  name: "Waslux Restaurant",
+  tagline: "Cuisine du terroir",
+  about: "",
+
+  logo: "logo-wasluxrestaurant.jpg",
+  logoFit: "cover",
+  cover: "cover-wasluxrestaurant.jpg",
+  currency: "DA",
+  menu: [
+
+  ],
+  catAr: {"Entrées":"مقبلات","Plats":"أطباق رئيسية","Grillades":"مشاوي","Desserts":"حلويات","Boissons":"مشروبات"},
+  hours: [],
+
+  features: {"cart":true,"waiter":true,"contact":true,"more":true},
+  order: { whatsapp: "", prefix: "", modes: ["dinein","takeaway","delivery"], note: "" },
+  waiter: { whatsapp: "", reasons: [], staff: [], halls: [] },
+  daily: null,
+
+  phone: "0784 68 87 51",
+  phone2: "",
+  whatsapp: "0784 68 87 51",
+  email: "commercial.waslux@gmail.com",
+  address: "Alger",
+  mapLink: "https://maps.app.goo.gl/nCUZKDRfdAS3xU8w6",
+  reviewLink: "https://search.google.com/local/writereview?placeid=ChIJBd6oMwBTjhIRXOtIYyr758E",
+  website: "https://waslux.com/",
+  social: [{"name":"Instagram","url":"https://www.instagram.com/sahtekpro"},{"name":"Facebook","url":"https://www.facebook.com/sahtekpro"}],
+  sheetCsv: "https://script.google.com/macros/s/AKfycbwAtJKTzuqkcJ6RaJ3IGknOcxp69G40peuWyikTIbaKiIBuGTVUpI_yi4yC5dMq8zg/exec?a=csv&s=waslux-restaurant",
+  credit: { text: "Powered by Waslux", url: "https://waslux.com" }
+};
+/* ===== نهاية قسم البيانات ===== */
+
+/* ===== Google Sheet (facultatif) : si sheetCsv est rempli, le menu, les horaires et les infos viennent du tableau ===== */
+(function () {
+  if (!SHOP.sheetCsv) return;
+  function parse(t) {
+    var r = [], row = [], f = "", q = false, i = 0, c; t = t.replace(/^﻿/, "");
+    for (; i < t.length; i++) { c = t[i];
+      if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true;
+      else if (c === ",") { row.push(f); f = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(f); r.push(row); row = []; f = ""; }
+      else f += c; }
+    if (f !== "" || row.length) { row.push(f); r.push(row); }
+    return r;
+  }
+  function apply(tx) {
+    var rows = parse(tx).slice(1), menu = [], idx = {}, hours = [], stf = [], hls = [], info = {}, has = Object.prototype.hasOwnProperty;
+    rows.forEach(function (r) {
+      var ty = (r[0] || "").trim().toLowerCase(), a = (r[1] || "").trim(), b = (r[2] || "").trim(), c = (r[3] || "").trim(), p = (r[4] || "").trim(), d = (r[5] || "").trim().toLowerCase(), im = (r[6] || "").trim();
+      if (ty === "menu") {
+        if (!a || !b || /^(non|no|0|false|nd|epuise|épuisé|نفد)$/.test(d)) return;
+        if (!has.call(idx, a)) { idx[a] = menu.length; menu.push({ cat: a, items: [] }); }
+        menu[idx[a]].items.push([b, c, p === "" ? "" : (isNaN(+p) ? p : +p), im]);
+      } else if (ty === "daily") { if (a && c !== "") SHOP.daily = { name: a, desc: b, price: isNaN(+c) ? c : +c, until: p, img: im }; }
+      else if (ty === "staff") { if (a) stf.push({ name: a, whatsapp: b, active: !/^(non|no|0|false|off|مغلق|لا)$/.test(c.toLowerCase()) }); }
+      else if (ty === "hall") { if (a) hls.push({ name: a, tables: b, staff: c }); }
+      else if (ty === "hours") { if (a) hours.push([a, b]); }
+      else if (ty === "info") { if (a) info[a] = b; }
+    });
+    if (menu.length) SHOP.menu = menu;
+    if (hours.length) SHOP.hours = hours;
+    if (stf.length) SHOP.waiter.staff = stf;
+    if (hls.length) SHOP.waiter.halls = hls;
+    ["phone", "phone2", "whatsapp", "address", "about", "tagline", "mapLink", "reviewLink", "email", "website"].forEach(function (k) { if (has.call(info, k) && info[k] !== "") SHOP[k] = info[k]; });
+  }
+  var K = "wl-sheet:" + SHOP.sheetCsv, cached = null;
+  try { cached = localStorage.getItem(K); } catch (e) {}
+  if (cached) { try { apply(cached); } catch (e) {} }
+  try {
+    fetch(SHOP.sheetCsv + (SHOP.sheetCsv.indexOf("?") > -1 ? "&" : "?") + "_=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+      .then(function (tx) {
+        if (!tx || tx.length < 15 || /<html/i.test(tx) || tx === cached) return;
+        try { localStorage.setItem(K, tx); } catch (e) {}
+        try { var h = tx.length + ":" + tx.split("").reduce(function (x, c) { return (x * 31 + c.charCodeAt(0)) | 0; }, 7); if (sessionStorage.getItem("wl-r") !== h) { sessionStorage.setItem("wl-r", h); location.reload(); } } catch (e) {}
+      }).catch(function () {});
+  } catch (e) {}
+})();
+
+const TH = {
+  fire:  { bg:"#120e0c", glow:"#2a1a10", c1:"#1c1613", c2:"#15100e", ivory:"#fff3e6", muted:"#c4ad9b", accent:"#ff6b1a", g1:"#ffb703", g2:"#ff6b1a", on:"#1a0d04" },
+  gold:  { bg:"#0b0b0c", glow:"#1f1b11", c1:"#171716", c2:"#101011", ivory:"#f1e9d8", muted:"#a9a293", accent:"#c8a85a", g1:"#e6cf8e", g2:"#b59443", on:"#17130a" },
+  royal: { bg:"#06130d", glow:"#0f2b1d", c1:"#0d2018", c2:"#091810", ivory:"#f2ecda", muted:"#aab8ad", accent:"#cdb36a", g1:"#e6d6a2", g2:"#b99b4c", on:"#14110a" },
+  rose:  { bg:"#151315", glow:"#2b2126", c1:"#262327", c2:"#1d1b1e", ivory:"#f6ecee", muted:"#b3a8ac", accent:"#e08fa6", g1:"#f2b3c4", g2:"#d1708b", on:"#2a0f18" },
+  blue:  { bg:"#0a1118", glow:"#12202e", c1:"#14202b", c2:"#0f1923", ivory:"#e9f1f7", muted:"#9fb2c1", accent:"#5cb3d6", g1:"#8fd3ec", g2:"#3a8fb3", on:"#06202c" },
+  green: { bg:"#0c110e", glow:"#15231a", c1:"#16201a", c2:"#101813", ivory:"#eef3ea", muted:"#a3b2a5", accent:"#7bb88a", g1:"#a6d9b0", g2:"#4f9a62", on:"#08210f" }
+};
+const TX = {
+  fr: { menu:"Menu", cart:"Panier", waiter:"Serveur", contact:"Contact", more:"Plus", search:"Rechercher un plat", nores:"Aucun plat trouvé.", add:"Ajouter", plus:"Ajouter un", minus:"Retirer un",
+    open:"Ouvert", closed:"Fermé", until:"jusqu’à", opensAt:"ouvre à", yourOrder:"Votre commande", empty:"Votre panier est vide. Ajoutez des plats depuis le menu.", total:"Total",
+    mode:"Mode", dinein:"Sur place", takeaway:"À emporter", delivery:"Livraison", table:"Numéro de table", hall:"Salle", address:"Adresse de livraison", yourName:"Votre nom (facultatif)", note:"Remarque (facultatif)",
+    send:"Envoyer sur WhatsApp", clear:"Vider le panier", needAddr:"Indiquez votre adresse de livraison.", needMenu:"Ajoutez au moins un plat.",
+    callWaiter:"Appeler le serveur", waiterIntro:"Un message est envoyé au restaurant avec votre numéro de table.", yourTable:"Votre table", why:"Pour quoi ?", needTable:"Indiquez votre numéro de table.",
+    sendCall:"Appeler le serveur", called:"Serveur appelé", callAgain:"Vous pourrez rappeler dans",
+    daily:"Plat du jour", pickHall:"Votre salle", alsoSend:"Envoyer aussi à", reasons:["Payer l’addition","Demande spéciale","Apporter de l’eau"],
+    call:"Appeler", wa:"WhatsApp", save:"Enregistrer le contact", email:"E-mail", map:"Itinéraire", hours:"Horaires", about:"À propos", review:"Donner un avis", site:"Site web", close:"Fermer", info:"Informations", lang:"Langue", sent:"Message prêt dans WhatsApp" },
+  ar: { menu:"القائمة", cart:"السلة", waiter:"النادل", contact:"تواصل", more:"المزيد", search:"ابحث عن طبق", nores:"لا يوجد طبق مطابق.", add:"أضف", plus:"أضف واحداً", minus:"احذف واحداً",
+    open:"مفتوح", closed:"مغلق", until:"حتى", opensAt:"يفتح عند", yourOrder:"طلبك", empty:"سلتك فارغة. أضف أطباقاً من القائمة.", total:"المجموع",
+    mode:"طريقة الطلب", dinein:"في المطعم", takeaway:"للأخذ", delivery:"توصيل", table:"رقم الطاولة", hall:"القاعة", address:"عنوان التوصيل", yourName:"اسمك (اختياري)", note:"ملاحظة (اختياري)",
+    send:"أرسل عبر واتساب", clear:"إفراغ السلة", needAddr:"اكتب عنوان التوصيل.", needMenu:"أضف طبقاً واحداً على الأقل.",
+    callWaiter:"نداء النادل", waiterIntro:"ترسل رسالة إلى المطعم مع رقم طاولتك.", yourTable:"طاولتك", why:"لأي سبب؟", needTable:"اكتب رقم الطاولة.",
+    sendCall:"نادِ النادل", called:"تم نداء النادل", callAgain:"يمكنك النداء مجدداً بعد",
+    daily:"طبق اليوم", pickHall:"قاعتك", alsoSend:"أرسل أيضاً إلى", reasons:["دفع الفاتورة","طلب خاص","إحضار الماء"],
+    call:"اتصال", wa:"واتساب", save:"حفظ جهة الاتصال", email:"البريد", map:"الموقع على الخريطة", hours:"أوقات العمل", about:"عن المطعم", review:"شاركنا رأيك", site:"الموقع", close:"إغلاق", info:"معلومات", lang:"اللغة", sent:"الرسالة جاهزة في واتساب" }
+};
+const MT = {
+  fr: { title:"Nouvelle commande", total:"Total", mode:"Mode", dinein:"Sur place", takeaway:"À emporter", delivery:"Livraison", table:"Table", hall:"Salle", name:"Nom", addr:"Adresse", note:"Remarque", call:"Appel serveur" },
+  ar: { title:"طلب جديد", total:"المجموع", mode:"الطريقة", dinein:"في المطعم", takeaway:"للأخذ", delivery:"توصيل", table:"طاولة", hall:"قاعة", name:"الاسم", addr:"العنوان", note:"ملاحظة", call:"نداء النادل" }
+};
+
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const intl = n => { let d = String(n || "").replace(/\D/g, ""); if (d.indexOf("00") === 0) d = d.slice(2); else if (d.charAt(0) === "0") d = String(SHOP.countryCode || "213") + d.slice(1); return d; };
+const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
+
+/* ---------- الألوان ---------- */
+(function () {
+  const c = Object.assign({}, TH[SHOP.theme] || TH.fire, SHOP.colors || {}), r = document.documentElement.style;
+  ["bg","glow","c1","c2","ivory","muted","accent","g1","g2","on"].forEach(k => { if (c[k]) r.setProperty("--" + k, c[k]); });
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = c.bg;
+  document.title = SHOP.name + (SHOP.tagline ? " — " + SHOP.tagline : "");
+})();
+
+/* ---------- الحالة ---------- */
+const F = Object.assign({ cart: true, waiter: true, contact: true, more: true }, SHOP.features || {});
+const OR = Object.assign({ whatsapp: "", prefix: "", modes: ["dinein", "takeaway", "delivery"], note: "" }, SHOP.order || {});
+const qs = new URLSearchParams(location.search);
+const urlTable = (qs.get("table") || "").replace(/\D/g, "").slice(0, 3);
+const urlHall = (qs.get("salle") || qs.get("hall") || "").replace(/[^\w؀-ۿ \-]/g, "").slice(0, 30);
+const langs = (SHOP.langs && SHOP.langs.length ? SHOP.langs : [SHOP.lang]).filter(l => TX[l]);
+let LANG = ls.get("wl-r-lang"); if (langs.indexOf(LANG) < 0) LANG = langs.indexOf(SHOP.lang) > -1 ? SHOP.lang : langs[0] || "fr";
+let T = TX[LANG];
+const CK = "wl-r-cart:" + SHOP.name;
+let cart = {}; try { cart = JSON.parse(ls.get(CK) || "{}") || {}; } catch (e) { cart = {}; }
+const form = { mode: "", table: urlTable, name: "", addr: "", note: "" };
+const wait = { table: urlTable, hall: "", why: 0, until: Number(ls.get("wl-r-wait") || 0) };
+let ITEMS = [], BYKEY = {};
+const hallName = () => wait.hall || urlHall;
+const WC = () => SHOP.waiter || {};
+function inTables(spec, n) { n = +n; if (!n) return false; return String(spec || "").split(/[,;\/]/).some(x => { x = x.trim(); const m = x.match(/^(\d+)\s*[-–]\s*(\d+)$/); return m ? (n >= +m[1] && n <= +m[2]) : (x !== "" && +x === n); }); }
+function hallObj() {
+  const hs = WC().halls || [], h = hallName().toLowerCase();
+  if (h) { const f = hs.find(x => String(x.name).toLowerCase() === h); if (f) return f; }
+  return hs.find(x => inTables(x.tables, wait.table)) || null;
+}
+function targets() {
+  const st = (WC().staff || []).filter(s => s.active !== false && intl(s.whatsapp)), hl = hallObj();
+  let list = [];
+  if (hl) { const names = (Array.isArray(hl.staff) ? hl.staff : String(hl.staff || "").split(/[+,;]/)).map(x => String(x).trim().toLowerCase()).filter(Boolean); list = names.map(n => st.find(s => String(s.name).trim().toLowerCase() === n)).filter(Boolean); }
+  if (!list.length) list = [{ name: "", whatsapp: WC().whatsapp || OR.whatsapp || SHOP.whatsapp || SHOP.phone }];
+  return list.slice(0, 3);
+}
+const dailyOk = () => { const d = SHOP.daily; if (!d || !d.name || !isNum(d.price)) return false; if (d.until) { const e = new Date(d.until + "T23:59:59"); if (!isNaN(e) && e < new Date()) return false; } return true; };
+const targetWa = () => intl(OR.whatsapp || SHOP.whatsapp || SHOP.phone);
+const waUrl = (num, t) => "https://wa.me/" + num + "?text=" + encodeURIComponent(t);
+const fmt = (n, plain) => { const s = String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " " + (SHOP.currency || "DA"); return plain || LANG !== "ar" ? s : "⁦" + s + "⁩"; };
+const isNum = p => p !== "" && p != null && !isNaN(+p);
+
+const IC = {
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2 2 0 0 0 2 2v8M7 3v5M11 3v8a2 2 0 0 1-2 2M17 21V3c-2.2 1.2-3 4-3 7s.8 4 3 4"/></svg>',
+  cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2 11h10.4l2-8H6.2"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg>',
+  bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15L6 17z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>',
+  user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+  dots: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+  x: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 0 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8L12 3.5z"/></svg>',
+  save: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>',
+  link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1"/></svg>'
+};
+const SOCSVG = {
+  facebook: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.44 18.63.07 12 .07S0 5.44 0 12.07c0 5.99 4.39 10.95 10.13 11.85v-8.39H7.08v-3.47h3.05V9.43c0-3.01 1.79-4.67 4.53-4.67 1.31 0 2.69.23 2.69.23v2.95h-1.52c-1.49 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.39C19.61 23.03 24 18.06 24 12.07z"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.78h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zM20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42z"/></svg>',
+  tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.3a4.8 4.8 0 0 1-3.8-4.3h-3.4v13.3a2.9 2.9 0 1 1-2-2.8V8.9a6.3 6.3 0 1 0 5.4 6.3V9.1a8.1 8.1 0 0 0 4.7 1.5V7.2a4.8 4.8 0 0 1-.9-.9z"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>'
+};
+
+/* ---------- الدوام (مفتوح / مغلق) ---------- */
+const DAYS = [["dimanche","الأحد"],["lundi","الاثنين","الإثنين"],["mardi","الثلاثاء"],["mercredi","الأربعاء"],["jeudi","الخميس"],["vendredi","الجمعة"],["samedi","السبت"]];
+const dayIdx = s => { s = String(s).trim().toLowerCase(); for (let i = 0; i < 7; i++) if (DAYS[i].some(n => s.indexOf(n) === 0 || s === n)) return i; return -1; };
+function daysOf(label) {
+  const all = [0,1,2,3,4,5,6], l = String(label || "").toLowerCase();
+  if (/tous|7j|كل|يومياً|يوميا/.test(l)) return all;
+  const parts = l.split(/\s*[–—\-→]\s*|\s+(?:à|au|الى|إلى)\s+/).map(s => s.trim()).filter(Boolean);
+  const idx = parts.map(dayIdx).filter(i => i > -1);
+  if (!idx.length) return all;
+  if (parts.length === 2 && idx.length === 2) { const out = []; let i = idx[0]; for (let k = 0; k < 8; k++) { out.push(i); if (i === idx[1]) break; i = (i + 1) % 7; } return out; }
+  return idx;
+}
+function rangesOf(t) { const out = [], re = /(\d{1,2})[:hH](\d{2})?\s*[–—\-]\s*(\d{1,2})[:hH](\d{2})?/g; let m; while ((m = re.exec(String(t || "")))) out.push([+m[1] * 60 + (+m[2] || 0), +m[3] * 60 + (+m[4] || 0)]); return out; }
+const hh = x => String(Math.floor(x / 60) % 24).padStart(2, "0") + ":" + String(x % 60).padStart(2, "0");
+function status() {
+  if (!SHOP.hours || !SHOP.hours.length) return null;
+  const d = new Date(), n = d.getHours() * 60 + d.getMinutes(), today = d.getDay();
+  let rg = [];
+  SHOP.hours.forEach(h => { if (daysOf(h[0]).indexOf(today) > -1) rg = rg.concat(rangesOf(h[1])); });
+  if (!rg.length) return { open: false, txt: T.closed };
+  for (const r of rg) { const o = r[0] <= r[1] ? (n >= r[0] && n < r[1]) : (n >= r[0] || n < r[1]); if (o) return { open: true, txt: T.open + " · " + T.until + " " + hh(r[1]) }; }
+  const next = rg.filter(r => r[0] > n).sort((a, b) => a[0] - b[0])[0];
+  return { open: false, txt: T.closed + (next ? " · " + T.opensAt + " " + hh(next[0]) : "") };
+}
+
+/* ---------- القائمة ---------- */
+function build() {
+  ITEMS = []; BYKEY = {};
+  (SHOP.menu || []).forEach((c, ci) => (c.items || []).forEach((it, ii) => {
+    const o = { id: ITEMS.length, ci, name: String(it[0] || ""), desc: String(it[1] || ""), price: it[2], img: it[3] || "", key: (c.cat || "") + "|" + it[0] };
+    ITEMS.push(o); BYKEY[o.key] = o;
+  }));
+  if (dailyOk()) { const d = SHOP.daily, o = { id: ITEMS.length, ci: -1, name: String(d.name), desc: String(d.desc || ""), price: d.price, img: d.img || "", key: "★|" + d.name, daily: true }; ITEMS.push(o); BYKEY[o.key] = o; }
+  Object.keys(cart).forEach(k => { if (!BYKEY[k] || !(cart[k] > 0) || !isNum(BYKEY[k].price)) delete cart[k]; });
+}
+const catName = c => { const ar = (SHOP.catAr && SHOP.catAr[c.cat]) || c.catAr; return (LANG === "ar" && ar) ? ar : c.cat; };
+const count = () => Object.keys(cart).reduce((a, k) => a + cart[k], 0);
+const sum = () => Object.keys(cart).reduce((a, k) => a + cart[k] * +BYKEY[k].price, 0);
+const saveCart = () => ls.set(CK, JSON.stringify(cart));
+function ctl(o) {
+  if (!F.cart || !isNum(o.price)) return "";
+  const q = cart[o.key] || 0;
+  return q ? '<div class="stp"><button type="button" class="qb" data-a="dec" data-id="' + o.id + '" aria-label="' + esc(T.minus) + '">' + IC.minus + '</button><b>' + q + '</b><button type="button" class="qb" data-a="inc" data-id="' + o.id + '" aria-label="' + esc(T.plus) + '">' + IC.plus + '</button></div>'
+    : '<button type="button" class="add" data-a="inc" data-id="' + o.id + '" aria-label="' + esc(T.add + " " + o.name) + '">' + IC.plus + '</button>';
+}
+function itemHtml(o) {
+  const im = o.img ? ' im' : "";
+  return '<div class="it' + (o.daily ? " dly" : "") + '" data-n="' + esc((o.name + " " + o.desc).toLowerCase()) + '"><div class="tx"><h3>' + esc(o.name) + '</h3>' + (o.desc ? '<div class="ds">' + esc(o.desc) + '</div>' : "") + (isNum(o.price) ? '<div class="pr">' + fmt(o.price) + '</div>' : (o.price ? '<div class="pr">' + esc(o.price) + '</div>' : "")) + '</div>' +
+    '<div class="md' + im + '">' + (o.img ? '<img src="' + esc(o.img) + '" alt="" loading="lazy" width="96" height="96">' : "") + '<div class="ctl" data-c="' + o.id + '">' + ctl(o) + '</div></div></div>';
+}
+function dailyHtml() { const o = ITEMS.find(x => x.daily); return o ? '<div class="w dl"><div class="dh">★ ' + esc(T.daily) + (SHOP.daily.until ? '' : '') + '</div>' + itemHtml(o) + '</div>' : ""; }
+function menuHtml() {
+  const menu = SHOP.menu || [];
+  if (!menu.length) return "";
+  return '<div class="cats"><div class="w"><div class="row" id="cats">' + menu.map((c, i) => '<button type="button" class="chip' + (i ? "" : " on") + '" data-a="cat" data-i="' + i + '">' + esc(catName(c)) + '</button>').join("") + '</div></div></div>' +
+    '<div class="w" id="menu">' + menu.map((c, ci) => '<section class="sec" id="c' + ci + '" data-ci="' + ci + '"><h2>' + esc(catName(c)) + '</h2>' + ITEMS.filter(o => o.ci === ci).map(itemHtml).join("") + '</section>').join("") + '<div class="none" id="none" hidden>' + esc(T.nores) + '</div></div>';
+}
+
+/* ---------- الصفحة ---------- */
+function render() {
+  T = TX[LANG]; document.documentElement.lang = LANG; document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+  build();
+  const s = status(), L = SHOP.logo ? '<img class="lg" src="' + esc(SHOP.logo) + '" alt="" style="object-fit:' + esc(SHOP.logoFit || "cover") + '">' : '<span class="lg">' + esc((SHOP.name || "?").charAt(0)) + '</span>';
+  const tabs = [["menu", T.menu, IC.menu, true], ["cart", T.cart, IC.cart, F.cart], ["waiter", T.waiter, IC.bell, F.waiter], ["contact", T.contact, IC.user, F.contact], ["more", T.more, IC.dots, F.more]].filter(t => t[3]);
+  document.getElementById("app").innerHTML =
+    '<header class="top"><div class="w">' + L + '<div class="nm"><b>' + esc(SHOP.name) + '</b>' + (s ? '<span class="st' + (s.open ? " on" : "") + '"><i></i>' + esc(s.txt) + '</span>' : "") + '</div>' +
+    (langs.length > 1 ? '<button type="button" class="lb" data-a="lang" aria-label="' + esc(T.lang) + '">' + (LANG === "ar" ? "Français" : "العربية") + '</button>' : "") + '</div></header>' +
+    '<div class="w"><div class="cv"' + (SHOP.cover ? ' style="background-image:url(\'' + esc(SHOP.cover) + '\')"' : "") + '><div><h1>' + esc(SHOP.name) + '</h1>' + (SHOP.tagline ? '<p>' + esc(SHOP.tagline) + '</p>' : "") + '</div></div>' +
+    ((SHOP.menu || []).length ? '<div class="sr"><input id="q" type="search" placeholder="' + esc(T.search) + '" aria-label="' + esc(T.search) + '" autocomplete="off"></div>' : "") + '</div>' +
+    dailyHtml() +
+    menuHtml() +
+    '<div class="cr w">' + (SHOP.credit && SHOP.credit.text ? '<a href="' + esc(safeUrl(SHOP.credit.url) || "#") + '" target="_blank" rel="noopener">' + esc(SHOP.credit.text) + '</a>' : "") + '</div>' +
+    '<nav class="bar" aria-label="Navigation"><div class="in">' + tabs.map(t => '<button type="button" class="tab' + (t[0] === "menu" ? " on" : "") + '" data-a="tab" data-t="' + t[0] + '" id="t-' + t[0] + '">' + t[2] + '<span>' + esc(t[1]) + '</span>' + (t[0] === "cart" ? '<span class="bd" id="bd" hidden></span>' : "") + '</button>').join("") + '</div></nav>';
+  badge(); spy();
+}
+function badge() { const b = document.getElementById("bd"); if (!b) return; const n = count(); b.hidden = !n; b.textContent = n; }
+function refreshCtl(o) { const e = document.querySelector('[data-c="' + o.id + '"]'); if (e) e.innerHTML = ctl(o); badge(); }
+
+/* ---------- نوافذ ---------- */
+let sheetEl = null, popEl = null;
+function closeSheet() { if (sheetEl) { sheetEl.remove(); sheetEl = null; document.body.style.overflow = ""; } }
+function closePop() { if (popEl) { popEl.remove(); popEl = null; } }
+function sheet(title, html) {
+  closePop(); closeSheet();
+  const o = document.createElement("div"); o.className = "ov"; o.setAttribute("role", "dialog"); o.setAttribute("aria-modal", "true");
+  o.innerHTML = '<div class="sh"><button type="button" class="sx" data-a="close" aria-label="' + esc(T.close) + '">' + IC.x + '</button><h2>' + esc(title) + '</h2>' + html + '</div>';
+  o.addEventListener("click", e => { if (e.target === o) closeSheet(); });
+  document.body.appendChild(o); document.body.style.overflow = "hidden"; sheetEl = o; return o;
+}
+function toast(t) { const e = document.createElement("div"); e.className = "toast"; e.textContent = t; document.body.appendChild(e); setTimeout(() => e.remove(), 2200); }
+function setTab(t) { document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.t === t)); }
+
+/* ---------- السلة ---------- */
+const modes = () => (OR.modes || []).filter(m => ["dinein", "takeaway", "delivery"].indexOf(m) > -1);
+function orderMsg() {
+  const M = MT[SHOP.msgLang] || MT[LANG] || MT.fr, L = [];
+  if (OR.prefix) L.push(OR.prefix);
+  L.push("🍽️ " + M.title);
+  Object.keys(cart).forEach(k => { const o = BYKEY[k]; L.push("• " + cart[k] + " × " + o.name + " — " + fmt(cart[k] * +o.price, true)); });
+  L.push(M.total + " : " + fmt(sum(), true));
+  const md = form.mode || modes()[0] || "";
+  if (md) { let t = M[md]; if (md === "dinein") { if (form.table) t += " · " + M.table + " " + form.table; if (hallName()) t += " (" + M.hall + " " + hallName() + ")"; } L.push(M.mode + " : " + t); }
+  if (md === "delivery" && form.addr.trim()) L.push(M.addr + " : " + form.addr.trim());
+  if (form.name.trim()) L.push(M.name + " : " + form.name.trim());
+  if (form.note.trim()) L.push(M.note + " : " + form.note.trim());
+  return L.join("\n");
+}
+function cartHtml() {
+  const ks = Object.keys(cart);
+  if (!ks.length) return '<p class="in">' + esc(T.empty) + '</p>';
+  const md = form.mode || modes()[0] || "";
+  return ks.map(k => { const o = BYKEY[k]; return '<div class="ln"><div class="tx">' + esc(o.name) + '<small>' + fmt(o.price) + '</small></div><div class="stp"><button type="button" class="qb" data-a="cdec" data-id="' + o.id + '" aria-label="' + esc(T.minus) + '">' + IC.minus + '</button><b>' + cart[k] + '</b><button type="button" class="qb" data-a="cinc" data-id="' + o.id + '" aria-label="' + esc(T.plus) + '">' + IC.plus + '</button></div><div class="pr">' + fmt(cart[k] * +o.price) + '</div></div>'; }).join("") +
+    '<div class="tt"><span>' + esc(T.total) + '</span><span>' + fmt(sum()) + '</span></div>' + (OR.note ? '<p class="in" style="margin-top:6px">' + esc(OR.note) + '</p>' : "") +
+    (modes().length ? '<div class="lbl">' + esc(T.mode) + '</div><div class="chs">' + modes().map(m => '<button type="button" class="ch' + (m === md ? " on" : "") + '" data-a="mode" data-m="' + m + '">' + esc(T[m]) + '</button>').join("") + '</div>' : "") +
+    (md === "dinein" ? '<div class="lbl">' + esc(T.table) + (hallName() ? " · " + esc(T.hall) + " " + esc(hallName()) : "") + '</div><input class="fld" id="f-table" inputmode="numeric" maxlength="3" value="' + esc(form.table) + '">' : "") +
+    (md === "delivery" ? '<div class="lbl">' + esc(T.address) + '</div><textarea class="fld" id="f-addr">' + esc(form.addr) + '</textarea>' : "") +
+    '<div class="lbl">' + esc(T.yourName) + '</div><input class="fld" id="f-name" value="' + esc(form.name) + '" autocomplete="name">' +
+    '<div class="lbl">' + esc(T.note) + '</div><textarea class="fld" id="f-note">' + esc(form.note) + '</textarea>' +
+    '<div class="hint" id="hint"></div><a class="btn cta" id="go" target="_blank" rel="noopener" href="#">' + esc(T.send) + '</a><button type="button" class="lnk" data-a="clear">' + esc(T.clear) + '</button>';
+}
+function syncGo() {
+  const g = document.getElementById("go"); if (!g) return;
+  const md = form.mode || modes()[0] || "", bad = !count() ? T.needMenu : (md === "delivery" && !form.addr.trim() ? T.needAddr : "");
+  g.href = bad ? "#" : waUrl(targetWa(), orderMsg()); g.setAttribute("aria-disabled", bad ? "true" : "false");
+  const h = document.getElementById("hint"); if (h) h.textContent = "";
+  g.dataset.bad = bad;
+}
+function openCart() { setTab("cart"); const o = sheet(T.yourOrder, '<div id="cb">' + cartHtml() + '</div>'); syncGo(); return o; }
+function reCart() { const b = document.getElementById("cb"); if (!b) return; const fe = document.activeElement && document.activeElement.id; b.innerHTML = cartHtml(); syncGo(); badge(); if (fe) { const e = document.getElementById(fe); if (e && e.focus) { e.focus(); try { const v = e.value.length; e.setSelectionRange(v, v); } catch (x) {} } } }
+
+/* ---------- نداء النادل ---------- */
+const reasons = () => (SHOP.waiter && SHOP.waiter.reasons && SHOP.waiter.reasons.length ? SHOP.waiter.reasons : T.reasons);
+function waiterMsg() { const M = MT[SHOP.msgLang] || MT[LANG] || MT.fr, hn = (hallObj() || {}).name || hallName(); return (OR.prefix ? OR.prefix + " " : "") + "🛎️ " + M.call + " — " + M.table + " " + (wait.table || "?") + (hn ? " (" + M.hall + " " + hn + ")" : "") + " : " + reasons()[wait.why]; }
+function waiterHtml() {
+  const hs = WC().halls || [], tg = targets(), left = Math.ceil((wait.until - Date.now()) / 1000), hn = (hallObj() || {}).name || hallName();
+  return '<p class="in">' + esc(T.waiterIntro) + '</p>' +
+    (hs.length && !urlHall ? '<div class="lbl">' + esc(T.pickHall) + '</div><div class="chs">' + hs.map(h => '<button type="button" class="ch' + (hn && String(h.name).toLowerCase() === hn.toLowerCase() ? " on" : "") + '" data-a="hall" data-h="' + esc(h.name) + '">' + esc(h.name) + '</button>').join("") + '</div>' : "") +
+    '<div class="lbl">' + esc(T.yourTable) + (hn && (!hs.length || urlHall) ? " · " + esc(T.hall) + " " + esc(hn) : "") + '</div><input class="fld" id="w-table" inputmode="numeric" maxlength="3" value="' + esc(wait.table) + '">' +
+    '<div class="lbl">' + esc(T.why) + '</div><div class="chs">' + reasons().map((r, i) => '<button type="button" class="ch' + (i === wait.why ? " on" : "") + '" data-a="why" data-i="' + i + '">' + esc(r) + '</button>').join("") + '</div>' +
+    '<div class="hint" id="whint"></div><a class="btn cta" id="wgo" target="_blank" rel="noopener" href="#"></a>' +
+    tg.slice(1).map((x, i) => '<a class="btn wgo2" data-i="' + (i + 1) + '" target="_blank" rel="noopener" href="#">' + esc(T.alsoSend) + ' ' + esc(x.name) + '</a>').join("");
+}
+function syncWait() {
+  const g = document.getElementById("wgo"); if (!g) return; const tg = targets(), left = Math.ceil((wait.until - Date.now()) / 1000), msg = waiterMsg();
+  if (left <= 0) { g.href = wait.table ? waUrl(intl(tg[0].whatsapp), msg) : "#"; g.setAttribute("aria-disabled", "false"); g.textContent = T.sendCall + (tg[0].name ? " · " + tg[0].name : ""); } else { g.setAttribute("aria-disabled", "true"); g.textContent = T.called + " · " + Math.floor(left / 60) + ":" + String(left % 60).padStart(2, "0"); }
+  document.querySelectorAll(".wgo2").forEach(a => { a.href = wait.table ? waUrl(intl(tg[+a.dataset.i].whatsapp), msg) : "#"; });
+}
+function openWaiter() { setTab("waiter"); sheet(T.callWaiter, '<div id="wb">' + waiterHtml() + '</div>'); syncWait(); }
+
+/* ---------- التواصل (قائمة عمودية) ---------- */
+const socKey = s => /tiktok/i.test(s.name + s.url) ? "tk" : /instagram/i.test(s.name + s.url) ? "ig" : /facebook|fb\.com/i.test(s.name + s.url) ? "fb" : /whatsapp|wa\.me/i.test(s.name + s.url) ? "wa" : "";
+const SOCKEY2 = { tk: "tiktok", ig: "instagram", fb: "facebook", wa: "whatsapp" };
+function openContact(btn) {
+  if (popEl) { closePop(); setTab("menu"); return; }
+  closeSheet(); setTab("contact");
+  const items = [], num = intl(SHOP.phone), wn = intl(SHOP.whatsapp);
+  if (num) items.push('<a class="pi" href="tel:+' + num + '"><i>' + IC.user + '</i>' + esc(T.call) + '</a>');
+  if (wn) items.push('<a class="pi wa" href="' + "https://wa.me/" + wn + '" target="_blank" rel="noopener"><i>' + SOCSVG.whatsapp + '</i>' + esc(T.wa) + '</a>');
+  items.push('<button type="button" class="pi" data-a="vcard" style="font:inherit"><i>' + IC.save + '</i>' + esc(T.save) + '</button>');
+  if (SHOP.email) items.push('<a class="pi" href="mailto:' + esc(SHOP.email) + '"><i>' + IC.mail + '</i>' + esc(T.email) + '</a>');
+  (SHOP.social || []).forEach(s => { const u = safeUrl(s.url); if (!u) return; const k = socKey(s); if (k === "wa" && wn) return; items.push('<a class="pi ' + k + '" href="' + esc(u) + '" target="_blank" rel="noopener"><i>' + (k ? SOCSVG[SOCKEY2[k]] : IC.link) + '</i>' + esc(s.name || "Lien") + '</a>'); });
+  const p = document.createElement("div"); p.className = "pop"; p.innerHTML = items.join("");
+  const r = btn.getBoundingClientRect(), W = Math.min(260, innerWidth - 24), cx = r.left + r.width / 2;
+  p.style.left = Math.max(12, Math.min(innerWidth - W - 12, cx - W / 2)) + "px";
+  document.body.appendChild(p); popEl = p;
+}
+function vcard() {
+  const v = s => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n"), num = intl(SHOP.phone);
+  const L = ["BEGIN:VCARD", "VERSION:3.0", "N:" + v(SHOP.name) + ";;;;", "FN:" + v(SHOP.name), "ORG:" + v(SHOP.name)];
+  if (SHOP.tagline) L.push("TITLE:" + v(SHOP.tagline));
+  if (num) L.push("TEL;TYPE=WORK:+" + num);
+  if (SHOP.email) L.push("EMAIL:" + v(SHOP.email));
+  if (SHOP.address) L.push("ADR;TYPE=WORK:;;" + v(SHOP.address) + ";;;;");
+  if (safeUrl(SHOP.website)) L.push("URL:" + SHOP.website);
+  L.push("END:VCARD");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([L.join("\r\n")], { type: "text/vcard;charset=utf-8" }));
+  a.download = (String(SHOP.name).replace(/\s+/g, "_") || "contact") + ".vcf"; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ---------- المزيد ---------- */
+function openMore() {
+  setTab("more");
+  const today = new Date().getDay();
+  let h = "";
+  if (SHOP.about) h += '<div class="ab">' + esc(SHOP.about) + '</div>';
+  if ((SHOP.hours || []).length) h += '<div class="lbl">' + esc(T.hours) + '</div>' + SHOP.hours.map(x => '<div class="hr' + (daysOf(x[0]).indexOf(today) > -1 ? " today" : "") + '"><span>' + esc(x[0]) + '</span><span dir="ltr">' + esc(x[1]) + '</span></div>').join("");
+  if (SHOP.address) h += '<div class="lbl">' + esc(T.info) + '</div><div class="ab">' + esc(SHOP.address) + '</div>';
+  if (safeUrl(SHOP.mapLink)) h += '<a class="btn" href="' + esc(SHOP.mapLink) + '" target="_blank" rel="noopener">' + IC.pin + esc(T.map) + '</a>';
+  if (safeUrl(SHOP.reviewLink)) h += '<a class="btn" href="' + esc(SHOP.reviewLink) + '" target="_blank" rel="noopener">' + IC.star + esc(T.review) + '</a>';
+  if (safeUrl(SHOP.website)) h += '<a class="btn" href="' + esc(SHOP.website) + '" target="_blank" rel="noopener">' + IC.link + esc(T.site) + '</a>';
+  sheet(SHOP.name, h || '<p class="in">—</p>');
+}
+
+/* ---------- بحث + تمرير ---------- */
+function spy() {
+  const row = document.getElementById("cats"); if (!row || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { const i = e.target.dataset.ci; row.querySelectorAll(".chip").forEach(c => { const on = c.dataset.i === i; c.classList.toggle("on", on); if (on) { const l = c.offsetLeft - row.clientWidth / 2 + c.offsetWidth / 2; row.scrollTo({ left: LANG === "ar" ? l : l, behavior: "smooth" }); } }); } }); }, { rootMargin: "-130px 0px -70% 0px" });
+  document.querySelectorAll(".sec").forEach(s => io.observe(s));
+}
+function filter(q) {
+  q = q.trim().toLowerCase(); let any = false;
+  document.querySelectorAll(".sec").forEach(s => { let n = 0; s.querySelectorAll(".it").forEach(it => { const ok = !q || it.dataset.n.indexOf(q) > -1; it.hidden = !ok; if (ok) n++; }); s.hidden = !n; if (n) any = true; });
+  const e = document.getElementById("none"); if (e) e.hidden = any || !q;
+}
+
+/* ---------- الأحداث ---------- */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-a]");
+  if (popEl && !(t && t.dataset.a === "tab") && !e.target.closest(".pop")) { closePop(); setTab(sheetEl ? "" : "menu"); }
+  if (!t) return;
+  const a = t.dataset.a, o = ITEMS[+t.dataset.id];
+  if (a === "inc" || a === "cinc") { cart[o.key] = (cart[o.key] || 0) + 1; saveCart(); refreshCtl(o); if (a === "cinc") reCart(); }
+  else if (a === "dec" || a === "cdec") { cart[o.key] = (cart[o.key] || 0) - 1; if (cart[o.key] <= 0) delete cart[o.key]; saveCart(); refreshCtl(o); if (a === "cdec") reCart(); }
+  else if (a === "cat") { const s = document.getElementById("c" + t.dataset.i); if (s) window.scrollTo({ top: s.getBoundingClientRect().top + scrollY - 118, behavior: "smooth" }); }
+  else if (a === "tab") { const k = t.dataset.t; if (k === "menu") { closeSheet(); closePop(); setTab("menu"); window.scrollTo({ top: 0, behavior: "smooth" }); } else if (k === "cart") openCart(); else if (k === "waiter") openWaiter(); else if (k === "contact") openContact(t); else if (k === "more") openMore(); }
+  else if (a === "close") { closeSheet(); setTab("menu"); }
+  else if (a === "lang") { LANG = LANG === "ar" ? (langs.find(l => l !== "ar") || "fr") : "ar"; ls.set("wl-r-lang", LANG); closeSheet(); closePop(); render(); }
+  else if (a === "mode") { form.mode = t.dataset.m; reCart(); }
+  else if (a === "clear") { cart = {}; saveCart(); document.querySelectorAll(".ctl").forEach(c => { const x = ITEMS[+c.dataset.c]; if (x) c.innerHTML = ctl(x); }); badge(); reCart(); }
+  else if (a === "hall") { wait.hall = t.dataset.h; const b = document.getElementById("wb"); if (b) { b.innerHTML = waiterHtml(); syncWait(); } }
+  else if (a === "why") { wait.why = +t.dataset.i; const b = document.getElementById("wb"); if (b) { b.innerHTML = waiterHtml(); syncWait(); } }
+  else if (a === "vcard") { vcard(); closePop(); setTab("menu"); }
+});
+document.addEventListener("click", e => {
+  const g = e.target.closest("#go");
+  if (g) { if (g.dataset.bad) { e.preventDefault(); const h = document.getElementById("hint"); if (h) h.textContent = g.dataset.bad; } else { toast(T.sent); } return; }
+  const w2 = e.target.closest(".wgo2");
+  if (w2 && !wait.table) { e.preventDefault(); const h = document.getElementById("whint"); if (h) h.textContent = T.needTable; return; }
+  const w = e.target.closest("#wgo");
+  if (w) { if (w.getAttribute("aria-disabled") === "true") { e.preventDefault(); return; } if (!wait.table) { e.preventDefault(); const h = document.getElementById("whint"); if (h) h.textContent = T.needTable; return; } wait.until = Date.now() + 120000; ls.set("wl-r-wait", String(wait.until)); setTimeout(syncWait, 50); }
+});
+document.addEventListener("input", e => {
+  const id = e.target.id;
+  if (id === "q") filter(e.target.value);
+  else if (id === "f-table") { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 3); form.table = e.target.value; syncGo(); }
+  else if (id === "f-addr") { form.addr = e.target.value; syncGo(); }
+  else if (id === "f-name") { form.name = e.target.value; syncGo(); }
+  else if (id === "f-note") { form.note = e.target.value; syncGo(); }
+  else if (id === "w-table") { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 3); wait.table = e.target.value; const b = document.getElementById("wb"); if (b) { b.innerHTML = waiterHtml(); syncWait(); const w = document.getElementById("w-table"); w.focus(); w.setSelectionRange(w.value.length, w.value.length); } }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); closePop(); setTab("menu"); } });
+setInterval(() => { if (document.getElementById("wgo")) syncWait(); }, 1000);
+render();
+</script>
+</body>
+</html>
