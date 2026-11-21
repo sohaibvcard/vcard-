@@ -60,6 +60,10 @@ details.c[open]>summary{margin-bottom:8px}
   <details class="c" open><summary id="t_menu"></summary><p class="hint" id="t_menu_h"></p><div id="menu"></div><div class="tools"><button class="g s" id="addc" type="button"></button></div></details>
   <details class="c"><summary id="t_staff"></summary><p class="hint" id="t_staff_h"></p><div id="staff"></div><div class="tools"><button class="g s" id="adds" type="button"></button></div>
    <h2 style="margin-top:16px" id="t_halls"></h2><p class="hint" id="t_halls_h"></p><div id="halls"></div><div class="tools"><button class="g s" id="addz" type="button"></button></div></details>
+  <details class="c"><summary id="t_col"></summary><p class="hint" id="t_col_h"></p>
+   <div class="r2" style="grid-template-columns:1fr 1fr"><label><span id="l_acc"></span><input type="color" id="cacc" data-col="accent" style="height:46px;padding:4px"><input id="caccx" data-colx="accent" maxlength="7" dir="ltr" placeholder="#RRGGBB"></label><label><span id="l_bg"></span><input type="color" id="cbg" data-col="bg" style="height:46px;padding:4px"><input id="cbgx" data-colx="bg" maxlength="7" dir="ltr" placeholder="#RRGGBB"></label></div>
+   <div id="cprev" style="margin-top:10px;border-radius:14px;padding:12px;display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line)"><b id="cp1">Menu</b><span id="cp2" style="padding:8px 14px;border-radius:999px;font-weight:700">Commander</span></div>
+   <p class="hint" id="cstat"></p><div class="tools"><button class="g s" id="crst" type="button"></button></div></details>
   <div id="msg" role="status"></div>
  </div>
 </div>
@@ -71,13 +75,13 @@ var $ = function (i) { return document.getElementById(i); };
 var P = {}; (location.hash.slice(1) + "&" + location.search.slice(1)).split("&").forEach(function (x) { var a = x.split("="); if (a[0] && !(a[0] in P)) P[a[0]] = decodeURIComponent(a[1] || ""); });
 var S = P.s || "", K = P.k || "";
 var TX = {
- fr: { title: "Modifier ma page", sub: "Vos changements apparaissent sur votre page après l’enregistrement.", info: "Informations", hours: "Horaires", menu: "Menu", menu_h: "Décochez « Disponible » pour masquer un plat épuisé.", addh: "+ Ajouter une ligne", addc: "+ Ajouter une catégorie", save: "Enregistrer", view: "Voir ma page", name: "Nom", desc: "Description", price: "Prix", avail: "Disponible", up: "↑", down: "↓", additem: "+ Ajouter un plat", cat: "Nom de la catégorie", hday: "Jours", hh: "Heures", saved: "✓ Enregistré. Votre page est à jour.", saving: "Enregistrement…", loading: "Chargement…", e_link: "Lien invalide. Demandez-nous votre lien de modification sur WhatsApp.", e_key: "Lien non valide ou désactivé. Contactez Waslux.", e_net: "Connexion impossible. Réessayez.", e_price: "Le prix doit être un nombre.", confirm: "Supprimer ?",
+ fr: { t_col: "Couleurs", t_col_h: "Changez les couleurs de votre page. Vos couleurs d’origine restent sauvegardées.", l_acc: "Couleur des boutons", l_bg: "Couleur du fond", cst0: "Couleurs d’origine de votre page.", cst1: "Couleurs personnalisées.", crst: "Revenir aux couleurs d’origine", title: "Modifier ma page", sub: "Vos changements apparaissent sur votre page après l’enregistrement.", info: "Informations", hours: "Horaires", menu: "Menu", menu_h: "Décochez « Disponible » pour masquer un plat épuisé.", addh: "+ Ajouter une ligne", addc: "+ Ajouter une catégorie", save: "Enregistrer", view: "Voir ma page", name: "Nom", desc: "Description", price: "Prix", avail: "Disponible", up: "↑", down: "↓", additem: "+ Ajouter un plat", cat: "Nom de la catégorie", hday: "Jours", hh: "Heures", saved: "✓ Enregistré. Votre page est à jour.", saving: "Enregistrement…", loading: "Chargement…", e_link: "Lien invalide. Demandez-nous votre lien de modification sur WhatsApp.", e_key: "Lien non valide ou désactivé. Contactez Waslux.", e_net: "Connexion impossible. Réessayez.", e_price: "Le prix doit être un nombre.", confirm: "Supprimer ?",
   daily: "Plat du jour", daily_h: "Un seul plat mis en avant en haut du menu. Il disparaît seul après la date choisie. Laissez le nom vide pour ne rien afficher.", until: "Dernier jour", photo: "Photo", rmphoto: "Retirer la photo", upl: "Envoi de la photo…", e_img: "Photo non envoyée. Réessayez avec une autre photo.", e_quota: "Limite de photos atteinte. Contactez Waslux.",
-  staff: "Serveurs et salles", staff_h: "Serveurs : nom + numéro WhatsApp. Décochez « Actif » quand quelqu’un ne travaille pas aujourd’hui.", sname: "Nom du serveur", snum: "Numéro WhatsApp (ex. 0550…)", active: "Actif", adds: "+ Ajouter un serveur", halls: "Salles", halls_h: "Pour chaque salle : ses tables et le(s) serveur(s) qui répondent.", hname: "Nom de la salle", htab: "Tables (ex. 1-10 ou 1-5, 8)", addz: "+ Ajouter une salle", e_num: "Numéro de serveur invalide.",
+  staff: "Serveurs et salles", staff_h: "Serveurs : nom + numéro WhatsApp. Décochez « Actif » quand quelqu’un ne travaille pas aujourd’hui.", sname: "Nom du serveur", snum: "Numéro WhatsApp (ex. 0550…)", active: "Actif", adds: "+ Ajouter un serveur", sm: "Serveur", sf: "Serveuse", halls: "Salles", halls_h: "Pour chaque salle : ses tables et le(s) serveur(s) qui répondent.", hname: "Nom de la salle", htab: "Tables (ex. 1-10 ou 1-5, 8)", addz: "+ Ajouter une salle", e_num: "Numéro de serveur invalide.",
   k: { phone: "Téléphone", whatsapp: "WhatsApp", address: "Adresse", tagline: "Phrase courte", about: "Présentation", mapLink: "Lien Google Maps", reviewLink: "Lien avis Google", phone2: "Deuxième téléphone", email: "E-mail", website: "Site web" } },
- ar: { title: "تعديل صفحتي", sub: "تظهر تغييراتك على صفحتك بعد الحفظ.", info: "المعلومات", hours: "أوقات العمل", menu: "القائمة", menu_h: "ألغِ «متوفر» لإخفاء صنف نفد.", addh: "+ إضافة سطر", addc: "+ إضافة قسم", save: "حفظ", view: "عرض صفحتي", name: "الاسم", desc: "الوصف", price: "السعر", avail: "متوفر", up: "↑", down: "↓", additem: "+ إضافة صنف", cat: "اسم القسم", hday: "الأيام", hh: "الساعات", saved: "✓ تم الحفظ. صفحتك محدّثة.", saving: "جارٍ الحفظ…", loading: "جارٍ التحميل…", e_link: "الرابط غير صالح. اطلب منا رابط التعديل على واتساب.", e_key: "الرابط غير صالح أو معطّل. تواصل مع Waslux.", e_net: "تعذر الاتصال. حاول مرة أخرى.", e_price: "السعر يجب أن يكون رقماً.", confirm: "حذف؟",
+ ar: { t_col: "الألوان", t_col_h: "غيّر ألوان صفحتك. ألوانك الأصلية تبقى محفوظة.", l_acc: "لون الأزرار", l_bg: "لون الخلفية", cst0: "هذه الألوان الأصلية لصفحتك.", cst1: "ألوان مخصصة.", crst: "العودة إلى الألوان الأصلية", title: "تعديل صفحتي", sub: "تظهر تغييراتك على صفحتك بعد الحفظ.", info: "المعلومات", hours: "أوقات العمل", menu: "القائمة", menu_h: "ألغِ «متوفر» لإخفاء صنف نفد.", addh: "+ إضافة سطر", addc: "+ إضافة قسم", save: "حفظ", view: "عرض صفحتي", name: "الاسم", desc: "الوصف", price: "السعر", avail: "متوفر", up: "↑", down: "↓", additem: "+ إضافة صنف", cat: "اسم القسم", hday: "الأيام", hh: "الساعات", saved: "✓ تم الحفظ. صفحتك محدّثة.", saving: "جارٍ الحفظ…", loading: "جارٍ التحميل…", e_link: "الرابط غير صالح. اطلب منا رابط التعديل على واتساب.", e_key: "الرابط غير صالح أو معطّل. تواصل مع Waslux.", e_net: "تعذر الاتصال. حاول مرة أخرى.", e_price: "السعر يجب أن يكون رقماً.", confirm: "حذف؟",
   daily: "طبق اليوم", daily_h: "طبق واحد يظهر مميّزاً أعلى القائمة، ويختفي تلقائياً بعد التاريخ المحدد. اترك الاسم فارغاً لإخفائه.", until: "آخر يوم", photo: "صورة", rmphoto: "إزالة الصورة", upl: "جارٍ رفع الصورة…", e_img: "تعذر رفع الصورة. جرّب صورة أخرى.", e_quota: "بلغت حد الصور. تواصل مع Waslux.",
-  staff: "النُّدُل والقاعات", staff_h: "النادل: الاسم + رقم واتساب. ألغِ «نشط» عندما لا يعمل اليوم.", sname: "اسم النادل", snum: "رقم واتساب (مثال 0550…)", active: "نشط", adds: "+ إضافة نادل", halls: "القاعات", halls_h: "لكل قاعة: طاولاتها والنادل (أو النُّدُل) المسؤولون.", hname: "اسم القاعة", htab: "الطاولات (مثال 1-10 أو 1-5، 8)", addz: "+ إضافة قاعة", e_num: "رقم النادل غير صالح.",
+  staff: "النُّدُل والقاعات", staff_h: "النادل: الاسم + رقم واتساب. ألغِ «نشط» عندما لا يعمل اليوم.", sname: "اسم النادل", snum: "رقم واتساب (مثال 0550…)", active: "نشط", adds: "+ إضافة نادل", sm: "نادل", sf: "نادلة", halls: "القاعات", halls_h: "لكل قاعة: طاولاتها والنادل (أو النُّدُل) المسؤولون.", hname: "اسم القاعة", htab: "الطاولات (مثال 1-10 أو 1-5، 8)", addz: "+ إضافة قاعة", e_num: "رقم النادل غير صالح.",
   k: { phone: "الهاتف", whatsapp: "واتساب", address: "العنوان", tagline: "جملة قصيرة", about: "نبذة", mapLink: "رابط الخريطة", reviewLink: "رابط تقييم Google", phone2: "هاتف ثانٍ", email: "البريد", website: "الموقع" } }
 };
 var L = "fr"; try { L = localStorage.getItem("wl-edit-l") || ((navigator.language || "").indexOf("ar") === 0 ? "ar" : "fr"); } catch (e) {}
@@ -90,12 +94,24 @@ function say(txt, cls) { $("msg").textContent = txt || ""; $("msg").className = 
 function fail(k, d) { $("err").hidden = false; $("err").textContent = t(k) + (d ? " [" + d + "]" : ""); $("app").hidden = true; $("bar").hidden = true; }
 var isNum = function (p) { return /^\d+([.,]\d+)?$/.test(String(p || "").trim()); };
 
+var HEXRE = /^#[0-9a-fA-F]{6}$/;
+function hexRGB(h) { var n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function toHex(r) { return "#" + r.map(function (v) { return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0"); }).join(""); }
+function mix(a, b, k) { var x = hexRGB(a), y = hexRGB(b); return toHex([0, 1, 2].map(function (i) { return x[i] + (y[i] - x[i]) * k; })); }
+function lum(h) { var c = hexRGB(h); return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) / 255; }
+function renderCol() {
+  var o = HEXRE.test(M.info.accent || "") && HEXRE.test(M.info.bg || ""), ac = o ? M.info.accent : "#e0262f", bg = o ? M.info.bg : "#0d0d0d", l = lum(bg) > .55, e = $("cprev");
+  $("cacc").value = ac; $("caccx").value = o ? ac : ""; $("cbg").value = bg; $("cbgx").value = o ? bg : "";
+  e.style.background = bg; e.style.color = l ? "#1b1b1b" : "#f7f2ea"; e.style.borderColor = l ? "rgba(0,0,0,.14)" : "rgba(255,255,255,.12)";
+  $("cp2").style.background = "linear-gradient(135deg," + mix(ac, "#ffffff", .25) + "," + mix(ac, "#000000", .2) + ")"; $("cp2").style.color = lum(ac) > .6 ? "#1a1a1a" : "#fff";
+  e.style.display = o ? "flex" : "none"; $("cstat").textContent = t(o ? "cst1" : "cst0"); $("crst").hidden = !o;
+}
 function applyLang() {
   document.documentElement.lang = L; document.documentElement.dir = L === "ar" ? "rtl" : "ltr";
   $("lang").textContent = L === "ar" ? "Français" : "العربية";
-  var m = { t_title: "title", t_sub: "sub", t_info: "info", t_hours: "hours", t_menu: "menu", t_menu_h: "menu_h", t_daily: "daily", t_daily_h: "daily_h", t_staff: "staff", t_staff_h: "staff_h", t_halls: "halls", t_halls_h: "halls_h", addh: "addh", addc: "addc", adds: "adds", addz: "addz", save: "save", view: "view" };
+  var m = { t_col: "t_col", t_col_h: "t_col_h", l_acc: "l_acc", l_bg: "l_bg", crst: "crst", t_title: "title", t_sub: "sub", t_info: "info", t_hours: "hours", t_menu: "menu", t_menu_h: "menu_h", t_daily: "daily", t_daily_h: "daily_h", t_staff: "staff", t_staff_h: "staff_h", t_halls: "halls", t_halls_h: "halls_h", addh: "addh", addc: "addc", adds: "adds", addz: "addz", save: "save", view: "view" };
   for (var k in m) $(k).textContent = t(m[k]);
-  render();
+  render(); renderCol();
 }
 function fromRows(rows) {
   M = { info: {}, hours: [], daily: { n: "", d: "", p: "", u: "", img: "" }, menu: [], staff: [], halls: [] }; var idx = {};
@@ -104,7 +120,7 @@ function fromRows(rows) {
     if (ty === "info") M.info[r[1]] = r[2];
     else if (ty === "hours") M.hours.push([r[1], r[2]]);
     else if (ty === "daily") M.daily = { n: r[1], d: r[2], p: r[3], u: r[4], img: r[6] || "" };
-    else if (ty === "staff") M.staff.push({ n: r[1], w: r[2], on: !/^(non|no|0|false)$/i.test(r[3] || "") });
+    else if (ty === "staff") M.staff.push({ n: r[1], w: r[2], on: !/^(non|no|0|false)$/i.test(r[3] || ""), g: /^(f|femme|serveuse)$/i.test(r[4] || "") ? "f" : "m" });
     else if (ty === "hall") M.halls.push({ n: r[1], t: r[2], s: String(r[3] || "").split(/\s*[+,;]\s*/).filter(Boolean) });
     else if (ty === "menu") { if (!(r[1] in idx)) { idx[r[1]] = M.menu.length; M.menu.push({ cat: r[1], items: [] }); } M.menu[idx[r[1]]].items.push({ n: r[2], d: r[3], p: r[4], on: !/^(non|no|0|false)$/i.test(r[5] || ""), img: r[6] || "" }); }
   });
@@ -112,10 +128,11 @@ function fromRows(rows) {
 function toRows() {
   var rows = [], z = function (s) { return String(s == null ? "" : s).trim(); };
   INFO_ORDER.forEach(function (k) { if (z(M.info[k])) rows.push(["info", k, z(M.info[k]), "", "", "", ""]); });
+  if (HEXRE.test(M.info.accent || "") && HEXRE.test(M.info.bg || "")) { rows.push(["info", "accent", M.info.accent.toLowerCase(), "", "", "", ""]); rows.push(["info", "bg", M.info.bg.toLowerCase(), "", "", "", ""]); }
   M.hours.forEach(function (h) { if (z(h[0])) rows.push(["hours", z(h[0]), z(h[1]), "", "", "", ""]); });
   var d = M.daily; if (z(d.n) && z(d.p)) rows.push(["daily", z(d.n), z(d.d), z(d.p), z(d.u), "", z(d.img)]);
   M.menu.forEach(function (c) { var cn = z(c.cat) || "Menu"; c.items.forEach(function (i) { if (z(i.n)) rows.push(["menu", cn, z(i.n), z(i.d), z(i.p), i.on ? "oui" : "non", z(i.img)]); }); });
-  M.staff.forEach(function (s) { if (z(s.n) && z(s.w)) rows.push(["staff", z(s.n), z(s.w), s.on ? "oui" : "non", "", "", ""]); });
+  M.staff.forEach(function (s) { if (z(s.n) && z(s.w)) rows.push(["staff", z(s.n), z(s.w), s.on ? "oui" : "non", s.g === "f" ? "f" : "m", "", ""]); });
   M.halls.forEach(function (h) { if (z(h.n)) rows.push(["hall", z(h.n), z(h.t), h.s.join(" + "), "", "", ""]); });
   return rows;
 }
@@ -142,7 +159,7 @@ function render() {
           '<button class="g s" data-a="up" data-c="' + ci + '" data-i="' + ii + '" type="button">' + t("up") + '</button><button class="g s" data-a="dn" data-c="' + ci + '" data-i="' + ii + '" type="button">' + t("down") + '</button><button class="d s" data-a="deli" data-c="' + ci + '" data-i="' + ii + '" type="button">✕</button></div></div>';
       }).join("") + '<div class="tools"><button class="g s" data-a="addi" data-c="' + ci + '" type="button">' + esc(t("additem")) + '</button></div>';
   }).join("");
-  $("staff").innerHTML = M.staff.map(function (s, i) { return '<div class="item"><div class="r2" style="grid-template-columns:1fr 1fr"><input data-s="' + i + '.n" placeholder="' + esc(t("sname")) + '" value="' + esc(s.n) + '"><input data-s="' + i + '.w" class="ltr" inputmode="tel" placeholder="' + esc(t("snum")) + '" value="' + esc(s.w) + '"></div><div class="tools"><label class="sw"><input type="checkbox" data-s="' + i + '.on"' + (s.on ? " checked" : "") + '> ' + esc(t("active")) + '</label><span style="flex:1"></span><button class="d s" data-a="dels" data-i="' + i + '" type="button">✕</button></div></div>'; }).join("");
+  $("staff").innerHTML = M.staff.map(function (s, i) { return '<div class="item"><div class="r2" style="grid-template-columns:1fr 1fr"><input data-s="' + i + '.n" placeholder="' + esc(t("sname")) + '" value="' + esc(s.n) + '"><input data-s="' + i + '.w" class="ltr" inputmode="tel" placeholder="' + esc(t("snum")) + '" value="' + esc(s.w) + '"></div><div class="tools"><select data-s="' + i + '.g" style="width:auto;margin:0"><option value="m"' + (s.g === "f" ? "" : " selected") + '>' + esc(t("sm")) + '</option><option value="f"' + (s.g === "f" ? " selected" : "") + '>' + esc(t("sf")) + '</option></select><label class="sw"><input type="checkbox" data-s="' + i + '.on"' + (s.on ? " checked" : "") + '> ' + esc(t("active")) + '</label><span style="flex:1"></span><button class="d s" data-a="dels" data-i="' + i + '" type="button">✕</button></div></div>'; }).join("");
   renderHalls();
 }
 function renderHalls() {
@@ -152,6 +169,11 @@ function renderHalls() {
 function imgSet(key, url) { if (key === "d") M.daily.img = url; else { var q = key.slice(1).split("."); M.menu[+q[0]].items[+q[1]].img = url; } }
 document.addEventListener("input", function (e) {
   var el = e.target; dirty = true; say("");
+  if (el.dataset.col || el.dataset.colx) {
+    var ck = el.dataset.col || el.dataset.colx, v = el.value.trim(); if (v && v.charAt(0) !== "#") v = "#" + v;
+    if (HEXRE.test(v)) { v = v.toLowerCase(); if (!HEXRE.test(M.info.accent || "") || !HEXRE.test(M.info.bg || "")) { M.info.accent = "#e0262f"; M.info.bg = "#0d0d0d"; } M.info[ck] = v; var act = document.activeElement; renderCol(); if (act && act.dataset.colx) { $(act.id).value = v; } }
+    return;
+  }
   if (el.dataset.i && !el.dataset.a) M.info[el.dataset.i] = el.value;
   else if (el.dataset.h) { var p = el.dataset.h.split("."); M.hours[+p[0]][+p[1]] = el.value; }
   else if (el.dataset.dl) M.daily[el.dataset.dl] = el.value;
@@ -167,9 +189,10 @@ var photoKey = "";
 document.addEventListener("click", function (e) {
   var b = e.target.closest("button"); if (!b) return; var a = b.dataset.a, c = +b.dataset.c, i = +b.dataset.i;
   if (b.id === "lang") { L = L === "ar" ? "fr" : "ar"; try { localStorage.setItem("wl-edit-l", L); } catch (x) {} return applyLang(); }
+  if (b.id === "crst") { delete M.info.accent; delete M.info.bg; dirty = true; renderCol(); return; }
   if (b.id === "addh") { M.hours.push(["", ""]); dirty = true; return render(); }
   if (b.id === "addc") { M.menu.push({ cat: "", items: [{ n: "", d: "", p: "", on: true, img: "" }] }); dirty = true; return render(); }
-  if (b.id === "adds") { M.staff.push({ n: "", w: "", on: true }); dirty = true; return render(); }
+  if (b.id === "adds") { M.staff.push({ n: "", w: "", on: true, g: "m" }); dirty = true; return render(); }
   if (b.id === "addz") { M.halls.push({ n: "", t: "", s: [] }); dirty = true; return render(); }
   if (b.id === "save") return save();
   if (b.id === "view") return window.open(location.origin + "/p/" + S + "/", "_blank");
@@ -197,7 +220,7 @@ $("file").addEventListener("change", function () {
     var data = cv.toDataURL("image/jpeg", 0.72).split(",")[1];
     fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ a: "img", s: S, k: K, data: data }) })
       .then(function (r) { return r.json(); })
-      .then(function (j) { upBusy = false; if (j.ok) { imgSet(key, j.url); dirty = true; say(""); render(); } else say(t(j.e === "quota" ? "e_quota" : j.e === "key" ? "e_key" : "e_img"), "bad"); })
+      .then(function (j) { upBusy = false; if (j.ok) { imgSet(key, j.url); dirty = true; say(""); render(); } else say(t(j.e === "quota" ? "e_quota" : j.e === "key" ? "e_key" : "e_img") + (j.d ? " [" + j.d + "]" : j.e ? " [" + j.e + "]" : ""), "bad"); })
       .catch(function () { upBusy = false; say(t("e_net"), "bad"); });
   };
   im.onerror = function () { upBusy = false; say(t("e_img"), "bad"); };
@@ -211,7 +234,7 @@ function save() {
   $("save").disabled = true; say(t("saving"));
   fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ a: "save", s: S, k: K, rows: toRows() }) })
     .then(function (r) { return r.json(); })
-    .then(function (j) { $("save").disabled = false; if (j.ok) { dirty = false; say(t("saved"), "ok"); } else say(t(j.e === "key" ? "e_key" : "e_net"), "bad"); })
+    .then(function (j) { $("save").disabled = false; if (j.ok) { dirty = false; say(t("saved"), "ok"); } else say(t(j.e === "key" ? "e_key" : "e_net") + (j.d ? " [" + j.d + "]" : ""), "bad"); })
     .catch(function () { $("save").disabled = false; say(t("e_net"), "bad"); });
 }
 window.addEventListener("beforeunload", function (e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
@@ -225,7 +248,7 @@ function init() {
     .then(function (txt) {
       var j; try { j = JSON.parse(txt); } catch (x) { return fail("e_net", "reponse: " + txt.replace(/\s+/g, " ").slice(0, 80)); }
       if (!j.ok) return fail("e_key", "serveur: " + j.e);
-      fromRows(j.rows); $("bar").hidden = false; say(""); render();
+      fromRows(j.rows); $("bar").hidden = false; say(""); render(); renderCol();
     })
     .catch(function (e) { fail("e_net", String(e && e.message || e)); });
 }
