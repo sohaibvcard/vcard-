@@ -47,7 +47,7 @@ h1{font-size:30px;font-weight:800;line-height:1.2}
 .cnl a span.t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cnl a small{color:var(--muted);font-size:12.5px;direction:ltr}
 @keyframes pop{from{opacity:0;transform:translateY(-10px) scale(.94)}to{opacity:1;transform:none}}
-.chip .ic{width:24px;height:24px}.chip .ic svg{width:14px;height:14px}
+.grid .btn{font-size:14px;gap:8px;padding:9px 8px;line-height:1.2}.grid .btn .ic{width:28px;height:28px}.grid .btn.full{font-size:15px}.chip .ic{width:24px;height:24px}.chip .ic svg{width:14px;height:14px}
 .btn:active{transform:scale(.98)}
 .btn[disabled]{opacity:.6;pointer-events:none}
 .btn.cta{margin-top:18px;padding:17px 12px;font-size:17px;font-weight:800;border:0;border-radius:18px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);box-shadow:0 10px 30px rgba(0,0,0,.4)}
@@ -157,20 +157,8 @@ const SHOP = {
     "fr",
     "ar"
   ],
-  "theme": "fire",
-  "colors": {
-    "bg": "#f6f1e7",
-    "glow": "#efe7d8",
-    "c1": "#eae5db",
-    "c2": "#f1ece2",
-    "ivory": "#1b1b1b",
-    "muted": "#5d5d5d",
-    "line": "rgba(0,0,0,.14)",
-    "accent": "#b18c52",
-    "g1": "#c5a97d",
-    "g2": "#8e7042",
-    "on": "#ffffff"
-  },
+  "theme": "gold",
+  "colors": {},
   "countryCode": "213",
   "name": "WASLUX",
   "tagline": ".VOTRE PAGE VOUS ATTEND !",
@@ -376,7 +364,8 @@ const SHOP = {
     ["phone", "phone2", "whatsapp", "address", "about", "tagline", "mapLink", "reviewLink", "email", "website"].forEach(function (k) { if (has.call(info, k) && info[k] !== "") SHOP[k] = info[k]; });
     if (has.call(info, "promoText")) SHOP.promo = { text: info.promoText || "", until: info.promoUntil || "" };
     if (has.call(info, "wifiName") || has.call(info, "wifiPass")) SHOP.wifi = { name: info.wifiName || "", pass: info.wifiPass || "" };
-    if (/^#[0-9a-fA-F]{6}$/.test(info.accent || "") && /^#[0-9a-fA-F]{6}$/.test(info.bg || "")) SHOP.colorOver = { accent: info.accent, bg: info.bg };
+    { const hx = /^#[0-9a-fA-F]{6}$/, co = {}; if (hx.test(info.accent || "") && hx.test(info.bg || "")) { co.accent = info.accent; co.bg = info.bg; } if (hx.test(info.accent2 || "")) co.accent2 = info.accent2; if (co.accent || co.accent2) SHOP.colorOver = co; }
+    if (info.socialSet === "oui") SHOP.social = [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"]].filter(x => /^https:\/\//i.test(info[x[0]] || "")).map(x => ({ name: x[1], url: info[x[0]] }));
     if (info.loyOn === "oui") SHOP.loy = { on: true, n: Math.min(30, Math.max(3, parseInt(info.loyN, 10) || 8)), gift: info.loyGift || "", mode: info.loyMode === "tel" ? "tel" : "code" };
   }
   var K = "wl-sheet:" + SHOP.sheetCsv, cached = null;
@@ -428,10 +417,12 @@ function hexRGB(h) { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, 
 function toHex(r) { return "#" + r.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join(""); }
 function mix(a, b, k) { const x = hexRGB(a), y = hexRGB(b); return toHex([0, 1, 2].map(i => x[i] + (y[i] - x[i]) * k)); }
 function lum(h) { const c = hexRGB(h); return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) / 255; }
-function derive(ac, bg) { const l = lum(bg) > .55; return { bg: bg, glow: mix(bg, ac, l ? .1 : .14), c1: l ? mix(bg, "#000000", .05) : mix(bg, "#ffffff", .07), c2: l ? mix(bg, "#000000", .02) : mix(bg, "#ffffff", .03), ivory: l ? "#1b1b1b" : "#f7f2ea", muted: l ? "#5d5d5d" : "#b8b0a6", line: l ? "rgba(0,0,0,.14)" : "rgba(255,255,255,.12)", accent: ac, g1: mix(ac, "#ffffff", .25), g2: mix(ac, "#000000", .2), on: lum(ac) > .6 ? "#1a1a1a" : "#ffffff" }; }
+function lin(x) { x /= 255; return x <= .03928 ? x / 12.92 : Math.pow((x + .055) / 1.055, 2.4); }
+function onCol(h) { const c = hexRGB(h), L = .2126 * lin(c[0]) + .7152 * lin(c[1]) + .0722 * lin(c[2]); return (1.05 / (L + .05)) >= ((L + .05) / .0121) ? "#ffffff" : "#1a1a1a"; }
+function derive(ac, bg, a2) { const l = lum(bg) > .55; return { bg: bg, glow: mix(bg, ac, l ? .1 : .14), c1: l ? mix(bg, "#000000", .05) : mix(bg, "#ffffff", .07), c2: l ? mix(bg, "#000000", .02) : mix(bg, "#ffffff", .03), ivory: l ? "#1b1b1b" : "#f7f2ea", muted: l ? "#5d5d5d" : "#b8b0a6", line: l ? "rgba(0,0,0,.14)" : "rgba(255,255,255,.12)", accent: ac, g1: mix(ac, "#ffffff", .25), g2: a2 || mix(ac, "#000000", .2), on: onCol(a2 ? mix(ac, a2, .5) : ac) }; }
 (function () {
   let c = Object.assign({}, TH[SHOP.theme] || TH.fire, SHOP.colors || {});
-  if (SHOP.colorOver) { const o = SHOP.colorOver; c = derive(o.accent || c.accent, o.bg || c.bg); }
+  if (SHOP.colorOver) { const o = SHOP.colorOver; c = derive(o.accent || c.accent, o.bg || c.bg, o.accent2 || ""); }
   const r = document.documentElement.style;
   ["bg", "glow", "c1", "c2", "ivory", "muted", "line", "accent", "g1", "g2", "on"].forEach(k => { if (c[k]) r.setProperty("--" + k, c[k]); });
   if (!c.line) r.setProperty("--line", "rgba(255,255,255,.14)");
