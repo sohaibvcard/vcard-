@@ -62,6 +62,7 @@ button{cursor:pointer}
 .fc{position:fixed;left:0;right:0;margin:0 auto;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:35;width:min(560px,calc(100% - 24px));display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 18px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--on);font-weight:800;font-size:15px;box-shadow:0 10px 28px rgba(0,0,0,.45);animation:up .22s ease both}
 .fc[hidden]{display:none}
 .fc{justify-content:center}#fc2{display:none}
+.gt{margin:12px 0 0;padding:11px 14px;border-radius:14px;border:1px dashed var(--accent);background:var(--c1);font-size:14px;line-height:1.5;color:var(--ivory)}.gt.on{border-style:solid;border-color:var(--ok);color:var(--ok);font-weight:700}
 .lyh{display:flex;align-items:center;justify-content:center;width:38px;min-height:38px;padding:0;border-color:var(--accent)}.lyh svg{width:19px;height:19px;color:var(--accent)}
 .lyb{display:flex;align-items:center;gap:10px;width:100%;margin-top:12px;padding:11px 14px;border-radius:14px;border:1px dashed var(--accent);background:var(--c1);color:var(--ivory);font-weight:700;font-size:14px;text-align:start}
 .lyb svg{flex:none;width:20px;height:20px;color:var(--accent)}
@@ -134,7 +135,7 @@ const SHOP = {
   langs: ["fr","ar"],
   msgLang: "fr",
   theme: "fire",
-  colors: {"bg":"#031933","glow":"#24323c","c1":"#152941","c2":"#0b2039","ivory":"#f7f2ea","muted":"#b8b0a6","line":"rgba(255,255,255,.12)","accent":"#ecce75","g1":"#f1da98","g2":"#bda55e","on":"#1a1a1a"},
+  colors: {"bg":"#133b61","glow":"#344e5b","c1":"#24496c","c2":"#1a4166","ivory":"#f7f2ea","muted":"#b8b0a6","line":"rgba(255,255,255,.12)","accent":"#ffc636","g1":"#ffd468","g2":"#cc9e2b","on":"#1a1a1a"},
   countryCode: "213",
 
   name: "Waslux Restaurant",
@@ -152,19 +153,19 @@ const SHOP = {
   hours: [],
 
   features: {"cart":true,"waiter":true,"contact":true,"more":true},
-  order: { whatsapp: "", prefix: "", modes: ["dinein","takeaway","delivery"], note: "" },
+  order: { whatsapp: "", prefix: "", modes: ["dinein","takeaway","delivery"], note: "", gate: "", hours: 4 },
   waiter: { whatsapp: "", reasons: [], staff: [], halls: [] },
   daily: null,
 
   phone: "0784 68 87 51",
   phone2: "",
   whatsapp: "0784 68 87 51",
-  email: "coumercialwaslux@gmail.com",
+  email: "",
   address: "Alger",
-  mapLink: "https://maps.app.goo.gl/qCBVTbN9Ugb3FsWc8",
+  mapLink: "https://maps.app.goo.gl/KP1MN5gKPmi8o4X26",
   reviewLink: "https://search.google.com/local/writereview?placeid=ChIJBd6oMwBTjhIRXOtIYyr758E",
   website: "https://waslux.com",
-  social: [{"name":"Instagram","url":"https://www.instagram.com/waslux.waslux"},{"name":"Facebook","url":"https://www.facebook.com/watch/?v=1799718997746660"}],
+  social: [{"name":"Instagram","url":"https://www.instagram.com/waslux.waslux"},{"name":"Facebook","url":"https://www.facebook.com/share/1KoMmwqa5d/"}],
   sheetCsv: "https://script.google.com/macros/s/AKfycbwAtJKTzuqkcJ6RaJ3IGknOcxp69G40peuWyikTIbaKiIBuGTVUpI_yi4yC5dMq8zg/exec?a=csv&s=waslux-restaurant",
   credit: { text: "Powered by Waslux", url: "https://waslux.com" }
 };
@@ -203,7 +204,7 @@ const SHOP = {
     if (stf.length) SHOP.waiter.staff = stf;
     if (hls.length) SHOP.waiter.halls = hls;
     if (info.loyOn === "oui") SHOP.loy = { on: true, n: Math.min(30, Math.max(3, parseInt(info.loyN, 10) || 8)), gift: info.loyGift || "", mode: info.loyMode === "tel" ? "tel" : "code" };
-    var ov = {}; if (/^#[0-9a-f]{6}$/i.test(info.accent || "")) ov.accent = info.accent; if (/^#[0-9a-f]{6}$/i.test(info.bg || "")) ov.bg = info.bg; if (ov.accent || ov.bg) SHOP.colorOver = ov;
+    var ov = {}; if (/^#[0-9a-f]{6}$/i.test(info.accent || "")) ov.accent = info.accent; if (/^#[0-9a-f]{6}$/i.test(info.bg || "")) ov.bg = info.bg; if (/^#[0-9a-f]{6}$/i.test(info.accent2 || "")) ov.accent2 = info.accent2; if (ov.accent || ov.bg || ov.accent2) SHOP.colorOver = ov;
     ["phone", "phone2", "whatsapp", "address", "about", "tagline", "mapLink", "reviewLink", "email", "website"].forEach(function (k) { if (has.call(info, k) && info[k] !== "") SHOP[k] = info[k]; });
   }
   var K = "wl-sheet:" + SHOP.sheetCsv, cached = null;
@@ -233,7 +234,7 @@ const TX = {
     viewCart:"Voir ma commande", callWho:"Appeler ", change:"Changer", back:"Retour au menu", editOrder:"Modifier ma commande", open:"Ouvert", closed:"Fermé", until:"jusqu’à", opensAt:"ouvre à", yourOrder:"Votre commande", empty:"Votre panier est vide. Ajoutez des plats depuis le menu.", total:"Total",
     mode:"Mode", dinein:"Sur place", takeaway:"À emporter", delivery:"Livraison", table:"Numéro de table", hall:"Salle", address:"Adresse de livraison", yourName:"Votre nom (facultatif)", note:"Remarque (facultatif)",
     send:"Envoyer sur WhatsApp", clear:"Vider le panier", needAddr:"Indiquez votre adresse de livraison.", needMenu:"Ajoutez au moins un plat.",
-    callWaiter:"Appeler le serveur", waiterIntro:"Un message est envoyé au restaurant avec votre numéro de table.", yourTable:"Votre table", why:"Pour quoi ?", needTable:"Indiquez votre numéro de table.",
+    gtOn:"Commande ouverte à votre table", gtUntil:"jusqu’à", gtOff:"Pour commander ou appeler le serveur à table, scannez le QR de votre table.", gtOffDel:"Pour commander sur place, scannez le QR de votre table. Livraison et à emporter restent disponibles.", callWaiter:"Appeler le serveur", waiterIntro:"Un message est envoyé au restaurant avec votre numéro de table.", yourTable:"Votre table", why:"Pour quoi ?", needTable:"Indiquez votre numéro de table.",
     sendCall:"Appeler le serveur", called:"Serveur appelé", callAgain:"Vous pourrez rappeler dans",
     daily:"Plat du jour", loyT:"Carte fidélité", loyNote:"En validant, votre numéro est conservé par le restaurant pour la carte fidélité.", loyAfter:"Gagnez un point fidélité : le restaurant vous enverra un lien sur WhatsApp.", loyUse:"Utiliser mon cadeau", loyUsed:"Cadeau utilisé, merci !", loyBan:"Carte fidélité", loyVis:"visites", loyPhone:"Votre numéro de téléphone", loyCons:"J’accepte que mon numéro soit conservé par le restaurant pour la carte fidélité.", loyView:"Voir ma carte", loyCode:"Code du jour : demandez-le au caissier après votre paiement.", loyStamp:"Valider ma visite", loyOk:"Visite enregistrée, merci !", loyToday:"Votre visite d’aujourd’hui est déjà enregistrée.", loyBad:"Code incorrect.", loyWait:"Trop d’essais. Réessayez plus tard.", loyErr:"Service indisponible. Réessayez dans un instant.", loyReady:"Cadeau prêt ! Montrez cet écran au caissier.", loyBadPhone:"Numéro invalide (exemple : 0550 12 34 56).", loyNeed:"Veuillez accepter pour continuer.", loyChange:"Changer de numéro", loyLeft:"Encore", loyGift:"Cadeau", pickHall:"Votre salle", alsoSend:"Envoyer aussi", reasons:["Payer l’addition","Demande spéciale","Apporter de l’eau"],
     call:"Appeler", wa:"WhatsApp", save:"Enregistrer le contact", email:"E-mail", map:"Itinéraire", hours:"Horaires", about:"À propos", review:"Donner un avis", site:"Site web", close:"Fermer", info:"Informations", lang:"Langue", sent:"Message prêt dans WhatsApp" },
@@ -241,7 +242,7 @@ const TX = {
     viewCart:"عرض طلبي", callWho:"نادِ ", change:"تغيير", back:"العودة إلى القائمة", editOrder:"تعديل طلبي", open:"مفتوح", closed:"مغلق", until:"حتى", opensAt:"يفتح عند", yourOrder:"طلبك", empty:"سلتك فارغة. أضف أطباقاً من القائمة.", total:"المجموع",
     mode:"طريقة الطلب", dinein:"في المطعم", takeaway:"للأخذ", delivery:"توصيل", table:"رقم الطاولة", hall:"القاعة", address:"عنوان التوصيل", yourName:"اسمك (اختياري)", note:"ملاحظة (اختياري)",
     send:"أرسل عبر واتساب", clear:"إفراغ السلة", needAddr:"اكتب عنوان التوصيل.", needMenu:"أضف طبقاً واحداً على الأقل.",
-    callWaiter:"نداء النادل", waiterIntro:"ترسل رسالة إلى المطعم مع رقم طاولتك.", yourTable:"طاولتك", why:"لأي سبب؟", needTable:"اكتب رقم الطاولة.",
+    gtOn:"الطلب مفتوح عند طاولتك", gtUntil:"حتى", gtOff:"للطلب أو لنداء النادل على الطاولة، امسح رمز QR الموجود على طاولتك.", gtOffDel:"للطلب داخل المطعم امسح رمز QR الموجود على طاولتك. التوصيل والطلب للأخذ متاحان.", callWaiter:"نداء النادل", waiterIntro:"ترسل رسالة إلى المطعم مع رقم طاولتك.", yourTable:"طاولتك", why:"لأي سبب؟", needTable:"اكتب رقم الطاولة.",
     sendCall:"نادِ النادل", called:"تم نداء النادل", callAgain:"يمكنك النداء مجدداً بعد",
     daily:"طبق اليوم", loyT:"بطاقة الولاء", loyNote:"بالتأكيد يُحفظ رقمك لدى المطعم من أجل بطاقة الولاء.", loyAfter:"اربح نقطة ولاء: سيرسل لك المطعم رابطاً على واتساب.", loyUse:"استعمال هديتي", loyUsed:"تم استعمال الهدية، شكراً!", loyBan:"بطاقة الولاء", loyVis:"زيارات", loyPhone:"رقم هاتفك", loyCons:"أوافق على حفظ رقمي لدى المطعم من أجل بطاقة الولاء.", loyView:"عرض بطاقتي", loyCode:"كود اليوم: اطلبه من الكاشير بعد الدفع.", loyStamp:"تسجيل زيارتي", loyOk:"تم تسجيل زيارتك، شكراً!", loyToday:"زيارتك اليوم مسجّلة من قبل.", loyBad:"الكود غير صحيح.", loyWait:"محاولات كثيرة. أعد المحاولة لاحقاً.", loyErr:"الخدمة غير متاحة. أعد المحاولة بعد لحظة.", loyReady:"الهدية جاهزة! أرِ هذه الشاشة للكاشير.", loyBadPhone:"رقم غير صالح (مثال: 0550 12 34 56).", loyNeed:"يرجى الموافقة للمتابعة.", loyChange:"تغيير الرقم", loyLeft:"بقي", loyGift:"الهدية", pickHall:"قاعتك", alsoSend:"أرسل أيضاً", reasons:["دفع الفاتورة","طلب خاص","إحضار الماء"],
     call:"اتصال", wa:"واتساب", save:"حفظ جهة الاتصال", email:"البريد", map:"الموقع على الخريطة", hours:"أوقات العمل", about:"عن المطعم", review:"شاركنا رأيك", site:"الموقع", close:"إغلاق", info:"معلومات", lang:"اللغة", sent:"الرسالة جاهزة في واتساب" }
@@ -261,10 +262,12 @@ function hexRGB(h) { h = h.replace("#", ""); var n = parseInt(h, 16); return [n 
 function toHex(r) { return "#" + r.map(function (v) { return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0"); }).join(""); }
 function mix(a, b, t) { var x = hexRGB(a), y = hexRGB(b); return toHex([0, 1, 2].map(function (i) { return x[i] + (y[i] - x[i]) * t; })); }
 function lum(h) { var c = hexRGB(h); return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) / 255; }
-function derive(ac, bg) { var l = lum(bg) > .55; return { bg: bg, glow: mix(bg, ac, l ? .1 : .14), c1: l ? mix(bg, "#000000", .05) : mix(bg, "#ffffff", .07), c2: l ? mix(bg, "#000000", .02) : mix(bg, "#ffffff", .03), ivory: l ? "#1b1b1b" : "#f7f2ea", muted: l ? "#5d5d5d" : "#b8b0a6", line: l ? "rgba(0,0,0,.14)" : "rgba(255,255,255,.12)", accent: ac, g1: mix(ac, "#ffffff", .25), g2: mix(ac, "#000000", .2), on: lum(ac) > .6 ? "#1a1a1a" : "#ffffff" }; }
+function lin(x) { x /= 255; return x <= .03928 ? x / 12.92 : Math.pow((x + .055) / 1.055, 2.4); }
+function onCol(h) { var c = hexRGB(h), L = .2126 * lin(c[0]) + .7152 * lin(c[1]) + .0722 * lin(c[2]); return (1.05 / (L + .05)) >= ((L + .05) / .0121) ? "#ffffff" : "#1a1a1a"; }
+function derive(ac, bg, a2) { var l = lum(bg) > .55; return { bg: bg, glow: mix(bg, ac, l ? .1 : .14), c1: l ? mix(bg, "#000000", .05) : mix(bg, "#ffffff", .07), c2: l ? mix(bg, "#000000", .02) : mix(bg, "#ffffff", .03), ivory: l ? "#1b1b1b" : "#f7f2ea", muted: l ? "#5d5d5d" : "#b8b0a6", line: l ? "rgba(0,0,0,.14)" : "rgba(255,255,255,.12)", accent: ac, g1: mix(ac, "#ffffff", .25), g2: a2 || mix(ac, "#000000", .2), on: onCol(a2 ? mix(ac, a2, .5) : ac) }; }
 (function () {
   let c = Object.assign({}, TH[SHOP.theme] || TH.fire, SHOP.colors || {}); const r = document.documentElement.style;
-  if (SHOP.colorOver) { const o = SHOP.colorOver; c = derive(o.accent || c.accent, o.bg || c.bg); }
+  if (SHOP.colorOver) { const o = SHOP.colorOver; c = derive(o.accent || c.accent, o.bg || c.bg, o.accent2 || ""); }
   ["bg","glow","c1","c2","ivory","muted","line","accent","g1","g2","on"].forEach(k => { if (c[k]) r.setProperty("--" + k, c[k]); });
   const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = c.bg;
   document.title = SHOP.name + (SHOP.tagline ? " — " + SHOP.tagline : "");
@@ -272,12 +275,21 @@ function derive(ac, bg) { var l = lum(bg) > .55; return { bg: bg, glow: mix(bg, 
 
 /* ---------- الحالة ---------- */
 const F = Object.assign({ cart: true, waiter: true, contact: true, more: true }, SHOP.features || {});
-const OR = Object.assign({ whatsapp: "", prefix: "", modes: ["dinein", "takeaway", "delivery"], note: "" }, SHOP.order || {});
+const OR = Object.assign({ whatsapp: "", prefix: "", modes: ["dinein", "takeaway", "delivery"], note: "", gate: "", hours: 4 }, SHOP.order || {});
 const qs = new URLSearchParams(location.search);
 let urlTable = (qs.get("table") || "").replace(/\D/g, "").slice(0, 3);
 let urlHall = (qs.get("salle") || qs.get("hall") || "").replace(/[^\p{L}\p{N} \-]/gu, "").slice(0, 30);
 const sess = { get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }, del(k) { try { sessionStorage.removeItem(k); } catch (e) {} } };
-if (urlTable || urlHall) sess.set("wl-r-loc", JSON.stringify({ t: urlTable, h: urlHall })); else { try { const o = JSON.parse(sess.get("wl-r-loc") || "{}"); urlTable = String(o.t || ""); urlHall = String(o.h || ""); } catch (e) {} }
+const GATE = ["table", "tabledel"].indexOf(OR.gate) > -1 ? OR.gate : "", SK = "wl-r-ses:" + SHOP.name, SH = Math.max(1, Math.min(12, +OR.hours || 4)) * 3600000;
+let sesExp = 0;
+if (GATE) {
+  if (urlTable || urlHall) { sesExp = Date.now() + SH; ls.set(SK, JSON.stringify({ t: urlTable, h: urlHall, x: sesExp })); try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {} }
+  else { try { const o = JSON.parse(ls.get(SK) || "{}"); if (+o.x > Date.now()) { urlTable = String(o.t || ""); urlHall = String(o.h || ""); sesExp = +o.x; } } catch (e) {} }
+} else { if (urlTable || urlHall) sess.set("wl-r-loc", JSON.stringify({ t: urlTable, h: urlHall })); else { try { const o = JSON.parse(sess.get("wl-r-loc") || "{}"); urlTable = String(o.t || ""); urlHall = String(o.h || ""); } catch (e) {} }
+}
+const live = () => sesExp > Date.now();
+const cartOn = () => F.cart && (!GATE || live() || (GATE === "tabledel" && (OR.modes || []).some(m => m !== "dinein")));
+const waiterOn = () => F.waiter && (!GATE || live());
 const langs = (SHOP.langs && SHOP.langs.length ? SHOP.langs : [SHOP.lang]).filter(l => TX[l]);
 let LANG = ls.get("wl-r-lang"); if (langs.indexOf(LANG) < 0) LANG = langs.indexOf(SHOP.lang) > -1 ? SHOP.lang : langs[0] || "fr";
 let T = TX[LANG];
@@ -378,7 +390,7 @@ const count = () => Object.keys(cart).reduce((a, k) => a + cart[k], 0);
 const sum = () => Object.keys(cart).reduce((a, k) => a + cart[k] * +BYKEY[k].price, 0);
 const saveCart = () => ls.set(CK, JSON.stringify(cart));
 function ctl(o) {
-  if (!F.cart || !isNum(o.price)) return "";
+  if (!cartOn() || !isNum(o.price)) return "";
   const q = cart[o.key] || 0;
   return q ? '<div class="stp"><button type="button" class="qb" data-a="dec" data-id="' + o.id + '" aria-label="' + esc(T.minus) + '">' + IC.minus + '</button><b>' + q + '</b><button type="button" class="qb" data-a="inc" data-id="' + o.id + '" aria-label="' + esc(T.plus) + '">' + IC.plus + '</button></div>'
     : '<button type="button" class="add" data-a="inc" data-id="' + o.id + '" aria-label="' + esc(T.add + " " + o.name) + '">' + IC.plus + '</button>';
@@ -401,20 +413,28 @@ function render() {
   T = TX[LANG]; document.documentElement.lang = LANG; document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
   build();
   const s = status(), L = SHOP.logo ? '<img class="lg" src="' + esc(SHOP.logo) + '" alt="" style="object-fit:' + esc(SHOP.logoFit || "cover") + '">' : '<span class="lg">' + esc((SHOP.name || "?").charAt(0)) + '</span>';
-  const tabs = [["menu", T.menu, IC.menu, true], ["cart", T.cart, IC.cart, F.cart], ["waiter", T.waiter, IC.bell, F.waiter], ["contact", T.contact, IC.user, F.contact], ["more", T.more, IC.dots, F.more]].filter(t => t[3]);
+  const tabs = [["menu", T.menu, IC.menu, true], ["cart", T.cart, IC.cart, cartOn()], ["waiter", T.waiter, IC.bell, waiterOn()], ["contact", T.contact, IC.user, F.contact], ["more", T.more, IC.dots, F.more]].filter(t => t[3]);
   document.getElementById("app").innerHTML =
     '<header class="top"><div class="w">' + L + '<div class="nm"><b>' + esc(SHOP.name) + '</b>' + (s ? '<span class="st' + (s.open ? " on" : "") + '"><i></i>' + esc(s.txt) + '</span>' : "") + '</div>' +
     (loyOn() ? '<button type="button" class="lb lyh" data-a="loy" aria-label="' + esc(T.loyT) + '">' + IC.star + '</button>' : "") +
     (langs.length > 1 ? '<button type="button" class="lb" data-a="lang" aria-label="' + esc(T.lang) + '">' + (LANG === "ar" ? "Français" : "العربية") + '</button>' : "") + '</div></header>' +
     '<div class="w"><div class="cv"' + (SHOP.cover ? ' style="background-image:url(\'' + esc(SHOP.cover) + '\')"' : "") + '><div><h1>' + esc(SHOP.name) + '</h1>' + (SHOP.tagline ? '<p>' + esc(SHOP.tagline) + '</p>' : "") + '</div></div>' +
     ((SHOP.menu || []).length ? '<div class="sr"><input id="q" type="search" placeholder="' + esc(T.search) + '" aria-label="' + esc(T.search) + '" autocomplete="off"></div>' : "") + '</div>' +
+    gateHtml() +
     dailyHtml() +
     menuHtml() +
     '<div class="cr w">' + (SHOP.credit && SHOP.credit.text ? '<a href="' + esc(safeUrl(SHOP.credit.url) || "#") + '" target="_blank" rel="noopener">' + esc(SHOP.credit.text) + '</a>' : "") + '</div>' +
     '<nav class="bar" aria-label="Navigation"><div class="in">' + tabs.map(t => '<button type="button" class="tab' + (t[0] === "menu" ? " on" : "") + '" data-a="tab" data-t="' + t[0] + '" id="t-' + t[0] + '">' + t[2] + '<span>' + esc(t[1]) + '</span>' + (t[0] === "cart" ? '<span class="bd" id="bd" hidden></span>' : "") + '</button>').join("") + '</div></nav>' + (F.cart ? '<button type="button" class="fc" id="fc" data-a="tab" data-t="cart" hidden><span id="fc1"></span><span id="fc2"></span></button>' : "");
   badge(); spy(); loyBoot();
 }
-function badge() { const n = count(), b = document.getElementById("bd"); if (b) { b.hidden = !n; b.textContent = n; } const fc = document.getElementById("fc"); if (fc) { const show = n > 0 && !sheetEl; fc.hidden = !show; document.body.classList.toggle("hasfc", show); document.getElementById("fc1").textContent = T.viewCart; } }
+function gateHtml() {
+  if (!GATE) return "";
+  if (live()) { const d = new Date(sesExp); return '<div class="w"><div class="gt on">✓ ' + esc(T.gtOn) + (wait.table ? " · " + esc(T.table) + " " + esc(wait.table) : "") + " · " + esc(T.gtUntil) + " " + pad2(d.getHours()) + ":" + pad2(d.getMinutes()) + '</div></div>'; }
+  return '<div class="w"><div class="gt">' + esc(GATE === "tabledel" && cartOn() ? T.gtOffDel : T.gtOff) + '</div></div>';
+}
+const pad2 = n => ("0" + n).slice(-2);
+if (GATE && live()) setTimeout(() => location.reload(), Math.min(sesExp - Date.now() + 800, 2147000000));
+function badge() { const n = count(), b = document.getElementById("bd"); if (b) { b.hidden = !n; b.textContent = n; } const fc = document.getElementById("fc"); if (fc) { const show = n > 0 && !sheetEl && cartOn(); fc.hidden = !show; document.body.classList.toggle("hasfc", show); document.getElementById("fc1").textContent = T.viewCart; } }
 function refreshCtl(o) { const e = document.querySelector('[data-c="' + o.id + '"]'); if (e) e.innerHTML = ctl(o); badge(); }
 
 /* ---------- نوافذ ---------- */
@@ -432,7 +452,7 @@ function toast(t) { const e = document.createElement("div"); e.className = "toas
 function setTab(t) { document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.t === t)); }
 
 /* ---------- السلة ---------- */
-const modes = () => (OR.modes || []).filter(m => ["dinein", "takeaway", "delivery"].indexOf(m) > -1);
+const modes = () => (OR.modes || []).filter(m => ["dinein", "takeaway", "delivery"].indexOf(m) > -1).filter(m => !GATE || live() || (GATE === "tabledel" && m !== "dinein"));
 function tableSel(inputId) {
   const hs = WC().halls || [], h = hallObj(), nums = h ? tableNums(h.tables) : [];
   if (urlTable) return '<div class="lbl">' + esc(T.yourTable) + '</div><div class="fx"><span>' + esc(T.table) + " " + esc(wait.table) + (hn() ? " · " + esc(T.hall) + " " + esc(hn()) : "") + '</span><button type="button" class="lnk2" data-a="unlock">' + esc(T.change) + '</button></div>';
@@ -656,7 +676,7 @@ document.addEventListener("click", e => {
   else if (a === "clear") { cart = {}; saveCart(); document.querySelectorAll(".ctl").forEach(c => { const x = ITEMS[+c.dataset.c]; if (x) c.innerHTML = ctl(x); }); badge(); reCart(); }
   else if (a === "hall") { wait.hall = t.dataset.h; const h = hallObj(); if (h && wait.table && tableNums(h.tables).indexOf(+wait.table) < 0) wait.table = ""; refreshSheet(); }
   else if (a === "tbl") { wait.table = t.dataset.n; refreshSheet(); }
-  else if (a === "unlock") { urlTable = ""; urlHall = ""; wait.table = ""; wait.hall = ""; sess.del("wl-r-loc"); refreshSheet(); }
+  else if (a === "unlock") { urlTable = ""; urlHall = ""; wait.table = ""; wait.hall = ""; sess.del("wl-r-loc"); if (GATE) ls.set(SK, JSON.stringify({ t: "", h: "", x: sesExp })); refreshSheet(); }
   else if (a === "reopen") { reCart(); }
   else if (a === "why") { wait.why = +t.dataset.i; wait.ack = null; const b = document.getElementById("wb"); if (b) { b.innerHTML = waiterHtml(); syncWait(); } }
   else if (a === "vcard") { vcard(); closePop(); setTab("menu"); }
